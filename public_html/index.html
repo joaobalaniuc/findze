@@ -24,6 +24,8 @@ and open the template in the editor.
     </head>
     <body>
         <div>TODO write content</div>
+        
+        <a id="userFb" href="#">Facebook</a>
 
         <!-- DEBUG -->
         <script>
@@ -47,6 +49,15 @@ and open the template in the editor.
             if (!isApp) {
                 //start();
             }
+        </script>
+
+
+        <script>
+            $(document).ready(function () {
+                $("#userFb").click(function () {
+                    fb.login();
+                });
+            });
         </script>
     </body>
 </html>
