@@ -47,10 +47,14 @@ var app = {
 
         app.receivedEvent('deviceready');
 
-        //start();
+        start();
+        
+        alert(0);
         
         geo();
-
+        
+        alert(1);
+        
         // SPLASHSCREEN (CONFIG.XML BUGFIX)
         setTimeout(function () {
             navigator.splashscreen.hide();
