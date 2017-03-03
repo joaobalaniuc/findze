@@ -34,7 +34,7 @@
     <plugin name="cordova-plugin-network-information" source="npm" />
     <plugin name="cordova-plugin-camera" source="npm" />
     <plugin name="cordova-plugin-file-transfer" source="npm" />  
-    <plugin name="org.apache.cordova.geolocation" source="npm" />
+    <plugin name="cordova-plugin-geolocation" source="npm" />
     
     <icon src="icon.png" />
     <icon gap:platform="android" gap:qualifier="ldpi" src="res/icon/android/icon-36-ldpi.png" />
