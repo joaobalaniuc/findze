@@ -6,11 +6,47 @@ and open the template in the editor.
 -->
 <html>
     <head>
-        <title>TODO supply a title</title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+        <!--
+        <meta http-equiv="Content-Security-Policy" content="default-src *; style-src * 'unsafe-inline script-src * 'unsafe-inline' 'unsafe-eval'"/>
+        <meta http-equiv="Content-Security-Policy" content="default-src *; style-src * 'unsafe-inline script-src * 'unsafe-inline media-src *; img-src * data:; " />
+        <meta http-equiv="Content-Security-Policy" content="default-src *; style-src * 'unsafe-inline script-src * 'unsafe-inline' 'unsafe-eval img-src * data: 'unsafe-inline connect-src * 'unsafe-inline frame-src *;" />
+        -->
+        <meta name="mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+        <title>Findze</title>
+        <!--
+        <link rel="stylesheet" href="css/include.css">
+        <link rel="icon" href="img/icon.png">
+        -->
     </head>
     <body>
         <div>TODO write content</div>
+
+        <!-- DEBUG -->
+        <script>
+            var isApp = document.URL.indexOf('http://') === -1 && document.URL.indexOf('https://') === -1;
+        </script>
+        <!-- PHONEGAP -->
+        <script src="cordova.js"></script>
+        <!-- API -->
+        <!--
+        <script type="text/javascript" src="f7/js/framework7.js"></script>
+        -->
+        <script type="text/javascript" src="js/jquery-1.10.1.min.js"></script>
+        <script type="text/javascript" src="js/app.js"></script>
+        <script type="text/javascript" src="js/facebook.js"></script>
+
+        <script type="text/javascript">
+            // init
+            app.initialize();
+
+            // DEV
+            if (!isApp) {
+                //start();
+            }
+        </script>
     </body>
 </html>
