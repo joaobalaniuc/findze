@@ -105,11 +105,11 @@
         <param name="APP_ID" value="680019738832743" />
         <param name="APP_NAME" value="Help Animal" />
     </plugin>
-    
+    <!--
     <plugin name="cordova-plugin-mauron85-background-geolocation" spec="^2.2.0">
         <variable name="ALWAYS_USAGE_DESCRIPTION" value="This app requires background tracking enabled" />
     </plugin>
-    
+    -->
     <!--
     <plugin name="uk.co.workingedge.phonegap.plugin.launchnavigator" source="npm" />
     <plugin name="cordova-plugin-inappbrowser" source="npm" />
