@@ -102,8 +102,12 @@
     -->
     
     <plugin name="cordova-plugin-facebook4" source="npm">
-        <param name="APP_ID" value="1269306609763820" />
-        <param name="APP_NAME" value="AdsApp" />
+        <param name="APP_ID" value="680019738832743" />
+        <param name="APP_NAME" value="Help Animal" />
+    </plugin>
+    
+    <plugin name="cordova-plugin-mauron85-background-geolocation" spec="^2.2.0">
+        <variable name="ALWAYS_USAGE_DESCRIPTION" value="This app requires background tracking enabled" />
     </plugin>
     
     <!--
