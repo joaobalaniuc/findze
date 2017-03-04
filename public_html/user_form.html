@@ -1,0 +1,139 @@
+<div id="user_form" data-page="user_form" class="page">
+    <div class="navbar">
+        <div class="navbar-inner">
+            <div class="left"><a href="#" class="back link icon-only"><i class="icon icon-back"></i></a></div>
+            <div class="center" id="postTitle">Editar Perfil</div>
+            <div class="right">
+                <a href="#" class="userUpdate link icon-only"><i class="fa fa-save"></i></a>
+            </div>
+        </div>
+    </div>
+    <div class="page-content" style="ppadding-bottom:80px !important">
+
+        <div id="profileImg" style="ddisplay:none">
+            <div
+                id ="profileImgBg"
+                class="blur darkglow lazy lazy-fadeIn ks-demo-lazy" 
+                style="height:150px;background-position:center;background-image:url(img/user.png)">
+            </div>
+
+            <img
+                id ="profileImgFront"
+                class="circle"
+                style="position:absolute;top:70px;left:50%;margin-left:-64px;width:128px;height:128px"
+                src="img/user.png"
+                />
+        </div>
+        <!--
+        <div id="FbIn" onclick="fb.login();" class="content-block">
+            <a href="#" class="button button-raised button-fill color-indigo">
+                <i class="fa fa-facebook" style="position:absolute;left:10px;top:10px"></i>
+                Login via Facebook
+            </a>
+        </div>
+
+        <div id="FbOut" onclick="fb.logout();" class="content-block" style="display:none;">
+            <a href="#" class="button button-raised button-fill color-gray">
+                <i class="fa fa-facebook" style="position:absolute;left:10px;top:10px"></i>
+                Sair do Facebook
+            </a>
+        </div>
+        -->
+        
+        <form id="userForm">
+            <div class="content-block-title" style="mmargin-top:-20px;">Meus dados públicos</div>
+            <div class="list-block">
+                <ul style="padding-left:10px">
+                    
+                    <li>
+                        <div class="item-content">
+                            <!--<div class="item-media"><i class="icon icon-form-name"></i></div>-->
+                            <div class="item-inner"> 
+                                <div class="item-title label">Username</div>
+                                <div class="item-input">
+                                    <input disabled="disabled" name="user_name" type="text" placeholder="Seu login"/>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    
+                    <li>
+                        <div class="item-content">
+                            <!--<div class="item-media"><i class="icon icon-form-name"></i></div>-->
+                            <div class="item-inner"> 
+                                <div class="item-title label">Nome</div>
+                                <div class="item-input">
+                                    <input name="user_fullname" type="text" placeholder="Seu nome"/>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="item-content">
+                            <div class="item-inner"> 
+                                <div class="item-title label">Telefone</div>
+                                <div class="item-input">
+                                    <input class="phone" name="user_phone" type="text" placeholder="Seu telefone"/>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="align-top">
+                        <div class="item-content">
+                            <div class="item-inner"> 
+                                <div class="item-title label">Sobre mim</div>
+                                <div class="item-input">
+                                    <textarea name="user_bio" class="resizable" placeholder="Sobre mim"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="content-block-title" style="margin-top:-20px;">Meus dados privados</div>
+            <div class="list-block">
+                <ul style="padding-left:10px">
+                    <li>
+                        <div class="item-content">
+                            <!--<div class="item-media"><i class="icon icon-form-name"></i></div>-->
+                            <div class="item-inner"> 
+                                <div class="item-title label">E-mail ou Facebook ID</div>
+                                <div class="item-input">
+                                    <input name="user_email" type="text" disabled="disabled" placeholder="Seu e-mail"/>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="item-content">
+                            <div class="item-inner"> 
+                                <div class="item-title label">Deseja alterar sua senha?</div>
+                                <div class="item-input">
+                                    <input name="user_pass0" type="password" placeholder="Senha atual"/>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="item-content">
+                            <div class="item-inner"> 
+                                <div class="item-title label">Nova senha</div>
+                                <div class="item-input">
+                                    <input name="user_pass1" type="password" placeholder="Nova senha"/>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+
+                </ul>
+            </div>
+            <div class="content-block" style="margin-top:-20px;">
+                <a href="#" style="margin-bottom:20px" class="userUpdate button button-big button-raised button-fill color-pink">
+                    Salvar alterações
+                </a>
+            </div>
+        </form>
+
+
+    </div>
+</div>

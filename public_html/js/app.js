@@ -3,17 +3,17 @@
 //--------------------------------------------
 function start() {
 
-    sessionStorage.start = 1;
-
     // App config
-    localStorage.appname = "Findze";
-    localStorage.version = "0.1";
+    localStorage.appname = "AdsApp";
+    localStorage.version = "1.0.0";
 
     // Server
-    //localStorage.server = "http://192.168.0.100/mycare/server/"; // casa
-    //localStorage.server = "http://10.0.0.35/mycare/server/"; // allware
-    localStorage.server = "http://feirafree.com.br/mycare/"; // casa
-    localStorage.server_img = "/app/pic/img/";
+    localStorage.server = "http://dev.house/adsapp/";
+    localStorage.server_img = "/app/upload/";
+
+    // Dev
+    sessionStorage.debug = 1;
+    sessionStorage.activePage = "";
 
     // Ajax timeout
     localStorage.timeout = 5000; // ajax
@@ -38,6 +38,8 @@ var app = {
         function onOffline() {
             sessionStorage.online = false;
         }
+
+
     },
     // deviceready Event Handler
     //
@@ -47,24 +49,57 @@ var app = {
 
         app.receivedEvent('deviceready');
 
-        start();
-
-        alert(0);
-
-        geo();
-
-        alert(1);
-
         // SPLASHSCREEN (CONFIG.XML BUGFIX)
         setTimeout(function () {
             navigator.splashscreen.hide();
-            if (window.StatusBar) {
-                /*StatusBar.overlaysWebView(false);
-                 StatusBar.backgroundColorByHexString("#3f51b5");
-                 StatusBar.styleLightContent();*/
+            //StatusBar.hide();
+        }, 1000);
+        start();
+        /*
+         var push = PushNotification.init({
+         "android": {
+         "senderID": "722208907195"
+         },
+         "ios": {
+         "alert": "true",
+         "badge": "true",
+         "sound": "true"
+         },
+         "windows": {}
+         });
+         
+         push.on('registration', function (data) {
+         //I can get registration id here
+         //alert("token=" + JSON.stringify(data));
+         
+         $.ajax({
+         url: localStorage.server + "/push_save_token.php",
+         data: {token: data.registrationId},
+         success: function (json) {
+         }
+         });
+         });
+         
+         push.on('notification', function (data) {
+         //this place doesn't work
+         //alert("notification event");
+         alert(JSON.stringify(data));
+         });
+         
+         push.on('error', function (e) {
+         alert("push error");
+         });
+         */
+
+        // BACK BUTTON INDEX
+        document.addEventListener("backbutton", function (e) {
+            if (sessionStorage.activePage == "index" || sessionStorage.activePage == "user_login") {
+                e.preventDefault();
             }
-        }, 500);
-    },
+        }, false);
+
+    }
+    ,
     // Update DOM on a Received Event
     receivedEvent: function (id) {
         /*var parentElement = document.getElementById(id);
@@ -75,29 +110,3 @@ var app = {
         console.log('Received Event: ' + id);
     }
 };
-
-function geo() {
-
-    alert("geo0");
-
-    var onSuccess = function (position) {
-        sessionStorage.lat = position.coords.latitude;
-        sessionStorage.lng = position.coords.longitude;
-        alert('Latitude: ' + position.coords.latitude + '\n' +
-                'Longitude: ' + position.coords.longitude + '\n' +
-                'Altitude: ' + position.coords.altitude + '\n' +
-                'Accuracy: ' + position.coords.accuracy + '\n' +
-                'Altitude Accuracy: ' + position.coords.altitudeAccuracy + '\n' +
-                'Heading: ' + position.coords.heading + '\n' +
-                'Speed: ' + position.coords.speed + '\n' +
-                'Timestamp: ' + position.timestamp + '\n');
-        //alert(sessionStorage.lat + "x" + sessionStorage.lng);
-    };
-    function onError(error) {
-        alert('code: ' + error.code + '\n' +
-                'message: ' + error.message + '\n');
-    }
-    navigator.geolocation.getCurrentPosition(onSuccess, onError);
-
-    alert("geo1");
-}

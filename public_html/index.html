@@ -1,11 +1,7 @@
 <!DOCTYPE html>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
 <html>
     <head>
+        <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
         <!--
         <meta http-equiv="Content-Security-Policy" content="default-src *; style-src * 'unsafe-inline script-src * 'unsafe-inline' 'unsafe-eval'"/>
@@ -17,47 +13,464 @@ and open the template in the editor.
         <meta name="apple-mobile-web-app-status-bar-style" content="black">
 
         <title>Findze</title>
-        <!--
         <link rel="stylesheet" href="css/include.css">
         <link rel="icon" href="img/icon.png">
-        -->
     </head>
-    <body>
-        <div>TODO write content</div>
-        
-        <a id="userFb" href="#">Facebook</a>
+
+    <body class='theme-pink'>
+
+        <div id="loaderx" style="z-index:9999;position:absolute;width:100%;height:100%;top:0;left:0;background:#fff">
+            <div style="width:80px;height:80px;position:relative;top: 50%;left: 50%;transform: translate(-50%, -50%);">
+                <img src="img/loading.gif" style="width:80px;height:80px" />
+            </div>
+        </div>
+
+        <div class="statusbar-overlay" style="background:#E60052"></div>
+        <div class="panel-overlay"></div>
+
+        <div class="views tabs toolbar-through">
+
+            <div id="view-1" class="view view-main tab active">
+                <div class="pages navbar-through toolbar-through">
+                    <div data-page="index" class="page ttheme-black">
+
+                        <div class="navbar">
+                            <div class="navbar-inner">
+                                <!-- We need cool sliding animation on title element, so we have additional "sliding" class -->
+                                <div class="center sliding">
+                                    <i class="fa fa-bolt"></i> &nbsp; Ads<span style="font-weight:100">App</span>
+
+                                </div>
+                                <!--<div class="right">
+                                    <a id="contactList" href="#" class="link icon-only"><i class="fa fa-refresh"></i></a>
+                                </div>-->
+                            </div>
+                        </div>
+
+                        <!--<form data-search-list="#contacts" class="searchbar searchbar-init">
+                            <div class="searchbar-input">
+                                <input type="search" placeholder="Search"/><a href="#" class="searchbar-clear"></a>
+                            </div>
+                        </form>
+                        <div class="searchbar-overlay"></div>-->
+
+                        <!-- Scrollable page content-->
+                        <div class="page-content pull-to-refresh-content infinite-scroll" style="padding-top:55px;padding-bottom:60px">
+
+                            <div class="pull-to-refresh-layer">
+                                <div class="preloader preloader-pink"></div>
+                                <div class="pull-to-refresh-arrow"></div>
+                            </div>
+
+
+
+
+
+                            <div id="post_template" style="display:none;margin:0;margin-bottom:5px;box-shadow:none !important" class="card ks-facebook-card" data-id="1">
+                                <div class="user_read card-header" style="border:0">
+                                    <div class="ks-facebook-avatar"><img class="user_fb_pic" style="border-radius:50%;box-shadow:none !important;border:0" src="img/user.png" width="34" height="34" /></div>
+                                    <div class="ks-facebook-name" style="ffont-weight:100;font-size:16px;margin-top:5px;text-transform:lowercase"><span class="color-pink">ads</span><span class="user_name">...</span></div>
+                                    <!--<div class="user_bio ks-facebook-date" style="font-weight:100;margin-top:-4px"></div>-->
+                                </div>
+                                <div class="card-content">
+                                    <div style="position:absolute;z-index:0;overflow: hidden;width:100vw;height:100vw;left:0;top:0">
+                                        <img class="thumb" style="filter: blur(7px) brightness(1);width:100%;height:100%" src="" />
+                                    </div>
+                                    <img style="position:absolute;z-index:1;width:100vw;height:100vw;left:0;top:0" class="post_read post_img" src="" />
+                                    <img style="width:100vw;height:100vw" class="post_read post_img" src="" />
+
+                                    <div class="card-content-inner" style="margin-top:-5px;margin-left:12px;">
+
+                                        <div style="margin-bottom:12px">
+                                            <a href="#" class="share"><span class="icon-share color-pink" style="font-size:32px"></span></a>&nbsp;&nbsp;&nbsp;&nbsp;
+                                            <a href="#" class="chat"><i class="icon-chat color-pink" style="font-size:32px;margin-right:16px"></i></a>
+                                            <a href="#" class="user_phone external"><i class="icon-phone color-pink" style="font-size:32px"></i></a>
+
+                                            <div class="post_price" style="font-size:24px;float:right;margin-right:8px"></div>
+                                        </div>
+                                        <div style="margin-bottom:3px;font-weight:100">
+                                            <span class="post_name" style="font-weight:bold">...</span> &nbsp;
+                                            <span class="post_txt">...</span>
+                                        </div>
+                                        <div class="post_date prettydate" style="font-weight:100;color:#ccc;font-size:12px;text-transform:uppercase">...</div>
+
+                                    </div>
+                                </div>
+
+
+
+                                <!--
+                                <div class="card-footer"><a href="#" class="postShow link">Like</a><a href="#" class="link">Comment</a><a href="#" class="link">Share</a></div>
+                                -->
+                            </div>
+
+                            <div id="post_none" style="display:none;text-align:center;padding:15px;font-size:20px;color:#ccc;font-weight:100">
+                                <i class="fa fa-search" style="font-size:48px;margin:20px"></i><br/>
+                                Encontre seus amigos e lojas preferidas <a href="#view-2" class="tab-link">clicando aqui</a>.
+                            </div>
+
+                            <div id="post_list"></div>
+
+                            <div id="post_infinite" style="display:none" class="infinite-scroll-preloader">
+                                <div class="preloader preloader-pink"></div>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <div id="view-2" class="view view-main tab">
+                <!-- Pages-->
+                <div class="pages">
+                    <!-- Page, data-page contains page name-->
+                    <div data-page="index-2" class="page ttheme-black">
+
+                        <div class="navbar">
+                            <div class="navbar-inner">
+                                <!--
+                                <div class="left"><a href="index.html" class="back link icon-only"><i class="icon icon-back"></i></a></div>
+                                
+                                <div class="center">
+                                -->
+                                <form id="search_form" class="searchbar searchbar-init">
+                                    <div class="searchbar-input">
+                                        <input id="kw" type="search" placeholder="Pesquisar"><a href="#" class="searchbar-clear"></a>
+                                    </div><a href="#" class="searchbar-cancel">Cancelar</a>
+                                </form>
+                                <!--</div>
+                                
+                                <div class="right">
+                                    <a href="#" class="link icon-only"><i class="fa fa-search"></i></a>
+                                </div>
+                                -->
+                            </div>
+                        </div>
+
+                        <!-- Scrollable page content-->
+                        <div class="page-content pull-to-refresh-content infinite-scroll" style="padding-top:55px;padding-bottom:60px">
+
+                            <div id="search_block">
+                                <div class="pull-to-refresh-layer">
+                                    <div class="preloader preloader-pink"></div>
+                                    <div class="pull-to-refresh-arrow"></div>
+                                </div>
+
+                                <div id="post2_list" class="squares">
+                                </div>
+
+                                <div id="post2_infinite" style="display:none;" class="infinite-scroll-preloader">
+                                    <div class="preloader preloader-pink"></div>
+                                </div>
+                            </div>
+
+                            <div id="search_list" style="display:none;margin-top:-25px">
+                                <!--
+                                <div class="content-block-title">Something more simple</div>
+                                -->
+                                <div class="list-block media-list">
+                                    <ul id="search_loader">
+                                        <li>
+                                            <div class="item-content">
+                                                <div class="item-media"><img src="img/loader.gif" width="24"></div>
+                                                <div class="item-inner">
+                                                    <div class="item-title-row">
+                                                        <div class="item-title" style="font-weight:100">Procurando por "<span class="searchTxt"></span>" ...</div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                    <ul id="search_none" style="display:none">
+                                        <li>
+                                            <div class="item-content">
+                                                <div class="item-media"><img src="img/close.png" width="24"></div>
+                                                <div class="item-inner">
+                                                    <div class="item-title-row">
+                                                        <div class="item-title" style="font-weight:100">Nenhum resultado para "<span class="searchTxt"></span>"</div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                    <ul id="search_err" style="display:none">
+                                        <li>
+                                            <div class="item-content">
+                                                <div class="item-media"><img src="img/none.png" width="24"></div>
+                                                <div class="item-inner">
+                                                    <div class="item-title-row">
+                                                        <div class="item-title" style="font-weight:100">Desculpe, verifique sua conexão.</div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                    <ul id="search_res" style="display:none">
+
+                                        <li id="search_template" style="display:none">
+                                            <a href="#" class="post_read" style="color:#222">
+                                                <div class="item-content">
+                                                    <div class="item-media"><img class="img_fn" src="" width="44" style="border-radius:0 !important" /></div>
+                                                    <div class="item-inner">
+                                                        <div class="item-title-row">
+                                                            <div class="post_name item-title">Yellow Submarine</div>
+                                                        </div>
+                                                        <div class="post_price item-subtitle">Beatles</div>
+                                                    </div>
+                                                </div>
+                                            </a>
+                                        </li>
+
+                                        <span id="search_ajax"></span>
+
+                                    </ul>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="view-3" class="view view-main tab">
+                <div class="pages navbar-through">
+
+                    <div data-page="index-3" class="page">
+                        <div class="navbar">
+                            <div class="navbar-inner">
+                                <div class="center sliding">Conversas</div>
+                            </div>
+                        </div>
+
+                        <div class="page-content" style='margin-top:45px;ppadding-bottom:100px'>
+
+                            <div style="display:none" id="chat_none" class="content-block-title" style="height:20px">
+                                Nenhuma conversa
+                            </div>
+
+                            <div class="list-block media-list" style="margin-top:12px">
+
+                                <ul>
+                                    <li style="display:none" id="chat_list_template" class="swipeout" data-id="" data-pic="" data-name="">
+                                        <div class="swipeout-content">
+                                            <a href="#" class="chat item-link item-content">
+                                                <div class="item-media">
+                                                    <img class="user_pic" src="" style="width:42px !important;height:42px !important"/>
+                                                </div>
+                                                <div class="item-inner">
+                                                    <div class="item-title-row">
+                                                        <div class="user_name item-title">...</div>
+                                                        <!--<div class="item-after">
+                                                            <div class="chip" style="margin-top:-5px;background:#0288d1;color:#fff;font-size:12px;font-weight:100">
+                                                                <div class="chip-label">5</div>
+                                                                </div>
+                                                        </div>-->
+                                                    </div>
+                                                    <div class="chat_txt item-text truncate" style="font-weight:100">...</div>
+                                                </div>
+                                            </a>
+                                        </div>
+                                        <!--<div class="swipeout-actions-left"><a href="#" class="bg-green swipeout-overswipe demo-reply">Responder</a><a href="#" class="demo-forward bg-blue">Repray</a></div>-->
+                                        <div class="swipeout-actions-right">
+                                            <a href="#" class="chat_del sswipeout-delete swipeout-overswipe">Deletar</a>
+                                        </div>
+                                    </li>
+
+                                    <span id="chat_list"></span>
+
+
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="view-4" class="view view-main tab">
+                <div class="pages navbar-fixed">
+                    <div id="index-4" data-page="index-4" class="page">
+                        <div class="navbar">
+                            <div class="navbar-inner">
+                                <div class="center">Meu Perfil</div>
+                                <div class="right">
+                                    <a href="user_form.html" class="link icon-only"><i class="fa fa-pencil"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="page-content" style="padding-bottom:80px !important">
+
+
+                            <div class="pic_bg blur"></div>
+                            <div style="margin:24px">
+                                <img class="pic_img circle glow" src="img/user.png" />
+                            </div>
+
+                            <div class="content-block" style="margin-top:0;margin-bottom:30px">
+                                <p class="buttons-row" style="margin-bottom:-10px">
+                                    <a href="#" class="button button-raised color-blue">Seguidores (<span class="user_followers">0</span>)</a>
+                                    <a href="#" class="button button-raised ccolor-green">Seguindo (<span class="user_following">0</span>)</a>
+                                </p>
+                            </div>
+
+                            <div class="content-block" style="margin-top:0px;margin-bottom:0">
+                                <h2 class="user_name" style="margin-bottom:-10px">...</h2>
+                                <p class="user_bio" style="margin-bottom:10px">...</p>
+                                <div class="row" style="font-weight:100">
+                                    <div class="col-50"><i class="icon-phone"></i> <span class="user_phone">...</span></div>
+                                    <div class="col-50" style="text-align:right;margin-right:10px"><a class="color-indigo" href="user_form.html"><i class="fa fa-pencil"></i> editar dados</a></div>
+                                </div>
+                            </div>
+                            <!--
+                            <div id="conexCheck" class="content-block-title" style="margin-top:0;">...</div>
+                            -->
+                            <div class="content-block-title" style="margin-top:10px;">Meus anúncios</div>
+
+                            <div class="list-block">
+                                <ul>
+                                    <li class="post_read" id="user_post_template" style="display:none">
+                                        <a href="#" class="item-link">
+                                            <div class="item-content">
+                                                <div class="item-media">
+                                                    <img style="border-radius:0" class="img_fn" src="img/user.png" />
+                                                </div>
+                                                <div class="item-inner">
+                                                    <div class="post_name item-title">
+                                                        ...
+                                                    </div>
+                                                    <div class="post_price item-after">...</div>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <span id="user_post"></span>
+                                </ul>
+                            </div>
+
+                            <div id="user_post_none" class="content-block-title" style="display:none;padding:0;font-weight:100">Você ainda não enviou anúncios...</div>
+
+                            <!--<div id="my_post_loading" style="text-align:center">
+                                <div class="preloader preloader-pink"></div>
+                            </div>-->
+
+
+                            <div class="content-block" style="font-weight:100;margin-top:40px">
+                                <a href="#" class="userLogout button button-raised">
+                                    Sair da minha conta
+                                </a>
+                            </div>
+
+
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bottom Tabbar-->
+
+            <div id="toolbar_on" class="theme-pink toolbar tabbar tabbar-labels jwbar">
+
+                <div class="toolbar-inner">
+
+                    <a href="#view-1" class="on tab-link active">
+                        <i class="icon-home"></i>
+                    </a>
+                    <a href="#view-2" class="on tab-link">
+                        <i class="icon-search"></i>
+                    </a>
+
+                    <a id="camera" href="#!" class="on tab-link">
+                        <i class="icon-camera"></i>
+                        <!--<img id="camera-loading" src="img/hourglass.gif" style="width:32px;margin-top:5px" />-->
+                    </a>
+                    <a href="#view-3" class="on tab-link">
+                        <!--<div class="jwicon">
+                            <i class="fa fa-comment-o"></i>
+                            <span class="badge bg-red">4</span>
+                        </div>
+                        -->
+                        <i class="icon-chat"></i>
+                        <!--<span class="tabbar-label">Conversas</span>-->
+                    </a>
+
+                    <a href="#view-4" class="on tab-link">
+                        <i class="icon-user"></i>
+                        <!--<span class="tabbar-label">Opções</span>-->
+                    </a>
+
+
+                </div>
+            </div>
+        </div>
 
         <!-- DEBUG -->
         <script>
             var isApp = document.URL.indexOf('http://') === -1 && document.URL.indexOf('https://') === -1;
         </script>
+        <!--
+        <script src="https://debug2.phonegap.com/target/target-script-min.js#2fcde2a6-1c48-11e6-93ce-067c7ecc21b3"></script>
+        <script src="http://192.168.0.100:8080/target/target-script-min.js#adsapp"></script>
+        -->
         <!-- PHONEGAP -->
         <script src="cordova.js"></script>
         <!-- API -->
-        <!--
         <script type="text/javascript" src="f7/js/framework7.js"></script>
-        -->
         <script type="text/javascript" src="js/jquery-1.10.1.min.js"></script>
+        <script type="text/javascript" src="js/jquery.mask.js"></script>
+        <script type="text/javascript" src="js/kitchen-sink.js"></script>
+        <script type="text/javascript" src="js/views.js"></script>
+        <!-- VENDOR -->
+        <script type="text/javascript" src="js/prettydate.js"></script>
+        <script type="text/javascript" src="js/jquery.validate.min.js"></script>
+        <script type="text/javascript" src="js/jquery.mask.js"></script>
+        <!--<script type="text/javascript" src="js/moment.min.js"></script>-->
+        <!-- APP -->
         <script type="text/javascript" src="js/app.js"></script>
-        <script type="text/javascript" src="js/facebook.js"></script>
+        <script type="text/javascript" src="js/arrays.js"></script>
+        <!-- MY CLASSES -->
+        <script type="text/javascript" src="js/class.camera.js"></script>
+        <script type="text/javascript" src="js/class.facebook.js"></script>
+        <script type="text/javascript" src="js/class.dom.js"></script>
+        <script type="text/javascript" src="js/class.debug.js"></script>
+        <script type="text/javascript" src="js/class.store.js"></script>
+        <script type="text/javascript" src="js/class.str.js"></script>
+        <script type="text/javascript" src="js/class.date.js"></script>
+        <script type="text/javascript" src="js/class.share.js"></script>
+        <!-- MY PAGES -->
+        <script type="text/javascript" src="js/page.js"></script>
+        <script type="text/javascript" src="js/page.index.js"></script>
+        <script type="text/javascript" src="js/page.chat.js"></script>
+        <script type="text/javascript" src="js/page.post.js"></script>
+        <script type="text/javascript" src="js/page.user.js"></script>
+        <script type="text/javascript" src="js/page.search.js"></script>
 
         <script type="text/javascript">
+            // alias session
+            s = sessionStorage;
+
             // init
             app.initialize();
 
+            //localStorage.removeItem("user_id");
+
             // DEV
             if (!isApp) {
-                //start();
+                start();
             }
+
+            // fix for browser reload
+            sessionStorage.activePage = 0;
+            sessionStorage.post_id_list = 0;
+            sessionStorage.post2_id_list = 0;
+            sessionStorage.loadIndex = 0;
+            sessionStorage.chat_list_loading = 0;
+
+            console.log(localStorage);
+            console.log(sessionStorage);
+
         </script>
 
-
-        <script>
-            $(document).ready(function () {
-                $("#userFb").click(function () {
-                    fb.login();
-                });
-            });
-        </script>
     </body>
 </html>

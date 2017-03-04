@@ -1,0 +1,57 @@
+
+<div id="user_login" data-page="user_login" class="page">
+    <div class="page-content login-screen-content">
+
+        <div class="login-screen-title">
+
+            <img src="img/logo.png" /><br/>
+            <div style="margin-top:-10px">
+                <strong>Ads</strong>App
+            </div>
+            <div style="color:#ccc;font-weight:100;font-size:24px;">
+                Welcome! ;)
+            </div>
+        </div>
+        <form id="userLogin">
+            <div class="list-block inputs-list">
+                <ul>
+                    <li class="item-content">
+                        <div class="item-inner">
+                            <div class="item-title label">Username ou e-mail</div>
+                            <div class="item-input">
+                                <input type="text" name="user_email" placeholder="user@provider.com" autocapitalize="off" autocorrect="off" />
+                            </div>
+                        </div>
+                    </li>
+                    <li class="item-content">
+                        <div class="item-inner">
+                            <div class="item-title label">Senha</div>
+                            <div class="item-input">
+                                <input type="password" name="user_pass" placeholder="*****"/>
+                            </div>
+                        </div>
+                    </li>
+
+                </ul>
+            </div>
+            <div class="content-block">
+                <a id="userSubmitLogin" href="#" class="button button-fill button-big" style="margin-top:-10px;margin-bottom:5px">Login</a>
+                <a href="#" onclick="javascript:fb.login()" class="button button-fill button-big color-blue" style="margin-bottom:5px">
+                    <i class="fa fa-facebook"></i> &nbsp;
+                    Entrar com Facebook
+                </a>
+                <a href="user_register.html" class="button button-fill button-big color-orange">
+                    <i class="fa fa-envelope"></i> &nbsp;
+                    Cadastrar com e-mail
+                </a>
+            </div>
+
+            <div class="content-block" style="font-weight:100;font-size:12px">
+                <div class="list-block-label">Entrando no AdsApp você concorda com nossos <a href="#">Termos de Uso</a> e <a href="#">Política de Privacidade</a></div>
+            </div>
+            <div class="content-block">
+                <div class="list-block-label">AdsApp Brasil © 2016</div>
+            </div>
+        </form>
+    </div>
+</div>
