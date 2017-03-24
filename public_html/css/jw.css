@@ -17,14 +17,19 @@
     background-position:center;background-image:url(img/user.png)
 }
 .pic_img {
-  display: block;
+    display: block;
     margin-left: auto;
     margin-right: auto;
     width:128px;height:128px;
-  }
+}
+/* FINDZE */
+.fznav {background-color:#fff !important;color:#333}
+.appname {font-family:Lobster;font-size:24px}
+
 /* GLOBAL */
-p,textarea,input[type=text],select {font-weight:100 !important}
-input{font-family:Nunito}
+.button {font-weight:400 !important}
+p,textarea,input[type=text],select {font-weight:400 !important}
+input{font-family:Open Sans}
 #global .item-subtitle {font-size:10px;text-transform:uppercase;color:#999}
 .navbar {bbackground:#ffc600}
 ul.global .item-text {margin-top:7px}
