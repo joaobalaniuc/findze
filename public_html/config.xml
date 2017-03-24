@@ -94,7 +94,6 @@
     </platform>
     
     
-    <!--
     <plugin name="cordova-plugin-statusbar" source="npm" />
     <preference name="StatusBarOverlaysWebView" value="true" /> 
     <preference name="StatusBarBackgroundColor" value="#000000" />
@@ -102,7 +101,6 @@
     <feature name="StatusBar">
         <param name="ios-package" value="CDVStatusBar" onload="true" />
     </feature>
-    -->
     
     <plugin name="cordova-plugin-facebook4" source="npm">
         <param name="APP_ID" value="680019738832743" />

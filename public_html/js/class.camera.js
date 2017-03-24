@@ -12,43 +12,16 @@ function getImage(gallery) {
         sourceType: type,
         quality: 50,
         allowEdit: true,
-        targetWidth: 600,
-        targetHeight: 300,
+        targetWidth: 612,
+        targetHeight: 306,
         saveToPhotoAlbum: true,
         popoverOptions: true
     });
 }
 
 function showPhoto(imageURI) {
-    myApp.showPreloader();
-    alert(imageURI);
+    //alert(imageURI);
     $("#post_camera").attr("src", imageURI);
-    myApp.hidePreloader();
-    return;
-    var options = new FileUploadOptions();
-    options.fileKey = "file";
-    options.fileName = imageURI.substr(imageURI.lastIndexOf('/') + 1);
-    options.mimeType = "image/jpeg";
-    //alert(JSON.stringify(options.fileName));
-    var params = new Object();
-
-    // user data
-    params.user_id = localStorage.user_id;
-    params.user_email = localStorage.user_email;
-    params.user_pass = localStorage.user_pass;
-    options.params = params;
-    options.chunkedMode = false;
-
-    var ft = new FileTransfer();
-    ft.upload(imageURI, "http://dev.house/adsapp/upload.php", function (result) {
-        //myApp.hidePreloader();
-        //alert(result);
-        //alert(JSON.stringify(result));
-        postStart();
-    }, function (error) {
-        myApp.hidePreloader();
-        alert(JSON.stringify(error));
-    }, options);
 }
 
 $$('#post_camera').on('click', function () {
