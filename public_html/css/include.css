@@ -1,20 +1,17 @@
 /* FA */
-@import url("fa-4.6.3/css/font-awesome.min.css");
-
-/* ICO MOON */
-@import url("icomoon.css");
-
+@import url("font-awesome-4.7.0/css/font-awesome.min.css");
 
 /* F7 */
 @import url("../f7/css/framework7.material.css");
 @import url("../f7/css/framework7.material.colors.css");
-@import url("kitchen-sink.css");
+@import url("../f7/css/kitchen-sink.css");
 
 /* CUSTOM */
 @import url("jw.css");
 @import url("grid.css");
+@import url("map.css");
 
-/* GFONT */
+/* GFONT *
 @font-face {
     font-family: 'Nunito';
     font-style: normal;
@@ -27,3 +24,4 @@
     font-weight: 400;
     src: local('Nunito-Regular'), url(1D_AI14T6X7H5aa5BXWWyuvvDin1pK8aKteLpeZ5c0A.woff) format('woff');
 }
+*/
