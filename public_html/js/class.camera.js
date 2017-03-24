@@ -11,7 +11,7 @@ function getImage(gallery) {
         destinationType: navigator.camera.DestinationType.FILE_URI,
         sourceType: type,
         quality: 50,
-        //allowEdit: true,
+        allowEdit: true,
         //targetWidth: 612,
         targetHeight: 306,
         saveToPhotoAlbum: true,
