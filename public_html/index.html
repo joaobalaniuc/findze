@@ -3,23 +3,18 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
-        <!--
-        <meta http-equiv="Content-Security-Policy" content="default-src *; style-src * 'unsafe-inline script-src * 'unsafe-inline' 'unsafe-eval'"/>
-        <meta http-equiv="Content-Security-Policy" content="default-src *; style-src * 'unsafe-inline script-src * 'unsafe-inline media-src *; img-src * data:; " />
-        <meta http-equiv="Content-Security-Policy" content="default-src *; style-src * 'unsafe-inline script-src * 'unsafe-inline' 'unsafe-eval img-src * data: 'unsafe-inline connect-src * 'unsafe-inline frame-src *;" />
-        -->
         <meta name="mobile-web-app-capable" content="yes">
         <meta name="apple-mobile-web-app-capable" content="yes">
         <meta name="apple-mobile-web-app-status-bar-style" content="black">
-
         <title>Findze</title>
+        <link href="https://fonts.googleapis.com/css?family=Maven+Pro:500|Open+Sans:300,400,600|Quicksand|Lobster" rel="stylesheet">
         <link rel="stylesheet" href="css/include.css">
         <link rel="icon" href="img/icon.png">
     </head>
 
     <body class='theme-pink'>
 
-        <div id="loaderx" style="z-index:9999;position:absolute;width:100%;height:100%;top:0;left:0;background:#fff">
+        <div id="loaderx" style="display:none;z-index:9999;position:absolute;width:100%;height:100%;top:0;left:0;background:#fff">
             <div style="width:80px;height:80px;position:relative;top: 50%;left: 50%;transform: translate(-50%, -50%);">
                 <img src="img/loading.gif" style="width:80px;height:80px" />
             </div>
@@ -34,16 +29,15 @@
                 <div class="pages navbar-through toolbar-through">
                     <div data-page="index" class="page ttheme-black">
 
-                        <div class="navbar">
+                        <div class="navbar ffznav">
                             <div class="navbar-inner">
                                 <!-- We need cool sliding animation on title element, so we have additional "sliding" class -->
-                                <div class="center sliding">
-                                    <i class="fa fa-bolt"></i> &nbsp; Ads<span style="font-weight:100">App</span>
-
+                                <div class="center sliding" style="width:100%">
+                                    <span class="appname" style="font-size:24px"> &nbsp;findze&nbsp; </span>
                                 </div>
-                                <!--<div class="right">
-                                    <a id="contactList" href="#" class="link icon-only"><i class="fa fa-refresh"></i></a>
-                                </div>-->
+                                <div class="right">
+                                    <a href="about.html" class="link icon-only"><i class="fa fa-search" aria-hidden="true"></i></a>
+                                </div>
                             </div>
                         </div>
 
@@ -63,36 +57,70 @@
                             </div>
 
 
-
-
-
-                            <div id="post_template" style="display:none;margin:0;margin-bottom:5px;box-shadow:none !important" class="card ks-facebook-card" data-id="1">
+                            <div id="post_template" style="display:none;margin:0;margin-bottom:-25px;box-shadow:none !important" class="card ks-facebook-card" data-id="1">
                                 <div class="user_read card-header" style="border:0">
                                     <div class="ks-facebook-avatar"><img class="user_fb_pic" style="border-radius:50%;box-shadow:none !important;border:0" src="img/user.png" width="34" height="34" /></div>
-                                    <div class="ks-facebook-name" style="ffont-weight:100;font-size:16px;margin-top:5px;text-transform:lowercase"><span class="color-pink">ads</span><span class="user_name">...</span></div>
+                                    <div class="ks-facebook-name" style="font-weight:bold;margin-top:5px;text-transform:lowercase"><span class="user_name">joaobalaniuc</span></div>
                                     <!--<div class="user_bio ks-facebook-date" style="font-weight:100;margin-top:-4px"></div>-->
                                 </div>
                                 <div class="card-content">
-                                    <div style="position:absolute;z-index:0;overflow: hidden;width:100vw;height:100vw;left:0;top:0">
-                                        <img class="thumb" style="filter: blur(7px) brightness(1);width:100%;height:100%" src="" />
+                                    <div style="position:absolute;z-index:0;overflow: hidden;width:100vw;height:50vw;left:0;">
+                                        <img class="thumb" style="filter: blur(7px) brightness(1);width:100%;height:100%" src="img/teste.jpg" />
                                     </div>
-                                    <img style="position:absolute;z-index:1;width:100vw;height:100vw;left:0;top:0" class="post_read post_img" src="" />
-                                    <img style="width:100vw;height:100vw" class="post_read post_img" src="" />
 
-                                    <div class="card-content-inner" style="margin-top:-5px;margin-left:12px;">
+                                    <img style="position:absolute;z-index:1;width:100vw;height:50vw;top:0;left:0;" class="post_read post_img" src="img/teste.jpg" />
+                                    <img style="position:absolute;z-index:2;width:100vw;height:50vw;top:0;left:0;" class="post_read post_img" src="img/degr.png" />
 
-                                        <div style="margin-bottom:12px">
-                                            <a href="#" class="share"><span class="icon-share color-pink" style="font-size:32px"></span></a>&nbsp;&nbsp;&nbsp;&nbsp;
-                                            <a href="#" class="chat"><i class="icon-chat color-pink" style="font-size:32px;margin-right:16px"></i></a>
-                                            <a href="#" class="user_phone external"><i class="icon-phone color-pink" style="font-size:32px"></i></a>
-
-                                            <div class="post_price" style="font-size:24px;float:right;margin-right:8px"></div>
+                                    <div style="
+                                         position:relative;z-index:3;
+                                         width:100vw;height:50vw;color:#fff;
+                                         ">
+                                        <div style="
+                                             position:absolute;bottom:10px;left:20px;
+                                             font-size:18px;font-weight:600
+                                             ">
+                                            ...
                                         </div>
-                                        <div style="margin-bottom:3px;font-weight:100">
-                                            <span class="post_name" style="font-weight:bold">...</span> &nbsp;
-                                            <span class="post_txt">...</span>
+                                        <div style="
+                                             position:absolute;bottom:35px;left:20px;
+                                             font-size:12px;font-weight:300
+                                             ">
+                                            ...
                                         </div>
-                                        <div class="post_date prettydate" style="font-weight:100;color:#ccc;font-size:12px;text-transform:uppercase">...</div>
+                                    </div>
+
+                                    <div class="card-content-inner" style="margin-top:-15px;margin-left:10px;margin-right:5px">
+
+                                        <div style="margin-top:5px;">
+
+                                            <a href="#" class="button button-raised bbutton-fill color-pink" style="display:inline-block;min-width:48px">
+                                                <i class="fa fa-share-alt"></i>
+                                            </a>
+                                            <a href="#" class="button button-raised bbutton-fill color-pink" style="display:inline-block;min-width:48px">
+                                                <i class="fa fa-comment"></i>
+                                            </a>
+
+                                            <a href="#"
+                                               class="button button-raised button-fill color-pink"
+                                               style="display:inline-block;float:right;font-size:12px;">
+                                                Eu quero
+                                            </a>
+
+
+                                        </div>
+                                        <div style="margin-top:3px;font-weight:300">
+                                            <div class="post_users" style="font-weight:bold;margin-bottom:5px">...</div>
+
+                                            <div class="post_txt">...</div>
+                                            <div style="clear:both;margin-bottom:7px"></div>
+
+
+                                            <div class="post_time color-pink" style="font-weight:300;text-transform:uppercase;font-size:11px;margin-top:5px">
+                                                Há <span class="post_dist">10 km</span> &nbsp; - &nbsp; <span class="post_date_start">...</span>
+                                            </div><br/>
+
+
+                                        </div>
 
                                     </div>
                                 </div>
@@ -104,9 +132,11 @@
                                 -->
                             </div>
 
+
+
                             <div id="post_none" style="display:none;text-align:center;padding:15px;font-size:20px;color:#ccc;font-weight:100">
                                 <i class="fa fa-search" style="font-size:48px;margin:20px"></i><br/>
-                                Encontre seus amigos e lojas preferidas <a href="#view-2" class="tab-link">clicando aqui</a>.
+                                Não há eventos próximos a você. Clique <a href="#view-2" class="tab-link">aqui</a> para criar um.
                             </div>
 
                             <div id="post_list"></div>
@@ -239,49 +269,147 @@
                     <div data-page="index-3" class="page">
                         <div class="navbar">
                             <div class="navbar-inner">
-                                <div class="center sliding">Conversas</div>
+                                <div class="center sliding">Criar um evento</div>
                             </div>
                         </div>
 
-                        <div class="page-content" style='margin-top:45px;ppadding-bottom:100px'>
+                        <div class="page-content" style="padding-top:55px;padding-bottom:50px !important">
 
-                            <div style="display:none" id="chat_none" class="content-block-title" style="height:20px">
-                                Nenhuma conversa
+                            <div class="card ks-facebook-card" style="margin:0;box-shadow:none !important">
+                                <div class="card-content" style="box-shadow:none !important"> 
+                                    <div class="card-content-inner" style="padding:0">
+                                        <img style="width:100vw;height:50vw;" class="post_img" src="img/camera.jpg" />
+
+                                    </div>
+                                </div>
+                                <!--
+                                <div class="card-footer"><a href="#" class="postShow link">Like</a><a href="#" class="link">Comment</a><a href="#" class="link">Share</a></div>
+                                -->
                             </div>
 
-                            <div class="list-block media-list" style="margin-top:12px">
+                            <form id="postForm">
 
-                                <ul>
-                                    <li style="display:none" id="chat_list_template" class="swipeout" data-id="" data-pic="" data-name="">
-                                        <div class="swipeout-content">
-                                            <a href="#" class="chat item-link item-content">
-                                                <div class="item-media">
-                                                    <img class="user_pic" src="" style="width:42px !important;height:42px !important"/>
-                                                </div>
-                                                <div class="item-inner">
-                                                    <div class="item-title-row">
-                                                        <div class="user_name item-title">...</div>
-                                                        <!--<div class="item-after">
-                                                            <div class="chip" style="margin-top:-5px;background:#0288d1;color:#fff;font-size:12px;font-weight:100">
-                                                                <div class="chip-label">5</div>
-                                                                </div>
-                                                        </div>-->
+                                <input type="hidden" name="img_fn" value="" />
+                                <input type="hidden" name="post_id" value="" />
+
+                                <div class="list-block inputs-list" style="margin:0">
+                                    <ul>
+                                        <li>
+                                            <div class="item-content">
+                                                <div class="item-inner"> 
+                                                    <div class="item-title label">Título</div>
+                                                    <div class="item-input">
+                                                        <input name="post_name" type="text" placeholder="Qual o nome do evento?"/>
                                                     </div>
-                                                    <div class="chat_txt item-text truncate" style="font-weight:100">...</div>
                                                 </div>
-                                            </a>
-                                        </div>
-                                        <!--<div class="swipeout-actions-left"><a href="#" class="bg-green swipeout-overswipe demo-reply">Responder</a><a href="#" class="demo-forward bg-blue">Repray</a></div>-->
-                                        <div class="swipeout-actions-right">
-                                            <a href="#" class="chat_del sswipeout-delete swipeout-overswipe">Deletar</a>
-                                        </div>
-                                    </li>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="item-content">
+                                                <div class="item-inner"> 
+                                                    <div class="item-title label">Descrição do Evento</div>
+                                                    <div class="item-input">
+                                                        <textarea name="post_txt" class="resizable" placeholder="Descrição completa..."></textarea>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="item-content">
+                                                <div class="item-inner"> 
+                                                    <div class="item-title label">Data de Início</div>
+                                                    <div class="item-input">
+                                                        <input name="post_date_start" type="text" placeholder="dd/mm/aaaa hh:mm"/>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="item-content">
+                                                <div class="item-inner"> 
+                                                    <div class="item-title label">Data do Término</div>
+                                                    <div class="item-input">
+                                                        <input name="post_date_start" type="text" placeholder="dd/mm/aaaa hh:mm"/>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li class="cat1">
+                                            <div class="item-content">
+                                                <div class="item-inner"> 
+                                                    <div class="item-title label">Categoria</div>
+                                                    <div class="item-input">
+                                                        <select name="categ_id" class="cat" id="cat1">
+                                                            <option value="1">...</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="content-block-title">LOCALIZAÇÃO DO EVENTO</div>
+                                        </li>
+                                        <li>
+                                        </li>
+                                    </ul>
 
-                                    <span id="chat_list"></span>
+                                    <div id="map" style="width:100%;height:400px"></div>
+
+                                    <ul style="margin-top:0px">
+                                        <li>
+                                            <div class="item-content">
+                                                <div class="item-inner"> 
+                                                    <div class="item-title label">Como chegar?</div>
+                                                    <div class="item-input">
+                                                        <input name="post_date_start" type="text" placeholder="Opcional"/>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <!--
+                                        <li>
+                                            <div class="item-content">
+                                                <div class="item-inner"> 
+                                                    <div class="item-title label">Bairro</div>
+                                                    <div class="item-input">
+                                                        <input name="post_date_start" type="text" placeholder="Bairro"/>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="item-content">
+                                                <div class="item-inner"> 
+                                                    <div class="item-title label">Cidade</div>
+                                                    <div class="item-input">
+                                                        <input name="post_date_start" type="text" placeholder="Cidade"/>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="item-content">
+                                                <div class="item-inner"> 
+                                                    <div class="item-title label">Estado</div>
+                                                    <div class="item-input">
+                                                        <input name="post_date_start" type="text" placeholder="Estado"/>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        -->
+                                    </ul>
 
 
-                                </ul>
-                            </div>
+
+                                </div>
+
+
+                                <div class="content-block" style="margin-top:5px">
+                                    <a class="postSend button button-big button-raised button-fill color-pink">Criar Evento</a>
+                                </div>
+
+                            </form>
                         </div>
                     </div>
                 </div>
@@ -292,7 +420,10 @@
                     <div id="index-4" data-page="index-4" class="page">
                         <div class="navbar">
                             <div class="navbar-inner">
-                                <div class="center">Meu Perfil</div>
+                                <div class="left">
+                                    <a href="user_fb.html" class="link icon-only"><i class="fa fa-user-plus"></i></a>
+                                </div>
+                                <div class="center" style="width:100%;text-align:center">joaobalaniuc</div>
                                 <div class="right">
                                     <a href="user_form.html" class="link icon-only"><i class="fa fa-pencil"></i></a>
                                 </div>
@@ -308,8 +439,8 @@
 
                             <div class="content-block" style="margin-top:0;margin-bottom:30px">
                                 <p class="buttons-row" style="margin-bottom:-10px">
-                                    <a href="#" class="button button-raised color-blue">Seguidores (<span class="user_followers">0</span>)</a>
-                                    <a href="#" class="button button-raised ccolor-green">Seguindo (<span class="user_following">0</span>)</a>
+                                    <a href="#" class="button button-raised color-black">Seguidores (<span class="user_followers">0</span>)</a>
+                                    <a href="#" class="button button-raised color-black">Seguindo (<span class="user_following">0</span>)</a>
                                 </p>
                             </div>
 
@@ -375,28 +506,20 @@
                 <div class="toolbar-inner">
 
                     <a href="#view-1" class="on tab-link active">
-                        <i class="icon-home"></i>
+                        <i class="fa fa-home"></i>
                     </a>
                     <a href="#view-2" class="on tab-link">
-                        <i class="icon-search"></i>
+                        <i class="fa fa-users"></i>
                     </a>
 
-                    <a id="camera" href="#!" class="on tab-link">
-                        <i class="icon-camera"></i>
+                    <a href="#view-3" class="on tab-link">
+                        <i class="fa fa-plus-circle"></i>
                         <!--<img id="camera-loading" src="img/hourglass.gif" style="width:32px;margin-top:5px" />-->
                     </a>
-                    <a href="#view-3" class="on tab-link">
-                        <!--<div class="jwicon">
-                            <i class="fa fa-comment-o"></i>
-                            <span class="badge bg-red">4</span>
-                        </div>
-                        -->
-                        <i class="icon-chat"></i>
-                        <!--<span class="tabbar-label">Conversas</span>-->
-                    </a>
+
 
                     <a href="#view-4" class="on tab-link">
-                        <i class="icon-user"></i>
+                        <i class="fa fa-user-circle-o"></i>
                         <!--<span class="tabbar-label">Opções</span>-->
                     </a>
 
@@ -416,7 +539,7 @@
         <!-- PHONEGAP -->
         <script src="cordova.js"></script>
         <!-- API -->
-        <script type="text/javascript" src="f7/js/framework7.js"></script>
+        <script type="text/javascript" src="f7/js/framework7.min.js"></script>
         <script type="text/javascript" src="js/jquery-1.10.1.min.js"></script>
         <script type="text/javascript" src="js/jquery.mask.js"></script>
         <script type="text/javascript" src="js/kitchen-sink.js"></script>
@@ -438,6 +561,7 @@
         <script type="text/javascript" src="js/class.str.js"></script>
         <script type="text/javascript" src="js/class.date.js"></script>
         <script type="text/javascript" src="js/class.share.js"></script>
+        <script type="text/javascript" src="js/class.map.js"></script>
         <!-- MY PAGES -->
         <script type="text/javascript" src="js/page.js"></script>
         <script type="text/javascript" src="js/page.index.js"></script>
@@ -445,6 +569,8 @@
         <script type="text/javascript" src="js/page.post.js"></script>
         <script type="text/javascript" src="js/page.user.js"></script>
         <script type="text/javascript" src="js/page.search.js"></script>
+        <!-- MAPS -->
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBbu9Qwc7f7u-ze4bmVu6oTbsgC86SR0mQ" async defer></script>
 
         <script type="text/javascript">
             // alias session
@@ -459,6 +585,7 @@
             if (!isApp) {
                 start();
             }
+            sessionStorage.clear();
 
             // fix for browser reload
             sessionStorage.activePage = 0;

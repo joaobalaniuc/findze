@@ -15,6 +15,13 @@ function getAge(dateString) {
     return age;
 }
 
+// ZEROS LEFT
+function pad(num, size) {
+    var s = num+"";
+    while (s.length < size) s = "0" + s;
+    return s;
+}
+
 // FORMAT USER NUMERIC PHONE
 function formatNum(num) {
     var str = num.replace(/[()-]/g, '').split(' ').join('');

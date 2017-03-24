@@ -4,12 +4,12 @@
 function start() {
 
     // App config
-    localStorage.appname = "AdsApp";
+    localStorage.appname = "Findze";
     localStorage.version = "1.0.0";
 
     // Server
-    localStorage.server = "http://dev.house/adsapp/";
-    localStorage.server_img = "/app/upload/";
+    localStorage.server = "http://dev.house/findze/";
+    localStorage.server_img = "/upload/";
 
     // Dev
     sessionStorage.debug = 1;

@@ -48,13 +48,12 @@ $(document).ready(function () {
         $('#toplogo').css("margin-top", "10px");
     }
 
-    userRead(localStorage.user_id, userReadCb_Me);
-    userAds(localStorage.user_id, userAdsCb_Me);
-    //postList(0);
+    //userRead(localStorage.user_id, userReadCb_Me);
+    //userAds(localStorage.user_id, userAdsCb_Me);
     postList(0, "", true);
-
-    // Get data and fill
-    //getSession();
+    
+    // Category
+    postCat(postCatCb);
 
     // Global timer
     setInterval(function () {
@@ -88,17 +87,10 @@ function pageRefresh() {
             && page !== "chat") {
         $("#toolbar_on").fadeIn("fast");
         $("#toolbar_off").fadeOut("fast");
-    }
-    else {
+    } else {
         $("#toolbar_on, #toolbar_off").hide();
     }
-    // novo post
-    if (page === "post_form") {
-        $("#toolbar_off").show();
-        $("#toolbar_on").fadeOut("fast");
-        setMask();
-        postCat(postCatCb);
-    }
+
     // ver post
     if (page === "post_read") {
     }
@@ -108,8 +100,7 @@ function pageRefresh() {
             if ($('#post_list').children().length === 0) {
                 postList(0, "", true); // followers
             }
-        }
-        else {
+        } else {
             sessionStorage.loadIndex = 1;
         }
         // atualizou followers
@@ -119,19 +110,19 @@ function pageRefresh() {
             postList(0, "", true); // followers
         }
     }
-    // chat list
-    if (page === "index-3") {
-        chatList(0);
-        t = 10000;
-    }
     if (page === "index-2") {
         if ($('#post2_list').children().length === 0) {
             //postGrid();
             myApp.showIndicator();
-            postListGrid(0);
+            //postListGrid(0);
 
         }
-
+    }
+    // novo post
+    if (page === "index-3") {
+        //setMask();
+        initMap();
+        t = 0;
     }
     // run again
     if (t > 0) {
@@ -186,8 +177,7 @@ function conexCheck() {
     if (sessionStorage.onlineLast !== sessionStorage.online) {
         if (sessionStorage.online === "true") {
             $('#conexCheck').html("<span style='color:#6ccb5e'><img src='img/online.png' style='vertical-align:bottom' /> &nbsp; Conectado</span>");
-        }
-        else {
+        } else {
             $('#conexCheck').html("<span style='color:#e95651'><img src='img/offline.png' style='vertical-align:bottom' /> &nbsp; Você está offline</span>");
         }
         sessionStorage.onlineLast = sessionStorage.online;

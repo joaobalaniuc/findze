@@ -12,8 +12,7 @@ $$(document).on('click', '.post_read', function (e) {
 //=============================
 $$(document).on('click', '#removeLastImg', function (e) {
     if (sessionStorage.edit_id > 0) {
-    }
-    else {
+    } else {
         myApp.confirm('Tem certeza disto?', 'Desfazer envio', function () {
             removeLastImg();
             //view1.router.back();
@@ -65,8 +64,7 @@ myApp.onPageInit('post_form', function (page) {
 $$(document).on('click', '.postSend', function (e) {
     if ($("#postForm").valid()) {
         postSend();
-    }
-    else {
+    } else {
         myApp.alert('Preencha corretamente os campos do formulário.', 'Ops!');
     }
 });
@@ -209,22 +207,20 @@ function postList(last_id, op, followers) {
     var prefix;
     // POST GERAL
     if (typeof followers === "undefined") {
-        prefix = "post2";
+        prefix = "post";
         if (op === "new") {
             sessionStorage.post_id_list_new = last_id;
-        }
-        else {
+        } else {
             op = "";
             sessionStorage.post_id_list = last_id;
         }
     }
     // POST FOLLOWER
     else {
-        prefix = "post"; // #post2_template, #post2_list, etc...
+        prefix = "post2"; // #post2_template, #post2_list, etc...
         if (op === "new") {
             sessionStorage.post2_id_list_new = last_id;
-        }
-        else {
+        } else {
             op = "";
             sessionStorage.post2_id_list = last_id;
         }
@@ -337,8 +333,7 @@ function postList(last_id, op, followers) {
                         if (typeof followers === "undefined") {
                             if (op === "new") {
                                 sessionStorage.post_id_list_new = val["post_id"];
-                            }
-                            else {
+                            } else {
                                 sessionStorage.post_id_list = val["post_id"];
                             }
                             if (last_id === 0) {
@@ -354,8 +349,7 @@ function postList(last_id, op, followers) {
                         else {
                             if (op === "new") {
                                 sessionStorage.post2_id_list_new = val["post_id"];
-                            }
-                            else {
+                            } else {
                                 sessionStorage.post2_id_list = val["post_id"];
                             }
                             if (last_id === 0) {
@@ -387,8 +381,7 @@ function postListGrid(last_id, op) {
     // POST GERAL
     if (op === "new") {
         sessionStorage.post_id_list_new = last_id;
-    }
-    else {
+    } else {
         op = "";
         sessionStorage.post_id_list = last_id;
     }
@@ -462,8 +455,7 @@ function postListGrid(last_id, op) {
                         //======================
                         if (op === "new") {
                             sessionStorage.post_id_list_new = val["post_id"];
-                        }
-                        else {
+                        } else {
                             sessionStorage.post_id_list = val["post_id"];
                         }
                         if (last_id === 0) {
@@ -644,6 +636,9 @@ $$(document).on('change', '.cat', function (e) {
     catChange(id);
 });
 function postCat(cb) {
+    
+    console.log("postCat");
+    
     $.ajax({
         url: localStorage.server + "/categ_list.php",
         data: {
@@ -667,30 +662,21 @@ function postCat(cb) {
                     if (res.error) {
                         return;
                     }
-                    $.each(res, function (key, val) {
-                        sessionStorage.setItem("cName_" + val["categ_id"], val["categ_name"]);
-                        sessionStorage.setItem("cLevel_" + val["categ_id"], val["categ_level"]);
-                        sessionStorage.setItem("cParent_" + val["categ_id"], val["categ_parent"]);
-                    });
-                    cb();
+                    cb(res);
                 }
-                console.log("cat");
-                console.log(sessionStorage);
+                
+                console.log(res);
+                console.log("/postCat");
             }); // after ajax
 }
 //======================================
 // LOAD CATEG LEVEL 1
 //======================================
-function postCatCb() {
+function postCatCb(res) {
     var html = "";
     html += "<option value=''>Selecione...</option>\r\n";
-    $.each(sessionStorage, function (key, val) {
-        if (key.startsWith("cName_")) {
-            var id = key.split("_");
-            if (sessionStorage.getItem("cParent_" + id[1]) == "") {
-                html += "<option value='" + id[1] + "'>" + val + "</option>\r\n";
-            }
-        }
+    $.each(res, function (key, val) {
+        html += "<option value='" + val["categ_id"] + "'>" + val["categ_name"] + "</option>\r\n";
     });
     $("#cat1").html(html);
     $(".cats").hide();
@@ -718,8 +704,7 @@ function catChange(id) {
     $("#cat" + next_level).html(html);
     if (find > 0) {
         $(".cat" + next_level).fadeIn("fast");
-    }
-    else {
+    } else {
         $(".cat" + next_level).hide();
     }
 }

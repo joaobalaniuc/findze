@@ -83,10 +83,14 @@ $$(document).on('click', "#userSubmitLogin", function (e) {
 //=============================
 myApp.onPageInit("user_register", function (page) {
 
-    setMask();
+    //setMask();
 
     $("#userSend").validate({
         rules: {
+            user_fullname: {
+                required: true,
+                minlength: 7
+            },
             user_name: {
                 required: true,
                 minlength: 3
@@ -108,13 +112,14 @@ myApp.onPageInit("user_register", function (page) {
         },
         // For custom messages
         messages: {
+            user_fullname: "Digite seu nome completo",
             user_email: {
                 required: "Digite seu e-mail",
                 email: "Digite um e-mail válido",
                 minlength: "Mínimo de 5 caracteres"
             },
             user_pass: "A senha deve ter no mínimo 5 caracteres",
-            user_cpass: "As senhas não coincidem",
+            user_cpass: "As senhas não coincidem"
         },
         errorElement: 'div',
         errorPlacement: function (error, element) {

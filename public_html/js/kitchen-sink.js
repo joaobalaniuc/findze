@@ -1,6 +1,6 @@
 // Init App
 var myApp = new Framework7({
-    modalTitle: 'AdsApp',
+    modalTitle: 'Findze',
     // Enable Material theme
     material: true,
     // dindin
