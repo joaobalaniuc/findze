@@ -12,8 +12,8 @@ function getImage(gallery) {
         sourceType: type,
         quality: 50,
         allowEdit: true,
-        targetWidth: 612,
-        targetHeight: 100,
+        //targetWidth: 612,
+        //targetHeight: 100,
         saveToPhotoAlbum: true,
         popoverOptions: true
     });
@@ -21,7 +21,8 @@ function getImage(gallery) {
 
 function showPhoto(imageURI) {
     //alert(imageURI);
-    $("#post_camera").attr("src", imageURI);
+    //$("#post_camera").attr("src", imageURI);
+    $("#post_camera").css("background-image", "url(" + imageURI + ")");
 }
 
 $$('#post_camera').on('click', function () {
