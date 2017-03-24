@@ -23,10 +23,10 @@
             </div>
         </div>
         -->
-        
+
         <div class="statusbar-overlay" style="background:#e91e63"></div>
         <div class="panel-overlay"></div>
-        
+
         <div class="views tabs toolbar-through">
 
             <div id="view-1" class="view view-main tab active">
@@ -323,7 +323,7 @@
                                                 <div class="item-inner"> 
                                                     <div class="item-title label">Data de Início</div>
                                                     <div class="item-input">
-                                                        <input name="post_date_start" type="text" placeholder="dd/mm/aaaa hh:mm"/>
+                                                        <input name="post_date_start" type="datetime-local" placeholder="dd/mm/aaaa hh:mm"/>
                                                     </div>
                                                 </div>
                                             </div>
@@ -331,9 +331,18 @@
                                         <li>
                                             <div class="item-content">
                                                 <div class="item-inner"> 
-                                                    <div class="item-title label">Data do Término</div>
+                                                    <div class="item-title label">Duração do Evento</div>
                                                     <div class="item-input">
-                                                        <input name="post_date_start" type="text" placeholder="dd/mm/aaaa hh:mm"/>
+                                                        <select name="post_dur">
+                                                            <option value="30m">30 min</option>
+                                                            <option value="1h" selected="selected">1 hora</option>
+                                                            <option value="1h30m">1 hora e 30 min</option>
+                                                            <option value="2h">2 horas</option>
+                                                            <option value="3h">3 horas</option>
+                                                            <option value="5h">6 horas</option>
+                                                            <option value="12h">12 horas</option>
+                                                            <option value="24h">24 horas</option>
+                                                        </select>
                                                     </div>
                                                 </div>
                                             </div>
