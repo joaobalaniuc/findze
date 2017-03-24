@@ -12,8 +12,8 @@ function getImage(gallery) {
         sourceType: type,
         quality: 50,
         allowEdit: true,
-        //targetWidth: 612,
-        targetHeight: 306,
+        targetWidth: 612,
+        targetHeight: 100,
         saveToPhotoAlbum: true,
         popoverOptions: true
     });
