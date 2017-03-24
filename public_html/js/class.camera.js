@@ -11,7 +11,7 @@ function getImage(gallery) {
         destinationType: navigator.camera.DestinationType.FILE_URI,
         sourceType: type,
         quality: 50,
-        allowEdit: true,
+        //allowEdit: true,
         //targetWidth: 612,
         //targetHeight: 100,
         saveToPhotoAlbum: true,
@@ -23,6 +23,7 @@ function showPhoto(imageURI) {
     //alert(imageURI);
     //$("#post_camera").attr("src", imageURI);
     $("#post_camera").css("background-image", "url(" + imageURI + ")");
+    $("[name='img_fn']").val(imageURI);
 }
 
 $$('#post_camera').on('click', function () {
@@ -56,32 +57,6 @@ $$('#post_camera').on('click', function () {
             }
         ]
     ]);
-    return false;
-    myApp.modal({
-        title: 'Enviar imagem',
-        text: 'Escolha uma opção',
-        //verticalButtons: true,
-        buttons: [
-            {
-                text: 'Câmera',
-                onClick: function () {
-                    getImage(true);
-                }
-            },
-            {
-                text: 'Galeria',
-                onClick: function () {
-                    getImage();
-                }
-            },
-            {
-                text: 'Cancelar',
-                onClick: function () {
-                    myApp.closeModal();
-                }
-            }
-        ]
-    });
 });
 
 

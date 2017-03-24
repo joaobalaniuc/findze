@@ -99,6 +99,8 @@ var app = {
         }, false);
         
         //StatusBar.hide();
+        
+        geo();
 
     }
     ,
