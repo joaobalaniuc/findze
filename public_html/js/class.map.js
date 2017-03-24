@@ -1,7 +1,7 @@
 
 function initMap() {
-    var myLatlng = {lat: -20.300651, lng: -40.295422};
-
+    //var myLatlng = {lat: -20.300651, lng: -40.295422};
+    var myLatlng = {lat: sessionStorage.lat, lng: sessionStorage.lng};
     map = new google.maps.Map(document.getElementById('map'), {
         zoom: 18,
         center: myLatlng,
@@ -53,12 +53,14 @@ function initMap() {
         var lng = e.latLng.lng();
         // populate yor box/field with lat, lng
         //alert("Lat=" + lat + "; Lng=" + lng);
+        $("[name='post_lat']").val(lat);
+        $("[name='post_lng']").val(lng);
     });
 
     me.addListener('click', function () {
-        map.setZoom(8);
+        //map.setZoom(8);
         map.setCenter(me.getPosition());
-        alert(me.getPosition());
+        //alert(me.getPosition());
     });
 }
 function addMarker(position, marker) {

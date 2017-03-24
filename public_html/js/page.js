@@ -51,7 +51,7 @@ $(document).ready(function () {
     //userRead(localStorage.user_id, userReadCb_Me);
     //userAds(localStorage.user_id, userAdsCb_Me);
     postList(0, "", true);
-    
+
     // Category
     postCat(postCatCb);
 
@@ -62,7 +62,7 @@ $(document).ready(function () {
 
     // Global timer
     setInterval(function () {
-        conexCheck();
+        //conexCheck();
     }, 500);
 
     setTimeout(function () {
@@ -91,6 +91,8 @@ function pageRefresh() {
         $("#toolbar_on, #toolbar_off").hide();
     }
 
+    conexCheck();
+
     // ver post
     if (page === "post_read") {
     }
@@ -113,7 +115,7 @@ function pageRefresh() {
     if (page === "index-2") {
         if ($('#post2_list').children().length === 0) {
             //postGrid();
-            myApp.showIndicator();
+            //myApp.showIndicator();
             //postListGrid(0);
 
         }
@@ -176,9 +178,13 @@ function conexCheck() {
     // Houve alteração no status de conexão?
     if (sessionStorage.onlineLast !== sessionStorage.online) {
         if (sessionStorage.online === "true") {
-            $('#conexCheck').html("<span style='color:#6ccb5e'><img src='img/online.png' style='vertical-align:bottom' /> &nbsp; Conectado</span>");
+            $(".conex_off").fadeOut("fast", function () {
+                $(".conex_on").fadeIn("fast");
+            });
         } else {
-            $('#conexCheck').html("<span style='color:#e95651'><img src='img/offline.png' style='vertical-align:bottom' /> &nbsp; Você está offline</span>");
+            $(".conex_on").fadeOut("fast", function () {
+                $(".conex_off").fadeIn("fast");
+            });
         }
         sessionStorage.onlineLast = sessionStorage.online;
     }

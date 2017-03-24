@@ -1,4 +1,10 @@
 /* #e91e63 */
+
+/* FINDZE */
+.fznav {background-color:#fff !important;color:#333}
+.appname {font-family:Lobster;font-size:24px}
+
+/* ? */
 .off {opacity:0.3}
 .off_ {opacity:1}
 #chat ::-webkit-input-placeholder {
@@ -22,9 +28,15 @@
     margin-right: auto;
     width:128px;height:128px;
 }
-/* FINDZE */
-.fznav {background-color:#fff !important;color:#333}
-.appname {font-family:Lobster;font-size:24px}
+
+/* BIG ALERT MSG */
+.conex_off {display:none}
+.alert_msg {
+    text-align:center;
+    padding:15px;font-size:20px;
+    color:#ccc;font-weight:100;
+}
+.alert_msg i {font-size:48px;margin:20px}
 
 /* GLOBAL */
 .button {font-weight:400 !important}

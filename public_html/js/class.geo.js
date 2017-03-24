@@ -13,20 +13,30 @@ function geo(cb) {
          'Speed: ' + position.coords.speed + '\n' +
          'Timestamp: ' + position.timestamp + '\n');*/
 
-        alert(sessionStorage.lat + "x" + sessionStorage.lng);
+        //alert(sessionStorage.lat + "x" + sessionStorage.lng);
 
         if (isFunction(cb)) { // isfunction = index.js
             cb();
+        } else {
+            setTimeout(function () {
+                geo();
+            }, 15000);
         }
 
     };
     function onError(error) {
         alert('code: ' + error.code + '\n' +
                 'message: ' + error.message + '\n');
+        geoIP();
     }
     navigator.geolocation.getCurrentPosition(onSuccess, onError);
 
-    setTimeout(function () {
-        geo();
-    }, 15000);
+}
+function geoIP() {
+    $.getJSON("http://ip-api.com/json/?callback=?", function (data) {
+        alert(data.lat);
+        sessionStorage.lat = data.lat;
+        sessionStorage.lng = data.lng;
+        sessionStorage.geoip = 1;
+    });
 }
