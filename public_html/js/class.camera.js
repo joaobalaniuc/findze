@@ -6,7 +6,7 @@ function getImage(gallery) {
         type = navigator.camera.PictureSourceType.CAMERA
     }
     navigator.camera.getPicture(showPhoto, function (message) {
-        alert('get picture failed');
+        alert('get picture failed: ' + message);
     }, {
         destinationType: navigator.camera.DestinationType.FILE_URI,
         sourceType: type,
@@ -51,7 +51,7 @@ function showPhoto(imageURI) {
     }, options);
 }
 
-$$('#camera').on('click', function () {
+$$('#post_camera').on('click', function () {
     myApp.actions([
         [
             {
