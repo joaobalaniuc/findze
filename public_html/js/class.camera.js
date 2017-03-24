@@ -2,12 +2,11 @@ function getImage(gallery) {
     var type;
     if (typeof gallery === "undefined") {
         type = navigator.camera.PictureSourceType.PHOTOLIBRARY
-    }
-    else {
+    } else {
         type = navigator.camera.PictureSourceType.CAMERA
     }
-    navigator.camera.getPicture(uploadPhoto, function (message) {
-        //alert('get picture failed');
+    navigator.camera.getPicture(showPhoto, function (message) {
+        alert('get picture failed');
     }, {
         destinationType: navigator.camera.DestinationType.FILE_URI,
         sourceType: type,
@@ -20,8 +19,12 @@ function getImage(gallery) {
     });
 }
 
-function uploadPhoto(imageURI) {
+function showPhoto(imageURI) {
     myApp.showPreloader();
+    alert(imageURI);
+    $("#post_camera").attr("src", imageURI);
+    myApp.hidePreloader();
+    return;
     var options = new FileUploadOptions();
     options.fileKey = "file";
     options.fileName = imageURI.substr(imageURI.lastIndexOf('/') + 1);
@@ -47,7 +50,6 @@ function uploadPhoto(imageURI) {
         alert(JSON.stringify(error));
     }, options);
 }
-
 
 $$('#camera').on('click', function () {
     myApp.actions([
@@ -107,3 +109,56 @@ $$('#camera').on('click', function () {
         ]
     });
 });
+
+
+/*
+ function getImage_(gallery) {
+ var type;
+ if (typeof gallery === "undefined") {
+ type = navigator.camera.PictureSourceType.PHOTOLIBRARY
+ }
+ else {
+ type = navigator.camera.PictureSourceType.CAMERA
+ }
+ navigator.camera.getPicture(uploadPhoto, function (message) {
+ //alert('get picture failed');
+ }, {
+ destinationType: navigator.camera.DestinationType.FILE_URI,
+ sourceType: type,
+ quality: 50,
+ allowEdit: true,
+ targetWidth: 600,
+ targetHeight: 600,
+ saveToPhotoAlbum: true,
+ popoverOptions: true
+ });
+ }
+ 
+ function uploadPhoto_(imageURI) {
+ myApp.showPreloader();
+ var options = new FileUploadOptions();
+ options.fileKey = "file";
+ options.fileName = imageURI.substr(imageURI.lastIndexOf('/') + 1);
+ options.mimeType = "image/jpeg";
+ //alert(JSON.stringify(options.fileName));
+ var params = new Object();
+ 
+ // user data
+ params.user_id = localStorage.user_id;
+ params.user_email = localStorage.user_email;
+ params.user_pass = localStorage.user_pass;
+ options.params = params;
+ options.chunkedMode = false;
+ 
+ var ft = new FileTransfer();
+ ft.upload(imageURI, "http://dev.house/adsapp/upload.php", function (result) {
+ //myApp.hidePreloader();
+ //alert(result);
+ //alert(JSON.stringify(result));
+ postStart();
+ }, function (error) {
+ myApp.hidePreloader();
+ alert(JSON.stringify(error));
+ }, options);
+ }
+ */
