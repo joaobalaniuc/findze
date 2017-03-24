@@ -97,10 +97,16 @@ var app = {
                 e.preventDefault();
             }
         }, false);
-        
+
         //StatusBar.hide();
-        
+
         geo();
+
+        cordova.plugins.diagnostic.isGpsLocationEnabled(function (enabled) {
+            alert("GPS location is " + (enabled ? "enabled" : "disabled"));
+        }, function (error) {
+            alert("The following error occurred: " + error);
+        });
 
     }
     ,
