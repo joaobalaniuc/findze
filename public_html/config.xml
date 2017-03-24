@@ -93,7 +93,7 @@
         <allow-intent href="itms-apps:*" />
     </platform>
     
-    <plugin name="cordova-plugin-statusbar" source="npm" />
+    
     <!--
     <plugin name="cordova-plugin-statusbar" source="npm" />
     <preference name="StatusBarOverlaysWebView" value="true" /> 

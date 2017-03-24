@@ -98,7 +98,7 @@ var app = {
             }
         }, false);
         
-        StatusBar.hide();
+        //StatusBar.hide();
 
     }
     ,

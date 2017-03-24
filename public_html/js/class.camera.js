@@ -13,7 +13,7 @@ function getImage(gallery) {
         quality: 50,
         allowEdit: true,
         targetWidth: 600,
-        targetHeight: 600,
+        targetHeight: 300,
         saveToPhotoAlbum: true,
         popoverOptions: true
     });
