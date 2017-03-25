@@ -62,14 +62,15 @@ myApp.onPageInit('post_form', function (page) {
     });
 });
 $$(document).on('click', '.postSend', function (e) {
-    alert(0);
+    
     var img_fn = $("#index-3 [name=fn]").val();
     if (img_fn === "") {
         //postSend();
     } else {
+        alert(1);
         postCameraUpload(img_fn);
     }
-    alert(1);
+    
     return false;
     postSend();
     return;

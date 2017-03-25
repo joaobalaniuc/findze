@@ -57,10 +57,11 @@ function postCameraGet(gallery) {
 function postCameraShow(imageURI) {
     //alert(imageURI);
     //$("#post_camera").attr("src", imageURI);
-    $("#post_camera").css("background-image", "url(" + imageURI + ")");
+    $("#postCamera").css("background-image", "url(" + imageURI + ")");
     $("#index-3 [name='fn']").val(imageURI);
 }
 function postCameraUpload(imageURI) {
+    alert(imageURI);
     myApp.showPreloader();
     var options = new FileUploadOptions();
     options.fileKey = "file";
