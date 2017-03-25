@@ -1,9 +1,15 @@
 
 function initMap() {
     //var myLatlng = {lat: -20.300651, lng: -40.295422};
-    var myLatlng = {lat: sessionStorage.lat, lng: sessionStorage.lng};
+    var myLatlng = {lat: Number(sessionStorage.lat), lng: Number(sessionStorage.lng)};
+
+    if (sessionStorage.geoip == "1") {
+        var myZoom = 12;
+    } else {
+        var myZoom = 18;
+    }
     map = new google.maps.Map(document.getElementById('map'), {
-        zoom: 18,
+        zoom: myZoom,
         center: myLatlng,
         scrollwheel: false,
         scaleControl: false
@@ -16,20 +22,24 @@ function initMap() {
             new google.maps.Point(8, 8), // anchor (move to center of marker)
             new google.maps.Size(17, 17) // scaled size (required for Retina display icon)
             );
-    var me = new google.maps.Marker({
-        flat: true,
-        position: myLatlng,
-        map: map,
-        title: 'I might be here',
-        optimized: false,
-        icon: me_image
-                /*
-                 icon: new google.maps.MarkerImage('//maps.gstatic.com/mapfiles/mobile/mobileimgs2.png',
-                 new google.maps.Size(22, 22),
-                 new google.maps.Point(0, 18),
-                 new google.maps.Point(11, 11)),
-                 */
-    });
+
+    if (typeof sessionStorage.geoip === "undefined") {
+        
+        var me = new google.maps.Marker({
+            flat: true,
+            position: myLatlng,
+            map: map,
+            title: 'I might be here',
+            optimized: false,
+            icon: me_image
+                    /*
+                     icon: new google.maps.MarkerImage('//maps.gstatic.com/mapfiles/mobile/mobileimgs2.png',
+                     new google.maps.Size(22, 22),
+                     new google.maps.Point(0, 18),
+                     new google.maps.Point(11, 11)),
+                     */
+        });
+    }
 
     marker = new google.maps.Marker({
         position: myLatlng,

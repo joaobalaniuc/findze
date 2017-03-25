@@ -16,14 +16,6 @@
 
     <body class='theme-pink'>
 
-        <!--
-        <div id="loaderx" style="display:none;z-index:9999;position:absolute;width:100%;height:100%;top:0;left:0;background:#fff">
-            <div style="width:80px;height:80px;position:relative;top: 50%;left: 50%;transform: translate(-50%, -50%);">
-                <img src="img/loading.gif" style="width:80px;height:80px" />
-            </div>
-        </div>
-        -->
-
         <div class="statusbar-overlay" style="background:#e91e63"></div>
         <div class="panel-overlay"></div>
 
@@ -149,7 +141,7 @@
 
                                 <div id="post_none" style="display:none;text-align:center;padding:15px;font-size:20px;color:#ccc;font-weight:100">
                                     <i class="fa fa-search" style="font-size:48px;margin:20px"></i><br/>
-                                    Não há eventos próximos a você. Clique <a href="#view-2" class="tab-link">aqui</a> para criar um.
+                                    Não há eventos próximos a você. Clique <a href="#view-3" class="tab-link">aqui</a> para criar um.
                                 </div>
 
                                 <div id="post_list"></div>
@@ -167,9 +159,7 @@
             </div>
 
             <div id="view-2" class="view view-main tab">
-                <!-- Pages-->
                 <div class="pages">
-                    <!-- Page, data-page contains page name-->
                     <div data-page="index-2" class="page ttheme-black">
 
                         <div class="navbar">
@@ -290,8 +280,7 @@
 
             <div id="view-3" class="view view-main tab">
                 <div class="pages navbar-through">
-
-                    <div data-page="index-3" class="page">
+                    <div id="index-3" data-page="index-3" class="page">
                         <div class="navbar">
                             <div class="navbar-inner">
                                 <div class="center sliding">Criar um evento</div>
@@ -312,7 +301,7 @@
                                 <div class="card ks-facebook-card" style="margin:0;box-shadow:none !important">
                                     <div class="card-content" style="box-shadow:none !important"> 
                                         <div class="card-content-inner" style="padding:0">
-                                            <div id="post_camera" style="
+                                            <div id="postCamera" style="
                                                  width:100vw;height:50vw;
                                                  background-image:url(img/camera.jpg);
                                                  background-size: 100% auto;
@@ -330,11 +319,10 @@
 
                                 <form id="postForm">
 
-
                                     <input type="hidden" name="post_id" value="" />
                                     <input type="hidden" name="post_lat" value="" />
                                     <input type="hidden" name="post_lng" value="" />
-                                    <input type="hidden" name="img_fn" value="" />
+                                    <input type="hidden" name="fn" value="" />
 
                                     <div class="list-block inputs-list" style="margin:0">
                                         <ul>
@@ -374,14 +362,14 @@
                                                         <div class="item-title label">Duração do Evento</div>
                                                         <div class="item-input">
                                                             <select name="post_dur">
-                                                                <option value="30m">30 min</option>
-                                                                <option value="1h" selected="selected">1 hora</option>
-                                                                <option value="1h30m">1 hora e 30 min</option>
-                                                                <option value="2h">2 horas</option>
-                                                                <option value="3h">3 horas</option>
-                                                                <option value="5h">6 horas</option>
-                                                                <option value="12h">12 horas</option>
-                                                                <option value="24h">24 horas</option>
+                                                                <option value="+30min">30 min</option>
+                                                                <option value="+1hour" selected="selected">1 hora</option>
+                                                                <option value="+1hour 30min">1 hora e 30 min</option>
+                                                                <option value="+2hours">2 horas</option>
+                                                                <option value="+3hours">3 horas</option>
+                                                                <option value="+6hours">6 horas</option>
+                                                                <option value="+12hours">12 horas</option>
+                                                                <option value="+24hours">24 horas</option>
                                                             </select>
                                                         </div>
                                                     </div>
@@ -414,7 +402,7 @@
                                                     <div class="item-inner"> 
                                                         <div class="item-title label">Como chegar?</div>
                                                         <div class="item-input">
-                                                            <input name="post_date_start" type="text" placeholder="Observações adicionais"/>
+                                                            <input name="post_obs" type="text" placeholder="Observações adicionais"/>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -562,7 +550,6 @@
             </div>
 
             <!-- Bottom Tabbar-->
-
             <div id="toolbar_on" class="theme-pink toolbar tabbar tabbar-labels jwbar">
 
                 <div class="toolbar-inner">

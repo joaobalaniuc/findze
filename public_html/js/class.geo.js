@@ -34,9 +34,8 @@ function geo(cb) {
 }
 function geoIP() {
     $.getJSON("http://ip-api.com/json/?callback=?", function (data) {
-        alert(data.lat);
-        sessionStorage.lat = data.lat;
-        sessionStorage.lng = data.lng;
+        sessionStorage.lat = Number(data.lat);
+        sessionStorage.lng = Number(data.lon);
         sessionStorage.geoip = 1;
     });
 }

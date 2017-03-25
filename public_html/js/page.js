@@ -62,8 +62,8 @@ $(document).ready(function () {
 
     // Global timer
     setInterval(function () {
-        //conexCheck();
-    }, 500);
+        conexCheck();
+    }, 3000);
 
     setTimeout(function () {
         //ajaxPing();
@@ -90,8 +90,6 @@ function pageRefresh() {
     } else {
         $("#toolbar_on, #toolbar_off").hide();
     }
-
-    conexCheck();
 
     // ver post
     if (page === "post_read") {

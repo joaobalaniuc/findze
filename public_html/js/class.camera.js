@@ -1,32 +1,7 @@
-function getImage(gallery) {
-    var type;
-    if (typeof gallery === "undefined") {
-        type = navigator.camera.PictureSourceType.PHOTOLIBRARY
-    } else {
-        type = navigator.camera.PictureSourceType.CAMERA
-    }
-    navigator.camera.getPicture(showPhoto, function (message) {
-        alert('get picture failed: ' + message);
-    }, {
-        destinationType: navigator.camera.DestinationType.FILE_URI,
-        sourceType: type,
-        quality: 50,
-        //allowEdit: true,
-        //targetWidth: 612,
-        //targetHeight: 100,
-        saveToPhotoAlbum: true,
-        popoverOptions: true
-    });
-}
-
-function showPhoto(imageURI) {
-    //alert(imageURI);
-    //$("#post_camera").attr("src", imageURI);
-    $("#post_camera").css("background-image", "url(" + imageURI + ")");
-    $("[name='img_fn']").val(imageURI);
-}
-
-$$('#post_camera').on('click', function () {
+//=================================
+// CAMERA POST FORM
+//=================================
+$$('#postCamera').on('click', function () {
     myApp.actions([
         [
             {
@@ -38,7 +13,7 @@ $$('#post_camera').on('click', function () {
                 bold: true,
                 color: "pink",
                 onClick: function () {
-                    getImage(true);
+                    postCameraGet(true);
                 }
             },
             {
@@ -46,7 +21,7 @@ $$('#post_camera').on('click', function () {
                 bold: true,
                 color: "pink",
                 onClick: function () {
-                    getImage();
+                    postCameraGet();
                 }
             }
         ],
@@ -58,6 +33,61 @@ $$('#post_camera').on('click', function () {
         ]
     ]);
 });
+function postCameraGet(gallery) {
+    var type;
+    if (typeof gallery === "undefined") {
+        type = navigator.camera.PictureSourceType.PHOTOLIBRARY
+    } else {
+        type = navigator.camera.PictureSourceType.CAMERA
+    }
+    navigator.camera.getPicture(postCameraShow, function (message) {
+        alert('get picture failed: ' + message);
+    }, {
+        destinationType: navigator.camera.DestinationType.FILE_URI,
+        sourceType: type,
+        quality: 50,
+        //allowEdit: true,
+        //targetWidth: 612,
+        //targetHeight: 100,
+        saveToPhotoAlbum: true,
+        popoverOptions: true,
+        correctOrientation: true
+    });
+}
+function postCameraShow(imageURI) {
+    //alert(imageURI);
+    //$("#post_camera").attr("src", imageURI);
+    $("#post_camera").css("background-image", "url(" + imageURI + ")");
+    $("#index-3 [name='fn']").val(imageURI);
+}
+function postCameraUpload(imageURI) {
+    myApp.showPreloader();
+    var options = new FileUploadOptions();
+    options.fileKey = "file";
+    options.fileName = imageURI.substr(imageURI.lastIndexOf('/') + 1);
+    options.mimeType = "image/jpeg";
+    //alert(JSON.stringify(options.fileName));
+    var params = new Object();
+
+    // user data
+    params.user_id = localStorage.user_id;
+    params.user_email = localStorage.user_email;
+    params.user_pass = localStorage.user_pass;
+    options.params = params;
+    options.chunkedMode = false;
+
+    var ft = new FileTransfer();
+    ft.upload(imageURI, localStorage.server + "/upload.php", function (result) {
+        myApp.hidePreloader();
+        alert(result);
+        alert(JSON.stringify(result));
+        postSend(result);
+        //postStart();
+    }, function (error) {
+        myApp.hidePreloader();
+        alert(JSON.stringify(error));
+    }, options);
+}
 
 
 /*

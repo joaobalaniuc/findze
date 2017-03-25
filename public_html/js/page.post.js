@@ -62,6 +62,15 @@ myApp.onPageInit('post_form', function (page) {
     });
 });
 $$(document).on('click', '.postSend', function (e) {
+    var img_fn = $("#index-3 [name=fn]").val();
+    if (img_fn === "") {
+        //postSend();
+    } else {
+        postCameraUpload(img_fn);
+    }
+    return false;
+    postSend();
+    return;
     if ($("#postForm").valid()) {
         postSend();
     } else {
@@ -534,8 +543,10 @@ function postGrid() {
 //=============================
 // INSERT / DELETE POST
 //=============================
-function postSend() {
-    var data_form = $("#post_form form").serialize();
+function postSend(img_fn) {
+    alert("postSend: " + img_fn);
+    return false;
+    var data_form = $("#postForm").serialize();
     var data_user = {
         user_id: localStorage.user_id,
         user_email: localStorage.user_email,
@@ -636,9 +647,9 @@ $$(document).on('change', '.cat', function (e) {
     catChange(id);
 });
 function postCat(cb) {
-    
+
     console.log("postCat");
-    
+
     $.ajax({
         url: localStorage.server + "/categ_list.php",
         data: {
@@ -664,7 +675,7 @@ function postCat(cb) {
                     }
                     cb(res);
                 }
-                
+
                 console.log(res);
                 console.log("/postCat");
             }); // after ajax
