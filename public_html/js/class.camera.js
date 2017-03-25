@@ -61,7 +61,7 @@ function postCameraShow(imageURI) {
     $("#index-3 [name='fn']").val(imageURI);
 }
 function postCameraUpload(imageURI) {
-    alert(imageURI);
+    //alert(imageURI);
     myApp.showPreloader();
     var options = new FileUploadOptions();
     options.fileKey = "file";
@@ -80,9 +80,9 @@ function postCameraUpload(imageURI) {
     var ft = new FileTransfer();
     ft.upload(imageURI, localStorage.server + "/upload.php", function (result) {
         myApp.hidePreloader();
-        alert(result);
-        alert(JSON.stringify(result));
-        //postSend(result);
+        //alert(result);
+        //alert(JSON.stringify(result));
+        postSend(result.response);
         //postStart();
     }, function (error) {
         myApp.hidePreloader();

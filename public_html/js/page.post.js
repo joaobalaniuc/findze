@@ -67,7 +67,6 @@ $$(document).on('click', '.postSend', function (e) {
     if (img_fn === "") {
         //postSend();
     } else {
-        alert(1);
         postCameraUpload(img_fn);
     }
     
@@ -548,12 +547,12 @@ function postGrid() {
 //=============================
 function postSend(img_fn) {
     alert("postSend: " + img_fn);
-    return false;
     var data_form = $("#postForm").serialize();
     var data_user = {
         user_id: localStorage.user_id,
         user_email: localStorage.user_email,
-        user_pass: localStorage.user_pass
+        user_pass: localStorage.user_pass,
+        img_fn: img_fn
     };
     var data_user = $.param(data_user); // serialize
     var data = data_form + "&" + data_user;
