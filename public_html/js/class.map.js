@@ -24,7 +24,7 @@ function initMap() {
             );
 
     if (typeof sessionStorage.geoip === "undefined") {
-        
+
         var me = new google.maps.Marker({
             flat: true,
             position: myLatlng,
@@ -38,6 +38,12 @@ function initMap() {
                      new google.maps.Point(0, 18),
                      new google.maps.Point(11, 11)),
                      */
+        });
+
+        me.addListener('click', function () {
+            //map.setZoom(8);
+            map.setCenter(me.getPosition());
+            //alert(me.getPosition());
         });
     }
 
@@ -67,11 +73,6 @@ function initMap() {
         $("[name='post_lng']").val(lng);
     });
 
-    me.addListener('click', function () {
-        //map.setZoom(8);
-        map.setCenter(me.getPosition());
-        //alert(me.getPosition());
-    });
 }
 function addMarker(position, marker) {
     marker.setPosition(position);

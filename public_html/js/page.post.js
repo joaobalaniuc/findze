@@ -546,7 +546,6 @@ function postGrid() {
 // INSERT / DELETE POST
 //=============================
 function postSend(img_fn) {
-    alert("postSend: " + img_fn);
     var data_form = $("#postForm").serialize();
     var data_user = {
         user_id: localStorage.user_id,

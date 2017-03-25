@@ -76,7 +76,7 @@ function postCameraUpload(imageURI) {
     params.user_pass = localStorage.user_pass;
     options.params = params;
     options.chunkedMode = false;
-    alert(localStorage.server);
+    //alert(localStorage.server);
     var ft = new FileTransfer();
     ft.upload(imageURI, localStorage.server + "/upload.php", function (result) {
         myApp.hidePreloader();
