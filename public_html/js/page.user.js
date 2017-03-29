@@ -27,8 +27,8 @@ myApp.onPageInit('user_form', function (page) {
     }, 500);
 });
 $$(document).on('click', '.userUpdate', function (e) {
-    var img_fn = $("#user_form [name=user_img]").val();
-    if (img_fn === "") {
+    var img_fn = $("#userForm [name='user_img']").val();
+    if (img_fn == "") {
         userUpdate();
     } else {
         userCameraUpload(img_fn);
@@ -510,13 +510,14 @@ function userSend() {
                 } // res not null
             }); // after ajax
 }
-function userUpdate() {
+function userUpdate(user_img) {
     // DATA TO SEND
     var data_form = $("#userForm").serialize();
     var data_user = {
         user_id: localStorage.user_id,
         user_email: localStorage.user_email,
-        user_pass: localStorage.user_pass
+        user_pass: localStorage.user_pass,
+        user_img: user_img
     };
     var data_user = $.param(data_user); // serialize
     var data = data_form + "&" + data_user;
