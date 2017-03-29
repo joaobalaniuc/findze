@@ -95,6 +95,7 @@ function postCameraUpload(imageURI) {
 // CAMERA USER FORM
 //=================================
 $$('#userCamera').on('click', function () {
+    alert(1);
     myApp.actions([
         [
             {
