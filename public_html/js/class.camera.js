@@ -1,7 +1,7 @@
 //=================================
 // CAMERA POST FORM
 //=================================
-$$('#postCamera').on('click', function () {
+$$(document).on('click', '#postCamera', function (e) {
     myApp.actions([
         [
             {
@@ -94,8 +94,8 @@ function postCameraUpload(imageURI) {
 //=================================
 // CAMERA USER FORM
 //=================================
-$$('#userCamera').on('click', function () {
-    alert(1);
+$$(document).on('click', '#userCamera', function (e) {
+
     myApp.actions([
         [
             {
