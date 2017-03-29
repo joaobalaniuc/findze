@@ -90,7 +90,6 @@ function postCameraUpload(imageURI) {
     }, options);
 }
 
-
 //=================================
 // CAMERA USER FORM
 //=================================
@@ -152,56 +151,31 @@ function userCameraShow(imageURI) {
     //$("#post_camera").attr("src", imageURI);
     $("#profileImgBg").css("background-image", "url(" + imageURI + ")");
     $("#profileImgFront").attr("src", imageURI);
-    $("#user_form [name='fn']").val(imageURI);
+    $("#user_form [name='user_img']").val(imageURI);
 }
-/*
- function getImage_(gallery) {
- var type;
- if (typeof gallery === "undefined") {
- type = navigator.camera.PictureSourceType.PHOTOLIBRARY
- }
- else {
- type = navigator.camera.PictureSourceType.CAMERA
- }
- navigator.camera.getPicture(uploadPhoto, function (message) {
- //alert('get picture failed');
- }, {
- destinationType: navigator.camera.DestinationType.FILE_URI,
- sourceType: type,
- quality: 50,
- allowEdit: true,
- targetWidth: 600,
- targetHeight: 600,
- saveToPhotoAlbum: true,
- popoverOptions: true
- });
- }
- 
- function uploadPhoto_(imageURI) {
- myApp.showPreloader();
- var options = new FileUploadOptions();
- options.fileKey = "file";
- options.fileName = imageURI.substr(imageURI.lastIndexOf('/') + 1);
- options.mimeType = "image/jpeg";
- //alert(JSON.stringify(options.fileName));
- var params = new Object();
- 
- // user data
- params.user_id = localStorage.user_id;
- params.user_email = localStorage.user_email;
- params.user_pass = localStorage.user_pass;
- options.params = params;
- options.chunkedMode = false;
- 
- var ft = new FileTransfer();
- ft.upload(imageURI, "http://dev.house/adsapp/upload.php", function (result) {
- //myApp.hidePreloader();
- //alert(result);
- //alert(JSON.stringify(result));
- postStart();
- }, function (error) {
- myApp.hidePreloader();
- alert(JSON.stringify(error));
- }, options);
- }
- */
+function userCameraUpload(imageURI) {
+    //alert(imageURI);
+    myApp.showIndicator();
+    var options = new FileUploadOptions();
+    options.fileKey = "file";
+    options.fileName = imageURI.substr(imageURI.lastIndexOf('/') + 1);
+    options.mimeType = "image/jpeg";
+    //alert(JSON.stringify(options.fileName));
+    var params = new Object();
+
+    // user data
+    params.user_id = localStorage.user_id;
+    params.user_email = localStorage.user_email;
+    params.user_pass = localStorage.user_pass;
+    options.params = params;
+    options.chunkedMode = false;
+    //alert(localStorage.server);
+    var ft = new FileTransfer();
+    ft.upload(imageURI, localStorage.server + "/upload.php", function (result) {
+        myApp.hideIndicator();
+        userUpdate(result.response);
+    }, function (error) {
+        myApp.hideIndicator();
+        alert(JSON.stringify(error));
+    }, options);
+}

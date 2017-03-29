@@ -27,7 +27,12 @@ myApp.onPageInit('user_form', function (page) {
     }, 500);
 });
 $$(document).on('click', '.userUpdate', function (e) {
-    userUpdate();
+    var img_fn = $("#user_form [name=user_img]").val();
+    if (img_fn === "") {
+        userUpdate();
+    } else {
+        userCameraUpload(img_fn);
+    }
 });
 $$(document).on('click', '.userLogout', function (e) {
     userLogout();
