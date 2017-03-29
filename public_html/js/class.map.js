@@ -68,7 +68,7 @@ function initMap() {
         var lat = e.latLng.lat();
         var lng = e.latLng.lng();
         // populate yor box/field with lat, lng
-        //alert("Lat=" + lat + "; Lng=" + lng);
+        alert("Lat=" + lat + "; Lng=" + lng);
         $("[name='post_lat']").val(lat);
         $("[name='post_lng']").val(lng);
     });

@@ -10,19 +10,21 @@
     </div>
     <div class="page-content" style="ppadding-bottom:80px !important">
 
-        <div id="profileImg" style="ddisplay:none">
-            <div
-                id ="profileImgBg"
-                class="blur darkglow lazy lazy-fadeIn ks-demo-lazy" 
-                style="height:150px;background-position:center;background-image:url(img/user.png)">
-            </div>
+        <div id="userCamera">
+            <div id="profileImg" style="ddisplay:none">
+                <div
+                    id ="profileImgBg"
+                    class="blur darkglow lazy lazy-fadeIn ks-demo-lazy" 
+                    style="height:150px;background-position:center;background-image:url(img/user.png)">
+                </div>
 
-            <img
-                id ="profileImgFront"
-                class="circle"
-                style="position:absolute;top:70px;left:50%;margin-left:-64px;width:128px;height:128px"
-                src="img/user.png"
-                />
+                <img
+                    id ="profileImgFront"
+                    class="circle"
+                    style="position:absolute;top:70px;left:50%;margin-left:-64px;width:128px;height:128px"
+                    src="img/user.png"
+                    />
+            </div>
         </div>
         <!--
         <div id="FbIn" onclick="fb.login();" class="content-block">
@@ -39,12 +41,15 @@
             </a>
         </div>
         -->
-        
+
         <form id="userForm">
+            
+            <input type="hidden" name="fn" value="" />
+            
             <div class="content-block-title" style="mmargin-top:-20px;">Meus dados públicos</div>
             <div class="list-block">
                 <ul style="padding-left:10px">
-                    
+
                     <li>
                         <div class="item-content">
                             <!--<div class="item-media"><i class="icon icon-form-name"></i></div>-->
@@ -56,7 +61,7 @@
                             </div>
                         </div>
                     </li>
-                    
+
                     <li>
                         <div class="item-content">
                             <!--<div class="item-media"><i class="icon icon-form-name"></i></div>-->
@@ -64,16 +69,6 @@
                                 <div class="item-title label">Nome</div>
                                 <div class="item-input">
                                     <input name="user_fullname" type="text" placeholder="Seu nome"/>
-                                </div>
-                            </div>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="item-content">
-                            <div class="item-inner"> 
-                                <div class="item-title label">Telefone</div>
-                                <div class="item-input">
-                                    <input class="phone" name="user_phone" type="text" placeholder="Seu telefone"/>
                                 </div>
                             </div>
                         </div>

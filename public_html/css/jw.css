@@ -147,10 +147,10 @@ i.tabbar-demo-icon-4 {
     behavior: url(border-radius.htc);
 }
 .circle {
-    -moz-border-radius: 10px;
-    -webkit-border-radius: 10px;
-    -khtml-border-radius: 10px;
-    border-radius: 10px;
+    -moz-border-radius: 128px;
+    -webkit-border-radius: 128px;
+    -khtml-border-radius: 128px;
+    border-radius: 128px;
     behavior: url(border-radius.htc);
 
 }

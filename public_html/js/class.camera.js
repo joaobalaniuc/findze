@@ -62,7 +62,7 @@ function postCameraShow(imageURI) {
 }
 function postCameraUpload(imageURI) {
     //alert(imageURI);
-    myApp.showPreloader();
+    myApp.showIndicator();
     var options = new FileUploadOptions();
     options.fileKey = "file";
     options.fileName = imageURI.substr(imageURI.lastIndexOf('/') + 1);
@@ -79,18 +79,80 @@ function postCameraUpload(imageURI) {
     //alert(localStorage.server);
     var ft = new FileTransfer();
     ft.upload(imageURI, localStorage.server + "/upload.php", function (result) {
-        myApp.hidePreloader();
+        myApp.hideIndicator();
         //alert(result);
         //alert(JSON.stringify(result));
         postSend(result.response);
         //postStart();
     }, function (error) {
-        myApp.hidePreloader();
+        myApp.hideIndicator();
         alert(JSON.stringify(error));
     }, options);
 }
 
 
+//=================================
+// CAMERA USER FORM
+//=================================
+$$('#userCamera').on('click', function () {
+    myApp.actions([
+        [
+            {
+                text: 'Escolha uma opção',
+                label: true
+            },
+            {
+                text: 'CÂMERA',
+                bold: true,
+                color: "pink",
+                onClick: function () {
+                    userCameraGet(true);
+                }
+            },
+            {
+                text: 'GALERIA DE FOTOS',
+                bold: true,
+                color: "pink",
+                onClick: function () {
+                    userCameraGet();
+                }
+            }
+        ],
+        [
+            {
+                text: 'Cancelar',
+                bold: false
+            }
+        ]
+    ]);
+});
+function userCameraGet(gallery) {
+    var type;
+    if (typeof gallery === "undefined") {
+        type = navigator.camera.PictureSourceType.PHOTOLIBRARY
+    } else {
+        type = navigator.camera.PictureSourceType.CAMERA
+    }
+    navigator.camera.getPicture(userCameraShow, function (message) {
+        alert('get picture failed: ' + message);
+    }, {
+        destinationType: navigator.camera.DestinationType.FILE_URI,
+        sourceType: type,
+        quality: 50,
+        allowEdit: true,
+        targetWidth: 300,
+        targetHeight: 300,
+        saveToPhotoAlbum: true,
+        popoverOptions: true
+    });
+}
+function userCameraShow(imageURI) {
+    //alert(imageURI);
+    //$("#post_camera").attr("src", imageURI);
+    $("#profileImgBg").css("background-image", "url(" + imageURI + ")");
+    $("#profileImgFront").attr("src", imageURI);
+    $("#user_form [name='fn']").val(imageURI);
+}
 /*
  function getImage_(gallery) {
  var type;

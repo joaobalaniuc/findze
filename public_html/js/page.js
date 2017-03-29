@@ -48,8 +48,8 @@ $(document).ready(function () {
         $('#toplogo').css("margin-top", "10px");
     }
 
-    //userRead(localStorage.user_id, userReadCb_Me);
-    //userAds(localStorage.user_id, userAdsCb_Me);
+    userRead(localStorage.user_id, userReadCb_Me);
+    userAds(localStorage.user_id, userAdsCb_Me);
     postList(0, "", true);
 
     // Category
@@ -115,7 +115,6 @@ function pageRefresh() {
             //postGrid();
             //myApp.showIndicator();
             //postListGrid(0);
-
         }
     }
     // novo post

@@ -146,7 +146,7 @@ $$(document).on('click', "#userSubmit", function (e) {
 function userRead(target_id, cb) {
 
     // PRELOADER
-    myApp.showPreloader();
+    myApp.showIndicator();
 
     // RUN AJAX
     $.ajax({
@@ -164,7 +164,7 @@ function userRead(target_id, cb) {
         timeout: localStorage.timeout
     })
             .always(function () {
-                myApp.hidePreloader();
+                myApp.hideIndicator();
             })
 
             .fail(function () {
@@ -195,11 +195,8 @@ function userReadCb_Me(res) {
 
     if (res[0]) {
 
-        console.log(res[0]);
-
         $("#index-4 .user_name").html(res[0]["user_name"]);
         $("#index-4 .user_fullname").html(res[0]["user_fullname"]);
-        $("#index-4 .user_bio").html(res[0]["user_bio"]);
         $("#index-4 .user_followers").html(res[0]["user_count_followers"]);
         $("#index-4 .user_following").html(res[0]["user_count_following"]);
         String.prototype.splice = function (idx, rem, str) {
@@ -210,14 +207,11 @@ function userReadCb_Me(res) {
             $("#index-4 .pic_bg").css("background-image", "url(" + res[0]["user_fb_pic"] + ")");
             $("#index-4 .pic_img").css("width", "180px").css("height", "180px");//.css("margin", "32px");;
         }
-        if (res[0]["user_phone"] == null) {
-            var phone = "(sem telefone)";
+        if (res[0]["user_bio"] !== null) {
+            $("#index-4 .user_bio").html(res[0]["user_bio"]);
+        } else {
+            $("#index-4 .user_bio").hide();
         }
-        else {
-            var phone = "(" + res[0]["user_phone"].splice(2, 0, ") ");
-            phone = phone.splice(10, 0, "-");
-        }
-        $("#index-4 .user_phone").html(phone);
 
     } // res[0]
 }
@@ -241,8 +235,7 @@ function userReadCb_Friend(res) {
         }
         if (res[0]["user_phone"] == null) {
             $("#user_read .user_phone").addClass("disabled");
-        }
-        else {
+        } else {
             var phone = "(" + res[0]["user_phone"].splice(2, 0, ") ");
             phone = phone.splice(10, 0, "-");
             $("#user_read .user_phone").attr("href", "tel:0" + res[0]["user_phone"]);
@@ -292,13 +285,12 @@ function userAdsCb_Me(res) {
 
     if (res !== null) {
 
-
         if (res.error) {
             myApp.alert('Desculpe, ocorreu um erro interno. ' + res.error, 'Erro');
             return;
         }
 
-        if (res[0]) {
+        if (res[0]["post_name"] !== "") {
             $("#user_post").html("");
             $.each(res, function (key, val) {
 
@@ -405,8 +397,7 @@ function userFollow(target_id) {
                         if (res.follow > 0) {
                             $("#deixar").show();
                             $("#seguir").hide();
-                        }
-                        else {
+                        } else {
                             $("#deixar").hide();
                             $("#seguir").show();
                         }

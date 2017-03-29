@@ -62,14 +62,14 @@ myApp.onPageInit('post_form', function (page) {
     });
 });
 $$(document).on('click', '.postSend', function (e) {
-    
+
     var img_fn = $("#index-3 [name=fn]").val();
     if (img_fn === "") {
-        //postSend();
+        postSend();
     } else {
         postCameraUpload(img_fn);
     }
-    
+
     return false;
     postSend();
     return;
@@ -557,7 +557,7 @@ function postSend(img_fn) {
     var data = data_form + "&" + data_user;
     console.log(data);
     // RUN AJAX
-    myApp.showPreloader();
+    myApp.showIndicator();
     $.ajax({
         url: localStorage.server + "/post_insert.php",
         data: data,
@@ -567,7 +567,7 @@ function postSend(img_fn) {
         timeout: localStorage.timeout
     })
             .always(function () {
-                myApp.hidePreloader();
+                myApp.hideIndicator();
             })
 
             .fail(function () {
@@ -576,15 +576,16 @@ function postSend(img_fn) {
 
             .done(function (res) {
                 if (res !== null) {
+                    $('#postForm')[0].reset();
                     console.log(res);
                     if (res.error) {
-                        //myApp.alert('Desculpe, ocorreu um erro interno.', 'Erro');
+                        myApp.alert('Desculpe, ocorreu um erro interno.', 'Erro');
                         alert(res.error);
                         return;
                     }
                     if (res.success) {
                         sessionStorage.post_id = res.success;
-                        window.location.href = "index.html";
+                        //window.location.href = "index.html";
                     }
                 } // res not null
             }); // after ajax
@@ -640,6 +641,7 @@ function removeLastImg() {
                 //window.location.href = "index.html";
             });
 }
+
 //=============================
 // GET CATEG LIST
 //=============================
@@ -648,8 +650,6 @@ $$(document).on('change', '.cat', function (e) {
     catChange(id);
 });
 function postCat(cb) {
-
-    console.log("postCat");
 
     $.ajax({
         url: localStorage.server + "/categ_list.php",
@@ -676,9 +676,6 @@ function postCat(cb) {
                     }
                     cb(res);
                 }
-
-                console.log(res);
-                console.log("/postCat");
             }); // after ajax
 }
 //======================================
@@ -686,7 +683,7 @@ function postCat(cb) {
 //======================================
 function postCatCb(res) {
     var html = "";
-    html += "<option value=''>Selecione...</option>\r\n";
+    html += "<option disabled='disabled' value='' selected='selected'>Selecione...</option>\r\n";
     $.each(res, function (key, val) {
         html += "<option value='" + val["categ_id"] + "'>" + val["categ_name"] + "</option>\r\n";
     });
