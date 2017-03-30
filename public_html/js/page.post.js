@@ -228,7 +228,7 @@ function postEditCb(res) {
 function postList(last_id, op, followers) {
 
     if (typeof sessionStorage.lat === "undefined") {
-        alert("waiting lat/lng for postList...");
+        console.log("waiting lat/lng for postList...");
         setTimeout(function () {
             postList(0, "");
         }, 1000);

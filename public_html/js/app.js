@@ -48,9 +48,11 @@ var app = {
     onDeviceReady: function () {
 
         cordova.plugins.diagnostic.isGpsLocationEnabled(function (enabled) {
-            alert("GPS location is " + (enabled ? "enabled" : "disabled"));
+            if (!enabled) {
+                geoIP();
+            }
         }, function (error) {
-            alert("The following error occurred: " + error);
+            //alert("The following error occurred: " + error);
         });
 
         app.receivedEvent('deviceready');
