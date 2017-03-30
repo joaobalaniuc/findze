@@ -289,7 +289,7 @@ function postList(last_id, op, followers) {
 
                     console.log(res);
                     if (res === false) {
-                        //$("#post_none").fadeIn("slow");
+                        $("#post_none").fadeIn("slow");
                         return;
                     }
                     if (res.error) {
@@ -450,7 +450,7 @@ function postList(last_id, op, followers) {
                             console.log("(NEW) post2_id = " + sessionStorage.post2_id_list_new + " (OLD) post2_id = " + sessionStorage.post2_id_list);
                         }
 
-                        pretty();
+                        //pretty();
                         setTimeout(function () {
                             if ($('#post_list').children().length > 0) {
                                 $("#post_none").hide();
