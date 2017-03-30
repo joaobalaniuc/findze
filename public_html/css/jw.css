@@ -57,7 +57,10 @@ ul.global .item-after img {width:24px;height:24px;}
     overflow: hidden;
     text-overflow: ellipsis;
 }
-#user_register div.error, #user_login div.error {
+#user_register div.error,
+#user_login div.error,
+#user_form div.error,
+#postForm div.error {
     font-weight:100;
     color:#ff9800;
     font-size:12px;
@@ -159,7 +162,7 @@ i.tabbar-demo-icon-4 {
     -moz-filter: blur(30px);
     -o-filter: blur(30px);
     -ms-filter: blur(30px);*/
-    filter: blur(30px) brightness(1.5);
+    filter: blur(20px) brightness(1);
 }
 /* Loading */
 

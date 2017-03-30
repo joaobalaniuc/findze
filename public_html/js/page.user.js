@@ -22,16 +22,40 @@ myApp.onPageBeforeInit('user_form', function (page) {
     userRead(localStorage.user_id, userReadCb_Form);
 });
 myApp.onPageInit('user_form', function (page) {
-    setTimeout(function () {
-        setMask();
-    }, 500);
+    $("#userForm").validate({
+        rules: {
+            user_fullname: {
+                required: true,
+                minlength: 5
+            }
+        },
+        // For custom messages
+        messages: {
+            user_fullname: "Digite seu nome completo"
+        },
+        errorElement: 'div',
+        errorPlacement: function (error, element) {
+            var placement = $(element).data('error');
+            if (placement) {
+                $(placement).append(error);
+            } else {
+                error.insertAfter(element.parent());
+            }
+        }
+        //errorLabelContainer: '.errorTxt'
+    });
 });
 $$(document).on('click', '.userUpdate', function (e) {
-    var img_fn = $("#userForm [name='user_img']").val();
-    if (img_fn == "") {
-        userUpdate();
+    if ($("#userForm").valid()) {
+        var img_fn = $("#userForm [name='user_img']").val();
+        if (img_fn == "") {
+            userUpdate();
+        } else {
+            userCameraUpload(img_fn);
+        }
     } else {
-        userCameraUpload(img_fn);
+        myApp.alert("Verifique os campos e tente novamente.");
+        return false;
     }
 });
 $$(document).on('click', '.userLogout', function (e) {
@@ -184,6 +208,23 @@ function userRead(target_id, cb) {
 }
 function userReadCb_Form(res) {
     FF(res, "#userForm");
+    $("#userForm [name=user_img]").val("");
+    // IMG UPLOAD
+    var img = res[0].user_img;
+    if (img != null && img != "") {
+        img = localStorage.server + localStorage.server_img + img;
+        $("#profileImgBg").css("background-image", "url(" + img + ")");
+        $("#profileImgFront").attr("src", img);
+    }
+    // IMG FACEBOOK
+    else {
+        var fb = res[0].user_fb_pic;
+        if (fb != null) {
+            $("#profileImgBg").css("background-image", "url(" + fb + ")");
+            $("#profileImgFront").attr("src", fb);
+        }
+    }
+
     /*$(".user_first_name").html(res[0].user_first_name);
      $(".user_email").html(res[0].user_email);
      
@@ -216,6 +257,12 @@ function userReadCb_Me(res) {
             $("#index-4 .user_bio").html(res[0]["user_bio"]);
         } else {
             $("#index-4 .user_bio").hide();
+        }
+        if (res[0]["user_img"] != "") {
+            var user_img = localStorage.server + localStorage.server_img + res[0]["user_img"];
+            $("#index-4 .pic_img").attr("src", user_img);
+            $("#index-4 .pic_bg").css("background-image", "url(" + user_img + ")");
+            $("#index-4 .pic_img").css("width", "180px").css("height", "180px");//.css("margin", "32px");;
         }
 
     } // res[0]
@@ -289,12 +336,10 @@ function userAds(user_id, cb) {
 function userAdsCb_Me(res) {
 
     if (res !== null) {
-
         if (res.error) {
             myApp.alert('Desculpe, ocorreu um erro interno. ' + res.error, 'Erro');
             return;
         }
-
         if (res[0]["post_name"] !== "") {
             $("#user_post").html("");
             $.each(res, function (key, val) {
@@ -310,10 +355,29 @@ function userAdsCb_Me(res) {
 
                 $("#user_post_" + val["post_id"]).each(function (index) {
 
-                    $(this).find(".post_name").html(val["post_name"]);
-                    $(this).find(".post_price").html(val["post_price"]);
-                    var url = localStorage.server + localStorage.server_img + "/" + val["img_fn"];
-                    $(this).find(".img_fn").attr("src", url);
+                    // STATUS
+                    var status, css, css_val = "";
+                    if (val["post_status"] == "1") {
+                        status = "Ativo";
+                        css = "color";
+                        css_val = "#00d449";
+                    }
+                    if (val["post_status"] == "2") {
+                        status = "Finalizado";
+                    }
+                    if (val["post_status"] == "0") {
+                        status = "Cancelado";
+                    }
+                    if (val["post_status"] == "-1") {
+                        status = "Bloqueado";
+                    }
+                    $(this).find(".post_status").html(status).css(css, css_val);
+
+                    // USER IMG
+                    if (val["img_fn"] != "") {
+                        var img = localStorage.server + localStorage.server_img + val["img_fn"];
+                        $(this).find(".img_fn").css("background-image", "url(" + img + ")");
+                    }
                 }).show();
             });
         } // res[0]
@@ -524,7 +588,7 @@ function userUpdate(user_img) {
     console.log(data);
 
     // RUN AJAX
-    myApp.showPreloader();
+    myApp.showIndicator();
     $.ajax({
         url: localStorage.server + "/user_update.php",
         data: data,
@@ -534,7 +598,7 @@ function userUpdate(user_img) {
         timeout: localStorage.timeout
     })
             .always(function () {
-                myApp.hidePreloader();
+                myApp.hideIndicator();
             })
 
             .fail(function () {

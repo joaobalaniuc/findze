@@ -3,6 +3,8 @@
 //=============================
 $$(document).on('click', '.post_read', function (e) {
 //myApp.showTab('#view-1');
+    myApp.alert("Under construction");
+    return false;
     var post_id = $(this).attr("data-id");
     sessionStorage.post_id = post_id;
     go("post_read.html");
@@ -20,7 +22,7 @@ $$(document).on('click', '#removeLastImg', function (e) {
         });
     }
 });
-myApp.onPageInit('post_form', function (page) {
+myApp.onPageInit('index-3', function (page) {
     sessionStorage.serialize = $("#post_form form").serialize();
     // EDITAR POST
     if (sessionStorage.edit_id > 0) {
@@ -62,19 +64,18 @@ myApp.onPageInit('post_form', function (page) {
     });
 });
 $$(document).on('click', '.postSend', function (e) {
-
-    var img_fn = $("#index-3 [name=fn]").val();
-    if (img_fn === "") {
-        postSend();
-    } else {
-        postCameraUpload(img_fn);
+    var lat = $("#index-3 [name=post_lat]").val();
+    if (lat === "") {
+        myApp.alert('Clique sobre o mapa para definir a localização do evento.', 'Ops!');
+        return false;
     }
-
-    return false;
-    postSend();
-    return;
     if ($("#postForm").valid()) {
-        postSend();
+        var img_fn = $("#index-3 [name=fn]").val();
+        if (img_fn === "") {
+            postSend();
+        } else {
+            postCameraUpload(img_fn);
+        }
     } else {
         myApp.alert('Preencha corretamente os campos do formulário.', 'Ops!');
     }
@@ -309,31 +310,35 @@ function postList(last_id, op, followers) {
                                 $(this).find(".user_fb_pic").attr("src", val["user_fb_pic"]);
                             }
                             $(this).find(".post_name").html(val["post_name"]);
-                            if (val["post_price"] !== null) {
-                                $(this).find(".post_price").html("R$ " + val["post_price"]);
-                            }
-                            if (val["user_bio"] !== null) {
-                                $(this).find(".user_bio").html(val["user_bio"]);
-                            }
+                            $(this).find(".cat1").html(val["cat1"]);
                             // share
-                            $(this).find(".share").attr("data-message", val["post_name"] + " por R$ " + val["post_price"]);
-                            $(this).find(".share").attr("data-img", localStorage.server + localStorage.server_img + val["img_fn"]);
+                            /*$(this).find(".share").attr("data-message", val["post_name"] + " por R$ " + val["post_price"]);
+                             $(this).find(".share").attr("data-img", localStorage.server + localStorage.server_img + val["img_fn"]);
+                             */
                             // content
                             $(this).find(".user_read").attr("data-id", val["user_id"]);
                             $(this).find(".post_read").attr("data-id", val["post_id"]);
                             $(this).find(".user_name").html(val["user_name"]);
-                            $(this).find(".post_date").html(val["post_date"]);
-                            $(this).find(".post_txt").html(val["post_txt"]);
-                            $(this).find(".post_txt").text(function (index, currentText) {
-                                if (currentText.length > 64) {
-                                    return currentText.substr(0, 128) + " ...";
+                            $(this).find(".post_date_start").html(val["post_date_start"]);
+                            if (val["post_txt"] != null) {
+                                $(this).find(".post_txt").html(val["post_txt"]);
+                                $(this).find(".post_txt").text(function (index, currentText) {
+                                    if (currentText.length > 64) {
+                                        return currentText.substr(0, 128) + " ...";
+                                    }
+                                });
+                            }
+                            
+                            // IMG USER
+                            if (val["user_img"] != "") {
+                                var user_img = localStorage.server + localStorage.server_img + val["user_img"];
+                                $(this).find(".user_img").attr("src", user_img);
+                            } else {
+                                if (val["user_fb_pic"] !== null) {
+                                    $(this).find(".user_img").attr("src", val["user_fb_pic"]);
                                 }
-                            });
-                            // chat
-                            $(this).find(".chat").attr("data-id", val["user_id"]);
-                            $(this).find(".chat").attr("data-name", val["user_name"]);
-                            // tel
-                            $(".user_phone").attr("href", "tel:0" + val["user_phone"]);
+                            }
+
 
                         }).show();
                         //======================
@@ -537,6 +542,38 @@ function postStart(id) {
                 } // res not null
             }); // after ajax
 }
+// JQUERY VALIDATION FORM
+function postValidate() {
+    $("#postForm").validate({
+        rules: {
+            post_name: {
+                required: true,
+                minlength: 5
+            },
+            post_txt: {
+                //required: true
+            },
+            post_date_start: {
+                required: true
+            },
+            post_dur: {
+                required: true
+            },
+            categ_id: {
+                required: true
+            }
+        },
+        errorElement: 'div',
+        errorPlacement: function (error, element) {
+            var placement = $(element).data('error');
+            if (placement) {
+                $(placement).append(error)
+            } else {
+                error.insertAfter(element);
+            }
+        }
+    });
+}
 //=============================
 // GRID MASONRY
 //=============================
@@ -585,7 +622,7 @@ function postSend(img_fn) {
                     }
                     if (res.success) {
                         sessionStorage.post_id = res.success;
-                        //window.location.href = "index.html";
+                        window.location.href = "index.html";
                     }
                 } // res not null
             }); // after ajax

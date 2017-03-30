@@ -50,7 +50,9 @@ $(document).ready(function () {
 
     userRead(localStorage.user_id, userReadCb_Me);
     userAds(localStorage.user_id, userAdsCb_Me);
-    postList(0, "", true);
+    postList(0, "");
+    
+    postValidate();
 
     // Category
     postCat(postCatCb);
@@ -288,6 +290,7 @@ function setMask() {
 function pretty() {
     $(".prettydate").prettydate({
         beforeSuffix: "atrás",
+        afterSuffix: "",
         messages: {
             second: "Agora mesmo",
             seconds: "%s segundos %s",
