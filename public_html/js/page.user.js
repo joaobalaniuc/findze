@@ -496,21 +496,28 @@ function userAdsCb_Friend(res) {
                     $(this).find(".post_status").html(status).css(css, css_val);
                     $(this).find(".post_name").html(val["post_name"]);
 
-                    // DATE
-                    $(this).find(".post_date_start").html(val["post_date_start"]);
+                    //=======================
+                    // DATA
+                    //=======================
                     var now = moment().format("YYYY-MM-DD HH:mm:ss");
-                    var start = val["post_date_start"];
-                    var end = val["post_date_end"];
-                    if (now < start) {
+                    var dt0 = val["post_date_start"];
+                    var dt1 = val["post_date_end"];
+                    if (now < dt0) {
                         $(this).find(".post_date_txt").html("Começa em");
                     } else {
-                        if (now < end) {
-                            $(this).find(".post_date_txt").html("Em andamento");
-                        } else {
+                        if (now > dt1) {
                             $(this).find(".post_date_txt").html("Finalizado");
+                            $(this).find(".post_date_start").hide();
+                        } else {
+                            $(this).find(".post_date_txt").html("Em andamento");
+                            $(this).find(".post_date_start").hide();
                         }
-                        $(this).find(".post_date_start").hide();
                     }
+                    var date_start = moment(val["post_date_start"], "YYYY-MM-DD HH:mm:ss").fromNow();
+                   $(this).find(".post_date_start").html(date_start);
+                    //=======================
+                    // /DATA
+                    //=======================
 
                     // USER IMG
                     if (val["img_fn"] != null) {
