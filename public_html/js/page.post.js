@@ -403,7 +403,7 @@ function postList(last_id, op, followers) {
                             }
 
                             // IMG USER
-                            if (val["user_img"] != "") {
+                            if (val["user_img"] != null) {
                                 var user_img = localStorage.server + localStorage.server_img + val["user_img"];
                                 $(this).find(".user_img").attr("src", user_img);
                             } else {
