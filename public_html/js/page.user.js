@@ -120,7 +120,7 @@ myApp.onPageInit("user_login", function (page) {
         rules: {
             user_email: {
                 required: true,
-                minlength: 7
+                minlength: 3
                         //email: true
             },
             user_pass: {
@@ -132,7 +132,7 @@ myApp.onPageInit("user_login", function (page) {
             user_email: {
                 required: "Digite seu e-mail",
                 email: "Digite um e-mail válido",
-                minlength: "Mínimo de 5 caracteres"
+                minlength: "Mínimo de 3 caracteres"
             },
             user_pass: "Digite sua senha"
         },
@@ -305,7 +305,7 @@ function userReadCb_Me(res) {
         } else {
             $("#index-4 .user_bio").hide();
         }
-        if (res[0]["user_img"] != "") {
+        if (res[0]["user_img"] !== null) {
             var user_img = localStorage.server + localStorage.server_img + res[0]["user_img"];
             $("#index-4 .pic_img").attr("src", user_img);
             $("#index-4 .pic_bg").css("background-image", "url(" + user_img + ")");
@@ -317,29 +317,26 @@ function userReadCb_Me(res) {
 function userReadCb_Friend(res) {
 
     if (res[0]) {
-        // chat button
-        $("#user_read .chat").attr("data-id", res[0]["user_id"]);
-        $("#user_read .chat").attr("data-name", res[0]["user_name"]);
-        $("#user_read .chat").attr("data-pic", res[0]["user_fb_pic"]);
         //
         $("#user_read .user_name").html(res[0]["user_name"]);
+        $("#user_read .user_fullname").html(res[0]["user_fullname"]);
         $("#user_read .user_bio").html(res[0]["user_bio"]);
         String.prototype.splice = function (idx, rem, str) {
             return this.slice(0, idx) + str + this.slice(idx + Math.abs(rem));
         };
-        if (res[0]["user_fb_pic"] !== null) {
+        // CAMERA PIC
+        if (res[0]["user_img"] !== null) {
+            var uri = localStorage.server + localStorage.server_img + res[0]["user_img"];
+            $("#user_read .pic_img").attr("src", uri);
+            $("#user_read .pic_bg").css("background-image", "url(" + uri + ")");
+            $("#user_read .pic_img").css("width", "180px").css("height", "180px");//.css("margin", "32px");;
+        }
+        // FB PIC
+        else if (res[0]["user_fb_pic"] !== null) {
             $("#user_read .pic_img").attr("src", res[0]["user_fb_pic"]);
             $("#user_read .pic_bg").css("background-image", "url(" + res[0]["user_fb_pic"] + ")");
             $("#user_read .pic_img").css("width", "180px").css("height", "180px");//.css("margin", "32px");;
         }
-        if (res[0]["user_phone"] == null) {
-            $("#user_read .user_phone").addClass("disabled");
-        } else {
-            var phone = "(" + res[0]["user_phone"].splice(2, 0, ") ");
-            phone = phone.splice(10, 0, "-");
-            $("#user_read .user_phone").attr("href", "tel:0" + res[0]["user_phone"]);
-        }
-
 
         if (res[0]["follow_id"] > 0) {
             $("#seguir").hide();
@@ -454,13 +451,11 @@ function userAdsCb_Friend(res) {
     console.log(res);
 
     if (res !== null) {
-
         if (res.error) {
             errorCheck(res.error);
             return;
         }
-
-        if (res[0]) {
+        if (res[0]["post_id"] !== "") {
             $("#friend_post").html("");
             $.each(res, function (key, val) {
 
@@ -475,14 +470,54 @@ function userAdsCb_Friend(res) {
 
                 $("#friend_post_" + val["post_id"]).each(function (index) {
 
+                    // STATUS
+                    var status, css, css_val = "";
+                    if (val["post_status"] == "1") {
+                        status = "Ativo";
+                        css = "color";
+                        css_val = "#00d449";
+                    }
+                    if (val["post_status"] == "2") {
+                        status = "Finalizado";
+                    }
+                    if (val["post_status"] == "0") {
+                        status = "Cancelado";
+                    }
+                    if (val["post_status"] == "-1") {
+                        status = "Bloqueado";
+                    }
+                    $(this).find(".post_status").html(status).css(css, css_val);
                     $(this).find(".post_name").html(val["post_name"]);
-                    $(this).find(".post_price").html(val["post_price"]);
-                    var url = localStorage.server + localStorage.server_img + "/" + val["img_fn"];
-                    $(this).find(".img_fn").attr("src", url);
+
+                    // DATE
+                    $(this).find(".post_date_start").html(val["post_date_start"]);
+                    var now = moment().format("YYYY-MM-DD HH:mm:ss");
+                    var start = val["post_date_start"];
+                    var end = val["post_date_end"];
+                    if (now < start) {
+                        $(this).find(".post_date_txt").html("Começa em");
+                    } else {
+                        if (now < end) {
+                            $(this).find(".post_date_txt").html("Em andamento");
+                        } else {
+                            $(this).find(".post_date_txt").html("Finalizado");
+                        }
+                        $(this).find(".post_date_start").hide();
+                    }
+
+                    // USER IMG
+                    if (val["img_fn"] != null) {
+                        var img = localStorage.server + localStorage.server_img + "thumb_" + val["img_fn"];
+                        $(this).find(".img_fn").css("background-image", "url(" + img + ")");
+                    }
                 }).show();
             });
         } // res[0]
+        else {
+            $("#friend_post_none").show();
+        }
     } // res not null
+    
 }
 
 //=============================
@@ -535,7 +570,7 @@ function userFollow(target_id) {
                             $("#seguir").show();
                         }
                         //alert(1);
-                        sessionStorage.refreshFollow = 1;
+                        //sessionStorage.refreshFollow = 1;
                     }
 
 

@@ -188,7 +188,7 @@ function postReadCb(res) {
     $("#post_read .post_date").html(post[0]["post_date"]);
     $("#post_read .user_phone").attr("href", "tel:0" + post[0]["user_phone"]);
     $("#post_read .post_price").html(post[0]["post_price"]);
-    pretty();
+    //pretty();
     var txt = post[0]["post_txt"];
     if (txt !== null) {
         $("#post_read .post_txt").html(txt);
@@ -369,16 +369,30 @@ function postList(last_id, op, followers) {
                                 }
                             }
 
-                            // data
+                            //=======================
+                            // DATA
+                            //=======================
                             var now = moment().format("YYYY-MM-DD HH:mm:ss");
-                            var dt = val["post_date_start"];
-                            if (now < dt) {
+                            var dt0 = val["post_date_start"];
+                            var dt1 = val["post_date_start"];
+                            if (now < dt0) {
                                 $(this).find(".date_txt").html("Começa em");
                             } else {
-                                $(this).find(".date_txt").html("Em andamento");
-                                $(this).find(".post_date_start").hide();
+                                if (now > dt1) {
+                                    $(this).find(".date_txt").html("Finalizado");
+                                    $(this).find(".post_date_start").hide();
+                                    $(this).find(".postRequest").hide();
+                                } else {
+                                    $(this).find(".date_txt").html("Em andamento");
+                                    $(this).find(".post_date_start").hide();
+                                }
                             }
-                            $(this).find(".post_date_start").html(val["post_date_start"]);
+                            var date_start = moment(val["post_date_start"], "YYYY-MM-DD HH:mm:ss").fromNow();
+                            $(this).find(".post_date_start").html(date_start);
+
+                            //=======================
+                            // /DATA
+                            //=======================
 
                             if (val["post_txt"] != null) {
                                 $(this).find(".post_txt").html(val["post_txt"]);
