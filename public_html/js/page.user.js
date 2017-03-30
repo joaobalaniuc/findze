@@ -105,6 +105,9 @@ $$(document).on('click', '#userNameSend', function (e) {
     }
 
 });
+$$(document).on('click', '#userNameCancel', function (e) {
+    userLogout();
+});
 $$(document).on('click', '#user_read .userFollow', function (e) {
     userFollow(sessionStorage.friend_id);
 });
@@ -647,7 +650,7 @@ function userNameSend() {
     var data = data_form + "&" + data_user;
     console.log(data);
     myApp.showIndicator();
-    
+
     // RUN AJAX
     $.ajax({
         url: localStorage.server + "/user_name.php",
