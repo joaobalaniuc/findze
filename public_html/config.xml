@@ -35,7 +35,7 @@
     <plugin name="cordova-plugin-camera" source="npm" />
     <plugin name="cordova-plugin-file-transfer" source="npm" />  
     <plugin name="cordova-plugin-geolocation" source="npm" />
-    <plugin name="cordova-diagnostic-plugin" source="npm" />
+    <plugin name="cordova.plugins.diagnostic" source="npm" />
     
     <icon src="icon.png" />
     
