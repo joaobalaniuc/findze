@@ -391,7 +391,7 @@ function userAdsCb_Me(res) {
                     }
 
                     // USER IMG
-                    if (val["img_fn"] != "") {
+                    if (val["img_fn"] != null) {
                         var img = localStorage.server + localStorage.server_img + "thumb_" + val["img_fn"];
                         $(this).find(".img_fn").css("background-image", "url(" + img + ")");
                     }
