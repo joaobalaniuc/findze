@@ -51,7 +51,7 @@ $(document).ready(function () {
     userRead(localStorage.user_id, userReadCb_Me);
     userAds(localStorage.user_id, userAdsCb_Me);
     postList(0, "");
-    
+
     postValidate();
 
     // Category
@@ -86,6 +86,7 @@ function pageRefresh() {
             && page !== "user_login"
             && page !== "post_form"
             && page !== "user_register"
+            && page !== "user_name"
             && page !== "chat") {
         $("#toolbar_on").fadeIn("fast");
         $("#toolbar_off").fadeOut("fast");
@@ -283,3 +284,26 @@ function setMask() {
     $('.zipcode').mask('00000-000');
 }
 
+//============================
+// ERROR
+//============================
+function errorCheck(err) {
+    // DADOS INVALIDOS
+    if (err == "1") {
+        myApp.alert("Desculpe, sua senha provavelmente foi alterada.", "Erro");
+        localStorage.removeItem("user_id");
+        setTimeout(function () {
+            window.location.href = "index.html";
+        }, 1000);
+    }
+    // NÃO TEM USER_NAME (APENAS FACEBOOK)
+    else if (err == "2") {
+        if (sessionStorage.activePage != "user_name") {
+            go("user_name.html");
+        }
+    }
+    // OUTRO ERRO
+    else {
+        myApp.alert('Desculpe, ocorreu um erro no lado do servidor. #' + err, 'Erro');
+    }
+}

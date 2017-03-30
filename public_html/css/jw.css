@@ -60,6 +60,7 @@ ul.global .item-after img {width:24px;height:24px;}
 #user_register div.error,
 #user_login div.error,
 #user_form div.error,
+#user_name div.error,
 #postForm div.error {
     font-weight:100;
     color:#ff9800;

@@ -293,6 +293,7 @@ function postList(last_id, op, followers) {
                         return;
                     }
                     if (res.error) {
+                        errorCheck(res.error);
                         return;
                     }
                     var i = 0;
@@ -591,7 +592,7 @@ function postStart(id) {
                 if (res !== null) {
 
                     if (res.error) {
-                        myApp.alert('Desculpe, ocorreu um erro interno. ' + res.error, 'Erro');
+                        errorCheck(res.error);
                         return;
                     }
 
@@ -728,8 +729,7 @@ function postSend(img_fn) {
                     $('#postForm')[0].reset();
                     console.log(res);
                     if (res.error) {
-                        myApp.alert('Desculpe, ocorreu um erro interno.', 'Erro');
-                        alert(res.error);
+                        errorCheck(res.error);
                         return;
                     }
                     if (res.success) {
