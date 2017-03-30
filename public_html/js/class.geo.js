@@ -37,5 +37,6 @@ function geoIP() {
         sessionStorage.lat = Number(data.lat);
         sessionStorage.lng = Number(data.lon);
         sessionStorage.geoip = 1;
+        alert("geoIP: " + sessionStorage.lat);
     });
 }
