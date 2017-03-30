@@ -52,7 +52,7 @@ var fb = {
 
                                 .fail(function () {
 
-                                  alert("Ocorreu um erro ao cadastrar sua conta com o facebook.");
+                                  myApp.alert("Ocorreu um erro ao cadastrar sua conta com o facebook.");
                                   return;
 
                                 })
@@ -70,7 +70,7 @@ var fb = {
                                             localStorage.user_id = res.id;
                                             localStorage.user_email = email;
                                             localStorage.user_pass = localStorage.fb_token;
-                                            window.location.href = "index.html";
+                                            go("user_name.html");
                                         }
 
                                     } // res not null
