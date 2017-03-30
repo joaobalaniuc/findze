@@ -283,35 +283,3 @@ function setMask() {
     $('.zipcode').mask('00000-000');
 }
 
-
-//==============================================
-// SET PRETTY DATE = REQUER prettydate.js
-//==============================================
-function pretty() {
-    $(".prettydate").prettydate({
-        beforeSuffix: "atrás",
-        afterSuffix: "",
-        messages: {
-            second: "Agora mesmo",
-            seconds: "%s segundos %s",
-            minute: "Um minuto %s",
-            minutes: "%s minutos %s",
-            hour: "Uma hora %s",
-            hours: "%s horas %s",
-            day: "Um dia %s",
-            days: "%s dias %s",
-            week: "Uma semana %s",
-            weeks: "%s semanas %s",
-            month: "Um mês %s",
-            months: "%s meses %s",
-            year: "Um ano %s",
-            years: "%s anos %s",
-            // Extra
-            yesterday: "Ontem",
-            beforeYesterday: "Antes de ontem",
-            tomorrow: "Amanhã",
-            afterTomorrow: "Depois de amanhã"
-
-        }
-    });
-}

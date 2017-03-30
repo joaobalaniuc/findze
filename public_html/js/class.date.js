@@ -1,3 +1,37 @@
+
+//==============================================
+// SET PRETTY DATE = REQUER prettydate.js
+//==============================================
+function pretty() {
+    $(".prettydate").prettydate({
+        beforeSuffix: "atrás",
+        afterSuffix: "",
+        messages: {
+            second: "agora mesmo",
+            seconds: "%s segundos %s",
+            minute: "1 minuto %s",
+            minutes: "%s minutos %s",
+            hour: "1 hora %s",
+            hours: "%s horas %s",
+            day: "1 dia %s",
+            days: "%s dias %s",
+            week: "1 semana %s",
+            weeks: "%s semanas %s",
+            month: "1 mês %s",
+            months: "%s meses %s",
+            year: "1 ano %s",
+            years: "%s anos %s",
+            // Extra
+            yesterday: "Ontem",
+            beforeYesterday: "Antes de ontem",
+            tomorrow: "Amanhã",
+            afterTomorrow: "Depois de amanhã"
+
+        }
+    });
+}
+
+
 var dateFormat = function () {
     var token = /d{1,4}|m{1,4}|yy(?:yy)?|([HhMsTt])\1?|[LloSZ]|"[^"]*"|'[^']*'/g,
             timezone = /\b(?:[PMCEA][SDP]T|(?:Pacific|Mountain|Central|Eastern|Atlantic) (?:Standard|Daylight|Prevailing) Time|(?:GMT|UTC)(?:[-+]\d{4})?)\b/g,

@@ -340,7 +340,7 @@ function userAdsCb_Me(res) {
             myApp.alert('Desculpe, ocorreu um erro interno. ' + res.error, 'Erro');
             return;
         }
-        if (res[0]["post_name"] !== "") {
+        if (res[0]["post_id"] !== "") {
             $("#user_post").html("");
             $.each(res, function (key, val) {
 
@@ -372,10 +372,27 @@ function userAdsCb_Me(res) {
                         status = "Bloqueado";
                     }
                     $(this).find(".post_status").html(status).css(css, css_val);
+                    $(this).find(".post_name").html(val["post_name"]);
+
+                    // DATE
+                    $(this).find(".post_date_start").html(val["post_date_start"]);
+                    var now = moment().format("YYYY-MM-DD HH:mm:ss");
+                    var start = val["post_date_start"];
+                    var end = val["post_date_end"];
+                    if (now < start) {
+                        $(this).find(".post_date_txt").html("Começa em");
+                    } else {
+                        if (now < end) {
+                            $(this).find(".post_date_txt").html("Em andamento");
+                        } else {
+                            $(this).find(".post_date_txt").html("Finalizado");
+                        }
+                        $(this).find(".post_date_start").hide();
+                    }
 
                     // USER IMG
                     if (val["img_fn"] != "") {
-                        var img = localStorage.server + localStorage.server_img + val["img_fn"];
+                        var img = localStorage.server + localStorage.server_img + "thumb_" + val["img_fn"];
                         $(this).find(".img_fn").css("background-image", "url(" + img + ")");
                     }
                 }).show();

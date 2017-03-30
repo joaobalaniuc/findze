@@ -9,6 +9,14 @@ $$(document).on('click', '.post_read', function (e) {
     sessionStorage.post_id = post_id;
     go("post_read.html");
 });
+$$(document).on('click', '.postRequest', function (e) {
+    var post_id = $(this).attr("data-id");
+    if (typeof post_id !== "undefined") {
+        postRequest(post_id);
+        $(this).hide();
+        $(this).after("<img class='pre' src='img/loader2.gif' style='float:right' />");
+    }
+});
 //=============================
 // PAGE: POST_FORM
 //=============================
@@ -153,6 +161,7 @@ function postReadCb(res) {
     var like = post[0]["post_count_like"];
     if (like == null)
         like = 0;
+
     // IMG
     var img_fn = post[0]["img_fn"];
     if (img_fn != null) {
@@ -168,6 +177,7 @@ function postReadCb(res) {
     $("#post_read .chat").attr("data-id", post[0]["user_id"]);
     $("#post_read .chat").attr("data-name", post[0]["user_name"]);
     $("#post_read .chat").attr("data-pic", post[0]["user_fb_pic"]);
+
     // FILL
     $("#post_read .user_read").attr("data-id", post[0]["user_id"]);
     $("#post_read .post_view").html(view);
@@ -187,7 +197,8 @@ function postReadCb(res) {
         $("#post_read .post_like").css("color", "blue");
         $("#post_read .post_like_txt").css("color", "blue").html("Curtiu");
     }
-// MOSTRAR OPÇÕES DE EDITAR
+
+    // MOSTRAR OPÇÕES DE EDITAR
     if (post[0]["user_id"] == localStorage.user_id) {
         $("#post_read .edit").show();
     }
@@ -216,6 +227,14 @@ function postEditCb(res) {
 }
 function postList(last_id, op, followers) {
 
+    if (typeof sessionStorage.lat === "undefined") {
+        console.log("waiting lat/lng for postList...");
+        setTimeout(function () {
+            postList(0, "");
+        }, 500);
+        return false;
+    }
+
     var prefix;
     // POST GERAL
     if (typeof followers === "undefined") {
@@ -238,8 +257,6 @@ function postList(last_id, op, followers) {
         }
     }
 
-    //$("#" + prefix + "_infinite").show();
-
     $.ajax({
         url: localStorage.server + "/post_list.php",
         data: {
@@ -249,7 +266,10 @@ function postList(last_id, op, followers) {
             //
             last_id: last_id,
             op: op,
-            followers: followers
+            followers: followers,
+            //
+            lat: sessionStorage.lat,
+            lng: sessionStorage.lng
         },
         type: 'GET',
         dataType: 'jsonp',
@@ -258,7 +278,6 @@ function postList(last_id, op, followers) {
     })
             .always(function () {
                 $("#" + prefix + "_infinite").fadeOut("slow");
-
             })
 
             .fail(function () {
@@ -270,7 +289,7 @@ function postList(last_id, op, followers) {
 
                     console.log(res);
                     if (res === false) {
-                        $("#post_none").fadeIn("slow");
+                        //$("#post_none").fadeIn("slow");
                         return;
                     }
                     if (res.error) {
@@ -299,6 +318,7 @@ function postList(last_id, op, followers) {
                                     .appendTo("#" + prefix + "_list")
                                     .attr("data-id", val["post_id"]);
                         }
+
                         $("#" + prefix + "_" + val["post_id"]).each(function (index) {
 
                             if (val["img_fn"] != null) {
@@ -319,7 +339,46 @@ function postList(last_id, op, followers) {
                             $(this).find(".user_read").attr("data-id", val["user_id"]);
                             $(this).find(".post_read").attr("data-id", val["post_id"]);
                             $(this).find(".user_name").html(val["user_name"]);
+                            $(this).find(".post_dis").html(val["dis"]);
+                            // BOTÃO SOLICITAR
+                            if (val["request_date"] === null) {
+                                $(this).find(".postRequest")
+                                        .html("Eu quero")
+                                        .addClass("color-pink button-fill")
+                                        .attr("data-id", val["post_id"]);
+                            } else {
+                                if (val["request_acc_date"] !== null) {
+
+                                    $(this).find(".postRequest")
+                                            .html("Participando")
+                                            .addClass("color-green button-fill")
+                                            .attr("data-id", val["post_id"]);
+
+                                } else if (val["request_rej_date"] !== null) {
+
+                                    $(this).find(".postRequest")
+                                            .html("Rejeitado")
+                                            .addClass("color-pink");
+                                } else {
+
+                                    $(this).find(".postRequest")
+                                            .html("Solicitado")
+                                            .addClass("color-gray button-fill")
+                                            .attr("data-id", val["post_id"]);
+                                }
+                            }
+
+                            // data
+                            var now = moment().format("YYYY-MM-DD HH:mm:ss");
+                            var dt = val["post_date_start"];
+                            if (now < dt) {
+                                $(this).find(".date_txt").html("Começa em");
+                            } else {
+                                $(this).find(".date_txt").html("Em andamento");
+                                $(this).find(".post_date_start").hide();
+                            }
                             $(this).find(".post_date_start").html(val["post_date_start"]);
+
                             if (val["post_txt"] != null) {
                                 $(this).find(".post_txt").html(val["post_txt"]);
                                 $(this).find(".post_txt").text(function (index, currentText) {
@@ -328,7 +387,7 @@ function postList(last_id, op, followers) {
                                     }
                                 });
                             }
-                            
+
                             // IMG USER
                             if (val["user_img"] != "") {
                                 var user_img = localStorage.server + localStorage.server_img + val["user_img"];
@@ -375,6 +434,7 @@ function postList(last_id, op, followers) {
                             }
                             console.log("(NEW) post2_id = " + sessionStorage.post2_id_list_new + " (OLD) post2_id = " + sessionStorage.post2_id_list);
                         }
+
                         pretty();
                         setTimeout(function () {
                             if ($('#post_list').children().length > 0) {
@@ -575,9 +635,61 @@ function postValidate() {
     });
 }
 //=============================
-// GRID MASONRY
+// REQUEST
 //=============================
-function postGrid() {
+function postRequest(post_id) {
+
+    // RUN AJAX
+    $.ajax({
+        url: localStorage.server + "/post_request.php",
+        data: {
+            user_id: localStorage.user_id,
+            user_email: localStorage.user_email,
+            user_pass: localStorage.user_pass,
+            //
+            post_id: post_id
+        },
+        type: 'GET',
+        dataType: 'jsonp',
+        jsonp: 'callback',
+        timeout: localStorage.timeout
+    })
+            .always(function () {
+                $(".pre").remove(); // loading
+            })
+
+            .fail(function () {
+                alert("fail");
+            })
+
+            .done(function (res) {
+
+                console.log(res);
+                if (res !== null) {
+
+                    if (res.error) {
+                        return;
+                    }
+                    if (res.success) {
+
+                        var $el = $("#post_" + post_id + " .postRequest");
+
+                        if (res.success == "1") {
+                            $el.html("Solicitado")
+                                    .removeClass()
+                                    .addClass("button button-fill color-gray postRequest")
+                                    .show();
+                        } else {
+                            $el.html("Eu quero")
+                                    .removeClass()
+                                    .addClass("button button-fill color-pink postRequest")
+                                    .show();
+                        }
+                    }
+
+
+                } // res not null
+            }); // after ajax
 }
 //=============================
 // INSERT / DELETE POST
@@ -652,30 +764,6 @@ function postDel(post_id) {
             })
             .done(function (res) {
                 window.location.href = "index.html";
-            });
-}
-function removeLastImg() {
-    myApp.showPreloader();
-    $.ajax({
-        url: localStorage.server + "/img_del.php",
-        data: {
-            user_id: localStorage.user_id,
-            user_email: localStorage.user_email,
-            user_pass: localStorage.user_pass
-        },
-        type: 'GET',
-        dataType: 'jsonp',
-        jsonp: 'callback',
-        timeout: localStorage.timeout
-    })
-            .always(function () {
-                window.location.href = "index.html";
-            })
-            .fail(function () {
-                //myApp.alert('Desculpe, verifique sua conexão e tente novamente.', 'Erro');
-            })
-            .done(function (res) {
-                //window.location.href = "index.html";
             });
 }
 
@@ -760,11 +848,11 @@ function catChange(id) {
 $$('.pull-to-refresh-content').on('refresh', function (e) {
     // ALL POSTS
     if (sessionStorage.activePage === "index-2") {
-        postListGrid(sessionStorage.post2_id_list_new, "new");
+        //postListGrid(sessionStorage.post2_id_list_new, "new", true); // followers
     }
     // POST FOLLOWERS
     else {
-        postList(sessionStorage.post_id_list_new, "new", true); // followers
+        postList(sessionStorage.post_id_list_new, "new");
     }
     setTimeout(function () {
         myApp.pullToRefreshDone();
@@ -773,20 +861,34 @@ $$('.pull-to-refresh-content').on('refresh', function (e) {
 //======================================
 // INFINITE SCROLL
 //======================================
+var loading = false;
 $$('.infinite-scroll').on('infinite', function () {
     // ALL POSTS
     if (sessionStorage.activePage === "index-2") {
         if ($("#post2_infinite").css("display") === "none") {
             $("#post2_infinite").fadeIn("slow", function () {
-                postListGrid(sessionStorage.post_id_list);
+                //postListGrid(sessionStorage.post_id_list);
             });
         }
     }
     // POST FOLLOWERS
     else {
         if ($("#post_infinite").css("display") === "none") {
-            $("#post_infinite").fadeIn("slow", function () {
-                postList(sessionStorage.post2_id_list, "", true);
+
+            if (loading)
+                return;
+            loading = true;
+
+            postList(sessionStorage.post_id_list, "");
+
+            $("#post_infinite").fadeIn("fast", function () {
+                $("#post_infinite").fadeOut("fast", function () {
+
+                    setTimeout(function () {
+                        loading = false;
+                    }, 500);
+
+                });
             });
         }
     }
