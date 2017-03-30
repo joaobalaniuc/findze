@@ -374,7 +374,7 @@ function postList(last_id, op, followers) {
                             //=======================
                             var now = moment().format("YYYY-MM-DD HH:mm:ss");
                             var dt0 = val["post_date_start"];
-                            var dt1 = val["post_date_start"];
+                            var dt1 = val["post_date_end"];
                             if (now < dt0) {
                                 $(this).find(".date_txt").html("Começa em");
                             } else {
@@ -389,7 +389,6 @@ function postList(last_id, op, followers) {
                             }
                             var date_start = moment(val["post_date_start"], "YYYY-MM-DD HH:mm:ss").fromNow();
                             $(this).find(".post_date_start").html(date_start);
-
                             //=======================
                             // /DATA
                             //=======================
