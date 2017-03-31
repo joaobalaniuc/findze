@@ -329,7 +329,7 @@ function postList(last_id, op, followers) {
 
                             if (val["img_fn"] != null) {
                                 $(this).find(".thumb").attr("src", localStorage.server + localStorage.server_img + "thumb_" + val["img_fn"]);
-                                $(this).find(".post_img").attr("src", localStorage.server + localStorage.server_img + val["img_fn"]);
+                                $(this).find(".post_img").css("background-image", "url(" + localStorage.server + localStorage.server_img + val["img_fn"] + ")");
 
                             }
                             if (val["user_fb_pic"] != null) {
