@@ -96,6 +96,6 @@ function setMyPosition(position, marker) {
     window.marker.setPosition(position);
     window.marker.setVisible(true);
     map.panTo(position);
-    alert(sessionStorage.lat);
+    //alert(sessionStorage.lat);
 
 }
