@@ -47,7 +47,7 @@ function initMap() {
         });
     }
 
-    marker = new google.maps.Marker({
+    window.marker = new google.maps.Marker({
         position: myLatlng,
         map: map,
         animation: google.maps.Animation.BOUNCE,
@@ -85,4 +85,16 @@ function addMarker(position, marker) {
         map: map
     });
     map.panTo(position);
+}
+function setMyPosition(position, marker) {
+
+    var position = {lat: Number(sessionStorage.lat), lng: Number(sessionStorage.lng)};
+
+    $("[name='post_lat']").val(sessionStorage.lat);
+    $("[name='post_lng']").val(sessionStorage.lng);
+
+    window.marker.setPosition(position);
+    window.marker.setVisible(true);
+    map.panTo(position);
+
 }

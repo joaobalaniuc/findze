@@ -68,9 +68,9 @@
                                         <!--<div class="user_bio ks-facebook-date" style="font-weight:100;margin-top:-4px"></div>-->
                                     </div>
                                     <div class="card-content">
-                                        
+
                                         <div class="post_read">
-                                            
+
                                             <div style="position:absolute;z-index:0;overflow: hidden;width:100vw;height:50vw;left:0;">
                                                 <img class="thumb" style="filter: blur(7px) brightness(1);width:100%;height:100%" src="img/camera.jpg" />
                                             </div>
@@ -123,7 +123,7 @@
 
 
                                                 <div class="post_time color-pink" style="font-weight:300;text-transform:uppercase;font-size:11px;margin-top:5px">
-                                                    Há <span class="post_dis"></span> &nbsp; <strong>-</strong> &nbsp; <span class="date_txt"></span> <span class="prettydate post_date_start">...</span>
+                                                    <span class="post_dis" style="text-transform:none"></span> &nbsp; <strong>-</strong> &nbsp; <span class="date_txt"></span> <span class="prettydate post_date_start">...</span>
                                                 </div><br/>
 
 
@@ -363,6 +363,7 @@
                                                     <div class="item-inner"> 
                                                         <div class="item-title label">Duração do Evento</div>
                                                         <div class="item-input">
+                                                            <!--
                                                             <select name="post_dur">
                                                                 <option disabled="disabled" value="" selected="selected">Selecione...</option>
                                                                 <option value="+30min">30 min</option>
@@ -374,6 +375,9 @@
                                                                 <option value="+12hours">12 horas</option>
                                                                 <option value="+24hours">24 horas</option>
                                                             </select>
+                                                            -->
+                                                            <input name="post_dur" type="time" placeholder="hh:mm"/>
+
                                                         </div>
                                                     </div>
                                                 </div>
@@ -381,9 +385,25 @@
                                             <li class="cat1">
                                                 <div class="item-content">
                                                     <div class="item-inner"> 
-                                                        <div class="item-title label">Categoria</div>
+                                                        <div class="item-title label">Categoria do Evento</div>
                                                         <div class="item-input">
                                                             <select name="categ_id" class="cat" id="cat1">
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </li>
+
+                                            <li>
+                                                <div class="item-content">
+                                                    <div class="item-inner"> 
+                                                        <div class="item-title label">Tipo de Acesso</div>
+                                                        <div class="item-input">
+                                                            <select name="post_access">
+                                                                <option disabled="disabled" value="" selected="selected">Selecione...</option>
+                                                                <option value="0">Livre (Todos podem participar)</option>
+                                                                <option value="1">Privado (Todos podem solicitar)</option>
+                                                                <option value="2">Secreto (Apenas convidados)</option>
                                                             </select>
                                                         </div>
                                                     </div>
@@ -400,13 +420,20 @@
                                             <div id="map" style="width:100%;height:350px"></div>
                                         </div>
 
+                                        <div class="content-block" style="margin-top:-15px;margin-bottom:10px">
+                                            <a onclick="javascript:setMyPosition()" class="button button-raised button-fill color-blue">
+                                                <i class="fa fa-map-marker" aria-hidden="true"></i> 
+                                                &nbsp; Usar localização atual
+                                            </a>
+                                        </div>
+
                                         <ul style="margin-top:0px">
                                             <li>
                                                 <div class="item-content">
                                                     <div class="item-inner"> 
                                                         <div class="item-title label">Como chegar?</div>
                                                         <div class="item-input">
-                                                            <input name="post_obs" type="text" placeholder="Observações adicionais"/>
+                                                            <input name="post_obs" type="text" placeholder="Observações adicionais..."/>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -488,7 +515,16 @@
 
                                 <div class="pic_bg blur"></div>
                                 <div style="margin:24px">
+                                    <!--
                                     <img class="pic_img circle glow" src="img/user.png" />
+                                    -->
+                                    <div class="circle glow pic_img" style="
+                                         background-image:url(img/user.png);
+                                         background-size:cover;
+                                         background-position:center;
+                                         width:48px;height:48px;">
+
+                                    </div>
                                 </div>
 
                                 <div class="content-block" style="margin-top:0;margin-bottom:30px">

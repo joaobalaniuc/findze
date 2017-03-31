@@ -261,14 +261,14 @@ function userReadCb_Form(res) {
     if (img != null && img != "") {
         img = localStorage.server + localStorage.server_img + img;
         $("#profileImgBg").css("background-image", "url(" + img + ")");
-        $("#profileImgFront").attr("src", img);
+        $("#profileImgFront").css("background-image", "url(" + img + ")");
     }
     // IMG FACEBOOK
     else {
         var fb = res[0].user_fb_pic;
         if (fb != null) {
             $("#profileImgBg").css("background-image", "url(" + fb + ")");
-            $("#profileImgFront").attr("src", fb);
+            $("#profileImgFront").css("background-image", "url(" + fb + ")");
         }
     }
 
@@ -307,7 +307,7 @@ function userReadCb_Me(res) {
         }
         if (res[0]["user_img"] !== null) {
             var user_img = localStorage.server + localStorage.server_img + res[0]["user_img"];
-            $("#index-4 .pic_img").attr("src", user_img);
+            $("#index-4 .pic_img").css("background-image", "url(" + user_img + ")");
             $("#index-4 .pic_bg").css("background-image", "url(" + user_img + ")");
             $("#index-4 .pic_img").css("width", "180px").css("height", "180px");//.css("margin", "32px");;
         }
@@ -321,6 +321,9 @@ function userReadCb_Friend(res) {
         $("#user_read .user_name").html(res[0]["user_name"]);
         $("#user_read .user_fullname").html(res[0]["user_fullname"]);
         $("#user_read .user_bio").html(res[0]["user_bio"]);
+        $("#user_read .user_count_followers").html(res[0]["user_count_followers"]);
+        $("#user_read .user_count_following").html(res[0]["user_count_following"]);
+
         String.prototype.splice = function (idx, rem, str) {
             return this.slice(0, idx) + str + this.slice(idx + Math.abs(rem));
         };
@@ -514,7 +517,7 @@ function userAdsCb_Friend(res) {
                         }
                     }
                     var date_start = moment(val["post_date_start"], "YYYY-MM-DD HH:mm:ss").fromNow();
-                   $(this).find(".post_date_start").html(date_start);
+                    $(this).find(".post_date_start").html(date_start);
                     //=======================
                     // /DATA
                     //=======================

@@ -229,10 +229,13 @@ function postList(last_id, op, followers) {
 
     if (typeof sessionStorage.lat === "undefined") {
         console.log("waiting lat/lng for postList...");
+        myApp.showPreloader('Detectando localização...');
         setTimeout(function () {
             postList(0, "");
         }, 1000);
         return false;
+    } else {
+        myApp.hidePreloader();
     }
 
     var prefix;
@@ -289,7 +292,9 @@ function postList(last_id, op, followers) {
 
                     console.log(res);
                     if (res === false) {
-                        $("#post_none").fadeIn("slow");
+                        if ($("#post_list").length === 0) {
+                            $("#post_none").fadeIn("slow");
+                        }
                         return;
                     }
                     if (res.error) {
@@ -719,6 +724,7 @@ function postSend(img_fn) {
     var data_user = $.param(data_user); // serialize
     var data = data_form + "&" + data_user;
     console.log(data);
+    //return;
     // RUN AJAX
     myApp.showIndicator();
     $.ajax({
@@ -825,6 +831,7 @@ function postCatCb(res) {
     $.each(res, function (key, val) {
         html += "<option value='" + val["categ_id"] + "'>" + val["categ_name"] + "</option>\r\n";
     });
+    html += "<option value='0'>Outros</option>\r\n";
     $("#cat1").html(html);
     $(".cats").hide();
 }

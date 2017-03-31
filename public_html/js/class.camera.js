@@ -150,7 +150,7 @@ function userCameraShow(imageURI) {
     //alert(imageURI);
     //$("#post_camera").attr("src", imageURI);
     $("#profileImgBg").css("background-image", "url(" + imageURI + ")");
-    $("#profileImgFront").attr("src", imageURI);
+    $("#profileImgFront").css("background-image", "url(" + imageURI + ")");
     $("#user_form [name='user_img']").val(imageURI);
 }
 function userCameraUpload(imageURI) {

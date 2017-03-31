@@ -19,12 +19,17 @@
                     style="height:150px;background-position:center;background-image:url(img/user.png)">
                 </div>
 
-                <img
+                <div
                     id="profileImgFront"
                     class="circle glow"
-                    style="position:absolute;top:70px;left:50%;margin-left:-64px;width:128px;height:128px"
-                    src="img/user.png"
-                    />
+                    style="
+                    position:absolute;top:70px;left:50%;
+                    margin-left:-64px;width:128px;height:128px;
+                    background-image:url(img/user.png);
+                    background-size:cover;
+                    background-position:center;"
+                    >
+                </div>
             </div>
         </div>
         <!--
@@ -44,9 +49,9 @@
         -->
 
         <form id="userForm">
-            
+
             <input type="hidden" name="user_img" value="" />
-            
+
             <div class="content-block-title" style="mmargin-top:-20px;">Meus dados públicos</div>
             <div class="list-block">
                 <ul style="padding-left:10px">
