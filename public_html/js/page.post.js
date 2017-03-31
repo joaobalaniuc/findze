@@ -17,6 +17,15 @@ $$(document).on('click', '.postRequest', function (e) {
         $(this).after("<img class='pre' src='img/loader2.gif' style='float:right' />");
     }
 });
+$$(document).on('click', '#searchButton', function (e) {
+    if ($("#searchForm").is(":visible")) {
+        $("#searchButton i").css("color", "#fff");
+        $("#searchForm").fadeOut("fast");
+    } else {
+        $("#searchButton i").css("color", "#000");
+        $("#searchForm").fadeIn("fast");
+    }
+});
 //=============================
 // PAGE: POST_FORM
 //=============================
@@ -229,10 +238,12 @@ function postList(last_id, op, followers) {
 
     if (typeof sessionStorage.lat === "undefined") {
         console.log("waiting lat/lng for postList...");
-        myApp.showPreloader('Detectando localização...');
+        if ($(".modal-overlay").length === 0) {
+            myApp.showPreloader('Detectando localização...');
+        }
         setTimeout(function () {
             postList(0, "");
-        }, 1000);
+        }, 500);
         return false;
     } else {
         myApp.hidePreloader();

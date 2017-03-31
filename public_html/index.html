@@ -32,7 +32,7 @@
                                     <span class="appname" style="font-size:24px"> &nbsp;findze&nbsp; </span>
                                 </div>
                                 <div class="right">
-                                    <a href="#!" class="link icon-only"><i class="fa fa-search" aria-hidden="true"></i></a>
+                                    <a id="searchButton" href="#!" class="link icon-only"><i class="fa fa-search" aria-hidden="true"></i></a>
                                 </div>
                             </div>
                         </div>
@@ -59,6 +59,78 @@
                                 <div class="pull-to-refresh-layer">
                                     <div class="preloader preloader-pink"></div>
                                     <div class="pull-to-refresh-arrow"></div>
+                                </div>
+
+                                <div id="searchForm" class="content-block" style="display:none;margin-top:15px">
+                                    
+                                    <form>
+
+                                        <input type="hidden" name="post_id" value="" />
+                                        <input type="hidden" name="post_lat" value="" />
+                                        <input type="hidden" name="post_lng" value="" />
+                                        <input type="hidden" name="fn" value="" />
+
+                                        <div class="list-block inputs-list" style="margin:0;">
+                                            <ul>
+                                                <li>
+                                                    <div class="item-content">
+                                                        <div class="item-inner"> 
+                                                            <div class="item-title label">Categorias</div>
+                                                            <div class="item-input">
+                                                                <select name="alcance">
+                                                                    <option disabled="disabled" value="" selected="selected">Todas as categorias</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                                <li>
+                                                    <div class="item-content">
+                                                        <div class="item-inner"> 
+                                                            <div class="item-title label">Alcance</div>
+                                                            <div class="item-input">
+                                                                <select name="alcance">
+                                                                    <option disabled="disabled" value="" selected="selected">Selecione...</option>
+                                                                    <option value="1km">1 km</option>
+                                                                    <option value="2km">2 km</option>
+                                                                    <option value="3km">3 km</option>
+                                                                    <option value="5km">5 km</option>
+                                                                    <option value="10km">10 km</option>
+                                                                    <option value="20km">20 km</option>
+                                                                    <option value="30km">30 km</option>
+                                                                    <option value="50km">50 km</option>
+                                                                    <option value="100km">100 km</option>
+                                                                    <option value="300km">300 km</option>
+                                                                    <option value="500km">500 km</option>
+                                                                    <option value="1000km">1.000 km</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                                <li>
+                                                    <div class="item-content">
+                                                        <div class="item-inner">
+                                                            <div class="item-title label">Apenas eventos em andamento</div>
+                                                            <div class="item-input">
+                                                                <label class="label-switch">
+                                                                    <input type="checkbox">
+                                                                    <div class="checkbox"></div>
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </li>
+
+                                            </ul>
+                                        </div>
+                                        <div class="content-block" style="margin-top:0;margin-bottom:20px">
+                                            <a class="button button-raised button-fill color-pink">
+                                                <i class="fa fa-search" aria-hidden="true"></i> 
+                                                &nbsp; Localizar Eventos
+                                            </a>
+                                        </div>
+                                    </form>
                                 </div>
 
                                 <div id="post_template" style="display:none;margin:0;margin-bottom:-25px;box-shadow:none !important" class="card ks-facebook-card" data-id="1">
