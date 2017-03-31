@@ -330,13 +330,13 @@ function userReadCb_Friend(res) {
         // CAMERA PIC
         if (res[0]["user_img"] !== null) {
             var uri = localStorage.server + localStorage.server_img + res[0]["user_img"];
-            $("#user_read .pic_img").attr("src", uri);
+            $("#user_read .pic_img").css("background-image", "url(" + uri + ")");
             $("#user_read .pic_bg").css("background-image", "url(" + uri + ")");
             $("#user_read .pic_img").css("width", "180px").css("height", "180px");//.css("margin", "32px");;
         }
         // FB PIC
         else if (res[0]["user_fb_pic"] !== null) {
-            $("#user_read .pic_img").attr("src", res[0]["user_fb_pic"]);
+            $("#user_read .pic_img").css("background-image", "url(" + res[0]["user_fb_pic"] + ")");
             $("#user_read .pic_bg").css("background-image", "url(" + res[0]["user_fb_pic"] + ")");
             $("#user_read .pic_img").css("width", "180px").css("height", "180px");//.css("margin", "32px");;
         }
