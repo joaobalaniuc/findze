@@ -296,7 +296,7 @@ function userReadCb_Me(res) {
             return this.slice(0, idx) + str + this.slice(idx + Math.abs(rem));
         };
         if (res[0]["user_fb_pic"] !== null) {
-            $("#index-4 .pic_img").attr("src", res[0]["user_fb_pic"]);
+            $("#index-4 .pic_img").css("background-image", "url(" + res[0]["user_fb_pic"] + ")");
             $("#index-4 .pic_bg").css("background-image", "url(" + res[0]["user_fb_pic"] + ")");
             $("#index-4 .pic_img").css("width", "180px").css("height", "180px");//.css("margin", "32px");;
         }
