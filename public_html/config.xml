@@ -104,8 +104,8 @@
     </feature>
     
     <plugin name="cordova-plugin-facebook4" source="npm">
-        <param name="APP_ID" value="680019738832743" />
-        <param name="APP_NAME" value="Help Animal" />
+        <param name="APP_ID" value="1428042377217863" />
+        <param name="APP_NAME" value="Findze" />
     </plugin>
 
     <!--
