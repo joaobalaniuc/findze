@@ -105,7 +105,7 @@ var app = {
         // BACK BUTTON INDEX
         document.addEventListener("backbutton", function (e) {
             if (sessionStorage.activePage == "index" || sessionStorage.activePage == "user_login") {
-                e.preventDefault();
+                //e.preventDefault();
             }
         }, false);
 
