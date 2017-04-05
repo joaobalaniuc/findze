@@ -82,7 +82,11 @@ function postCameraUpload(imageURI) {
         myApp.hideIndicator();
         //alert(result);
         //alert(JSON.stringify(result));
+        if (result.response == "" || result.response == null) {
+            alert("upload error");
+        }
         postSend(result.response);
+
         //postStart();
     }, function (error) {
         myApp.hideIndicator();
