@@ -19,7 +19,7 @@ var fb = {
             localStorage.fb_token = result.authResponse.accessToken;
 
             //facebookConnectPlugin.api("/me?fields=id,birthday,gender,first_name,middle_name,age_range,last_name,name,picture.width(400),email", [],
-            facebookConnectPlugin.api("/me?fields=id,email,birthday,gender,first_name,middle_name,last_name,picture.width(400)", [],
+            facebookConnectPlugin.api("/me?fields=id,email,first_name,middle_name,last_name,picture.width(400)", [],
                     function (result) {
 
                         if (typeof result.email !== "undefined") {
@@ -38,7 +38,7 @@ var fb = {
                                 user_pass: localStorage.fb_token,
                                 user_email: email,
                                 user_gender: result.gender,
-                                user_name: result.first_name + " " + result.last_name
+                                user_fullname: result.first_name + " " + result.last_name
                             },
                             type: 'GET',
                             dataType: 'jsonp',

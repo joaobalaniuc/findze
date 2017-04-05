@@ -94,7 +94,6 @@
         <allow-intent href="itms-apps:*" />
     </platform>
     
-    
     <plugin name="cordova-plugin-statusbar" source="npm" />
     <preference name="StatusBarOverlaysWebView" value="true" /> 
     <preference name="StatusBarBackgroundColor" value="#000000" />
@@ -112,5 +111,4 @@
     <plugin name="uk.co.workingedge.phonegap.plugin.launchnavigator" source="npm" />
     <plugin name="cordova-plugin-inappbrowser" source="npm" />
     -->
-    
 </widget>
