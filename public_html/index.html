@@ -32,7 +32,7 @@
                                     <span class="appname" style="font-size:24px"> &nbsp;findze&nbsp; </span>
                                 </div>
                                 <div class="right">
-                                    <a id="searchButton" href="#!" class="link icon-only"><i class="fa fa-search" aria-hidden="true"></i></a>
+                                    <a id="searchButton" href="#!" class="link icon-only"><i class="fa fa-filter" aria-hidden="true"></i></a>
                                 </div>
                             </div>
                         </div>
@@ -61,8 +61,8 @@
                                     <div class="pull-to-refresh-arrow"></div>
                                 </div>
 
-                                <div id="searchForm" class="content-block" style="display:none;margin-top:15px">
-                                    
+                                <div id="searchForm" class="content-block" style="display:none;margin-top:10px;margin-bottom:20px">
+
                                     <form>
 
                                         <input type="hidden" name="post_id" value="" />
@@ -75,10 +75,9 @@
                                                 <li>
                                                     <div class="item-content">
                                                         <div class="item-inner"> 
-                                                            <div class="item-title label">Categorias</div>
+                                                            <div class="item-title label">Filtrar</div>
                                                             <div class="item-input">
-                                                                <select name="alcance">
-                                                                    <option disabled="disabled" value="" selected="selected">Todas as categorias</option>
+                                                                <select id="filter_cat">
                                                                 </select>
                                                             </div>
                                                         </div>
@@ -87,23 +86,14 @@
                                                 <li>
                                                     <div class="item-content">
                                                         <div class="item-inner"> 
-                                                            <div class="item-title label">Alcance</div>
+                                                            <div class="item-title label">
+                                                                Alcance
+                                                                <div id="filter_range_val" style="float:right">50 km</div>
+                                                            </div>
                                                             <div class="item-input">
-                                                                <select name="alcance">
-                                                                    <option disabled="disabled" value="" selected="selected">Selecione...</option>
-                                                                    <option value="1km">1 km</option>
-                                                                    <option value="2km">2 km</option>
-                                                                    <option value="3km">3 km</option>
-                                                                    <option value="5km">5 km</option>
-                                                                    <option value="10km">10 km</option>
-                                                                    <option value="20km">20 km</option>
-                                                                    <option value="30km">30 km</option>
-                                                                    <option value="50km">50 km</option>
-                                                                    <option value="100km">100 km</option>
-                                                                    <option value="300km">300 km</option>
-                                                                    <option value="500km">500 km</option>
-                                                                    <option value="1000km">1.000 km</option>
-                                                                </select>
+                                                                <div class="range-slider">
+                                                                    <input id="filter_range" type="range" min="0" max="300" value="50" step="5">
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -114,20 +104,25 @@
                                                             <div class="item-title label">Apenas eventos em andamento</div>
                                                             <div class="item-input">
                                                                 <label class="label-switch">
-                                                                    <input type="checkbox">
+                                                                    <input type="checkbox" id="filter_inpro">
                                                                     <div class="checkbox"></div>
                                                                 </label>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </li>
-
                                             </ul>
                                         </div>
-                                        <div class="content-block" style="margin-top:0;margin-bottom:20px">
+                                        <div id="filter_but_ok" class="content-block" style="margin-top:0;margin-bottom:10px">
                                             <a class="button button-raised button-fill color-pink">
                                                 <i class="fa fa-search" aria-hidden="true"></i> 
-                                                &nbsp; Localizar Eventos
+                                                &nbsp; Aplicar filtros
+                                            </a>
+                                        </div>
+                                        <div id="filter_but_cancel" class="content-block" style="display:none;margin-top:0">
+                                            <a class="button button-raised button-fill color-gray">
+                                                <i class="fa fa-times" aria-hidden="true"></i> 
+                                                &nbsp; Resetar
                                             </a>
                                         </div>
                                     </form>
@@ -482,9 +477,9 @@
                                                         <div class="item-input">
                                                             <select name="post_access">
                                                                 <option disabled="disabled" value="" selected="selected">Selecione...</option>
-                                                                <option value="0">Livre (Todos podem participar)</option>
-                                                                <option value="1">Privado (Todos podem solicitar)</option>
-                                                                <option value="2">Secreto (Apenas convidados)</option>
+                                                                <option value="0">Livre (Todos podem ver e participar)</option>
+                                                                <option value="1">Privado (Todos podem ver e solicitar)</option>
+                                                                <option value="2">Secreto (Somente convidados)</option>
                                                             </select>
                                                         </div>
                                                     </div>
@@ -688,7 +683,7 @@
                         <i class="fa fa-home"></i>
                     </a>
                     <a href="#view-2" class="on tab-link">
-                        <i class="fa fa-users"></i>
+                        <i class="fa fa-map-marker"></i>
                     </a>
 
                     <a href="#view-3" class="on tab-link">
@@ -696,6 +691,10 @@
                         <!--<img id="camera-loading" src="img/hourglass.gif" style="width:32px;margin-top:5px" />-->
                     </a>
 
+                    <a href="#view-3" class="on tab-link">
+                        <i class="fa fa-flag"></i>
+                        <!--<img id="camera-loading" src="img/hourglass.gif" style="width:32px;margin-top:5px" />-->
+                    </a>
 
                     <a href="#view-4" class="on tab-link">
                         <i class="fa fa-user-circle-o"></i>
@@ -761,14 +760,16 @@
             app.initialize();
 
             //localStorage.removeItem("user_id");
+            //sessionStorage.clear();
 
             // DEV
             if (!isApp) {
                 start();
                 geoIP();
+                // enseada
+                sessionStorage.lat = "-20.311910";
+                sessionStorage.lng = "-40.297090";
             }
-            sessionStorage.clear();
-
             // fix for browser reload
             sessionStorage.activePage = 0;
             sessionStorage.post_id_list = 0;

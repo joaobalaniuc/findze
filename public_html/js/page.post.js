@@ -239,7 +239,7 @@ function postList(last_id, op, followers) {
     if (typeof sessionStorage.lat === "undefined") {
         console.log("waiting lat/lng for postList...");
         if ($(".modal-overlay").length === 0) {
-            myApp.showPreloader('Detectando localização...');
+            myApp.showPreloader('Detectando sua localização...');
         }
         setTimeout(function () {
             postList(0, "");
@@ -283,7 +283,11 @@ function postList(last_id, op, followers) {
             followers: followers,
             //
             lat: sessionStorage.lat,
-            lng: sessionStorage.lng
+            lng: sessionStorage.lng,
+            //
+            filter_cat: sessionStorage.filter_cat,
+            filter_range: sessionStorage.filter_range,
+            filter_inpro: sessionStorage.filter_inpro
         },
         type: 'GET',
         dataType: 'jsonp',
@@ -303,7 +307,7 @@ function postList(last_id, op, followers) {
 
                     console.log(res);
                     if (res === false) {
-                        if ($("#post_list").length === 0) {
+                        if ($("#post_list div").length == 0) {
                             $("#post_none").fadeIn("slow");
                         }
                         return;
@@ -843,8 +847,13 @@ function postCatCb(res) {
         html += "<option value='" + val["categ_id"] + "'>" + val["categ_name"] + "</option>\r\n";
     });
     html += "<option value='0'>Outros</option>\r\n";
+    // novo post
     $("#cat1").html(html);
     $(".cats").hide();
+    // filtrar
+    $("#filter_cat").html(html);
+    $("#filter_cat").prepend('<option value="" selected="selected">Todas as categorias</option>');
+    $$("#filter_cat").val(sessionStorage.filter_cat);
 }
 //======================================
 // LOAD CATEG LEVEL 2/3
