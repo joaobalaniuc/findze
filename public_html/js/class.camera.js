@@ -81,7 +81,7 @@ function postCameraUpload(imageURI) {
     ft.upload(imageURI, localStorage.server + "/upload.php", function (result) {
         myApp.hideIndicator();
         //alert(result);
-        //alert(JSON.stringify(result));
+        alert(JSON.stringify(result));
         if (result.response == "" || result.response == null) {
             alert("upload error");
         }
