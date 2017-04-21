@@ -79,19 +79,31 @@ function pageRefresh() {
     var old_page = sessionStorage.oldPage;
     var view = myApp.getCurrentView().container.id;
     var t = 0;
+    // paginas com #toolbar_event
+    if (page === "post_read"
+            || page === "post_map"
+            || page === "post_chat"
+            || page === "post_users") {
+        if ($("#toolbar_event").not(":visible")) {
+            $("#toolbar_on").fadeOut("fast");
+            $("#toolbar_event").fadeIn("fast");
+        }
+    }
     // paginas sem toolbar
-    if (page !== "post_form"
-            && page !== "user_read"
-            && page !== "user_form"
-            && page !== "user_login"
-            && page !== "post_form"
-            && page !== "user_register"
-            && page !== "user_name"
-            && page !== "chat") {
-        $("#toolbar_on").fadeIn("fast");
-        $("#toolbar_off").fadeOut("fast");
-    } else {
-        $("#toolbar_on, #toolbar_off").hide();
+    else {
+        if (page !== "post_form"
+                && page !== "user_read"
+                && page !== "user_form"
+                && page !== "user_login"
+                && page !== "post_form"
+                && page !== "user_register"
+                && page !== "user_name"
+                && page !== "chat") {
+            $("#toolbar_on").fadeIn("fast");
+            $("#toolbar_event").fadeOut("fast");
+        } else {
+            $("#toolbar_on, #toolbar_event").hide();
+        }
     }
 
     // ver post

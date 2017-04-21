@@ -37,12 +37,6 @@
                             </div>
                         </div>
 
-                        <!--<form data-search-list="#contacts" class="searchbar searchbar-init">
-                            <div class="searchbar-input">
-                                <input type="search" placeholder="Search"/><a href="#" class="searchbar-clear"></a>
-                            </div>
-                        </form>
-                        <div class="searchbar-overlay"></div>-->
 
                         <!-- Scrollable page content-->
                         <div class="page-content pull-to-refresh-content infinite-scroll" style="padding-top:55px;padding-bottom:60px">
@@ -427,7 +421,7 @@
                                             <li>
                                                 <div class="item-content">
                                                     <div class="item-inner"> 
-                                                        <div class="item-title label">Data de Início</div>
+                                                        <div class="item-title label">Data e hora do Evento</div>
                                                         <div class="item-input">
                                                             <input name="post_date_start" type="datetime-local" placeholder="dd/mm/aaaa hh:mm"/>
                                                         </div>
@@ -674,16 +668,146 @@
                 </div>
             </div>
 
+            <div id="view-5" class="view view-main tab">
+                <div class="pages navbar-fixed">
+                    <div id="post_read" data-page="post_read" class="page">
+                        <div class="navbar">
+                            <div class="navbar-inner">
+                                <div class="left"><a href="#" class="backToView link icon-only on tab-link"><i class="icon icon-back" style="margin-top:0 !important"></i></a></div>
+                                <!--
+                                <div class="post_name center" style="margin:0">...</div>
+                                -->
+                                <div class="center post_name" style="margin:0">
+
+                                </div>
+                                <!--
+                                <div class="right"><a href="#" class="link open-panel icon-only"><i class="icon icon-bars"></i></a></div>
+                                -->
+                                <div class="edit right" style="display:none">
+                                    <a href="#" class="post_edit link icon-only"><i class="fa fa-pencil"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="page-content" style="padding-top:55px;padding-bottom:70px !important">
+
+
+                            <div style="ddisplay:none;margin:0;box-shadow:none !important" class="card ks-facebook-card" data-id="1">
+
+                                <div class="card-content">
+
+                                    <div class="ppost_read">
+
+                                        <div style="position:absolute;z-index:0;overflow: hidden;width:100vw;height:50vw;left:0;">
+                                            <img class="thumb" style="filter: blur(7px) brightness(1);width:100%;height:100%" src="img/camera.jpg" />
+                                        </div>
+
+                                        <div style="
+                                             position:absolute;z-index:1;
+                                             width:100vw;height:50vw;top:0;left:0;
+                                             background-image:url(img/camera.jpg);
+                                             background-size: 100% auto;
+                                             background-position-y:center;
+                                             background-position-x:center
+                                             "
+                                             class="img_fn">
+                                        </div>
+
+                                        <div style="
+                                             position:relative;z-index:3;
+                                             width:100vw;height:50vw;color:#fff;
+                                             ">
+                                        </div>
+                                    </div>
+
+                                    <div class="user_read card-header" style="border:0">
+                                        <div class="ks-facebook-avatar"><img class="user_img" style="border-radius:50%;box-shadow:none !important;border:0" src="img/user.png" width="34" height="34" /></div>
+                                        <div class="ks-facebook-name" style="font-weight:bold;margin-top:5px;text-transform:lowercase"><span class="user_name"></span></div>
+                                        <!--<div class="user_bio ks-facebook-date" style="font-weight:100;margin-top:-4px"></div>-->
+                                    </div>
+
+                                    <div class="card-content-inner" style="margin-left:10px;margin-right:5px">
+
+
+                                        <div style="margin-top:3px;font-weight:300">
+
+                                            <div class="post_txt">...</div>
+                                            <div style="clear:both;margin-bottom:7px"></div>
+
+                                            <div class="post_time color-pink" style="font-weight:300;text-transform:uppercase;font-size:11px;margin-top:5px">
+                                                <span class="post_dis" style="text-transform:none"></span> &nbsp; <strong>-</strong> &nbsp; <span class="date_txt"></span> <span class="post_date_start">...</span>
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+
+                                    <div class="content-block" style="margin-top:0;margin-bottom:10px">
+                                        <a class="postRequest">
+                                        </a>
+                                    </div>
+
+                                </div>
+
+
+
+                                <!--
+                                <div class="card-footer"><a href="#" class="postShow link">Like</a><a href="#" class="link">Comment</a><a href="#" class="link">Share</a></div>
+                                -->
+                            </div>
+
+
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div id="view-6" class="view view-main tab">
+                <div class="pages navbar-fixed">
+                    <div class="pages navbar-fixed">
+                        <div id="post_map" data-page="post_map" class="page">
+
+                            <div class="navbar">
+                                <div class="navbar-inner">
+                                    <div class="left"><a href="#" class="backToView link icon-only on tab-link"><i class="icon icon-back" style="margin-top:0 !important"></i></a></div>
+                                    <div class="center post_name" style="margin:0">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="page-content" style="padding-top:55px;padding-bottom:70px !important">
+
+
+                                <img id="post_gmap" style="width:100%;margin-bottom:10px" src="" alt="FINDZE">
+
+                                <div class="content-block" style="margin-top:0;margin-bottom:-10px">
+
+                                    <a id="gps" class="button button-raised button-fill">
+                                        <i class="fa fa-automobile" aria-hidden="true"></i> 
+                                        &nbsp; Traçar rota até aqui
+                                    </a>
+                                </div>
+
+                                <div class="post_obs_title content-block-title">Como chegar?</div>
+                                <div class="content-block" style="margin-top:0;margin-bottom:-10px">
+                                    <div class="post_obs">...</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <!-- Bottom Tabbar-->
-            <div id="toolbar_on" class="theme-pink toolbar tabbar tabbar-labels jwbar">
+            <div id="toolbar_on" style="ddisplay:none" class="theme-pink toolbar tabbar tabbar-labels jwbar">
 
                 <div class="toolbar-inner">
 
                     <a href="#view-1" class="on tab-link active">
-                        <i class="fa fa-home"></i>
+                        <i class="fa fa-map-marker"></i>
                     </a>
                     <a href="#view-2" class="on tab-link">
-                        <i class="fa fa-map-marker"></i>
+                        <i class="fa fa-sitemap"></i>
                     </a>
 
                     <a href="#view-3" class="on tab-link">
@@ -701,6 +825,25 @@
                         <!--<span class="tabbar-label">Opções</span>-->
                     </a>
 
+                </div>
+            </div>
+            <div id="toolbar_event" style="display:none" class="theme-pink toolbar tabbar tabbar-labels jwbar">
+
+                <div class="toolbar-inner">
+
+                    <a href="#view-5" class="on tab-link active">
+                        <i class="fa fa-info-circle"></i>
+                    </a>
+                    <a href="#view-6" class="on tab-link">
+                        <i class="fa fa-map-o"></i>
+                    </a>
+                    <a href="#!" class="on tab-link">
+                        <i class="fa fa-users"></i>
+                        <!--<img id="camera-loading" src="img/hourglass.gif" style="width:32px;margin-top:5px" />-->
+                    </a>
+                    <a href="#!" class="on tab-link">
+                        <i class="fa fa-comments-o"></i>
+                    </a>
 
                 </div>
             </div>

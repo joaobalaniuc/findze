@@ -2,12 +2,15 @@
 // PAGE: *
 //=============================
 $$(document).on('click', '.post_read', function (e) {
-//myApp.showTab('#view-1');
-    myApp.alert("Under construction");
-    return false;
+    // back id
+    var backToView = "#" + myApp.getCurrentView().container.id;
+    $$(".backToView").attr("href", backToView);
+    // change view
+    myApp.showTab('#view-5'); // view-5 = post_read
+    // post id
     var post_id = $(this).attr("data-id");
     sessionStorage.post_id = post_id;
-    go("post_read.html");
+    postRead(sessionStorage.post_id, postReadCb);
 });
 $$(document).on('click', '.postRequest', function (e) {
     var post_id = $(this).attr("data-id");
@@ -17,15 +20,7 @@ $$(document).on('click', '.postRequest', function (e) {
         $(this).after("<img class='pre' src='img/loader2.gif' style='float:right' />");
     }
 });
-$$(document).on('click', '#searchButton', function (e) {
-    if ($("#searchForm").is(":visible")) {
-        $("#searchButton i").css("color", "#fff");
-        $("#searchForm").fadeOut("fast");
-    } else {
-        $("#searchButton i").css("color", "#000");
-        $("#searchForm").fadeIn("fast");
-    }
-});
+
 //=============================
 // PAGE: POST_FORM
 //=============================
@@ -55,30 +50,6 @@ myApp.onPageInit('index-3', function (page) {
         $("#img_last").attr("src", url);
         $("[name=img_fn]").val(sessionStorage.img_last);
     }
-    // VALIDATE
-    $("#postForm").validate({
-        rules: {
-            post_name: {
-                required: true,
-                minlength: 3
-            },
-            post_phone: {
-                required: true
-            },
-            categ_id: {
-                required: true
-            }
-        },
-        errorElement: 'div',
-        errorPlacement: function (error, element) {
-            var placement = $(element).data('error');
-            if (placement) {
-                $(placement).append(error)
-            } else {
-                error.insertAfter(element);
-            }
-        }
-    });
 });
 $$(document).on('click', '.postSend', function (e) {
     var lat = $("#index-3 [name=post_lat]").val();
@@ -101,11 +72,18 @@ $$(document).on('click', '#postCategEdit', function (e) {
     $(".catTxt").hide();
     $(".cat1").show();
 });
+$$(document).on('click', '#gps', function (e) {
+    var lat = $(this).attr("data-lat");
+    var lng = $(this).attr("data-lng");
+    launchnavigator.navigate([lat, lng], {
+        start: sessionStorage.lat + "," + sessionStorage.lng
+    });
+});
 //=============================
 // PAGE: POST_READ
 //=============================
 myApp.onPageBeforeInit('post_read', function (page) {
-    postRead(sessionStorage.post_id, postReadCb);
+    //postRead(sessionStorage.post_id, postReadCb);
 });
 $$(document).on('click', '.post_edit', function (e) {
     sessionStorage.edit_id = sessionStorage.post_id;
@@ -130,7 +108,10 @@ function postRead(post_id, cb) {
             user_email: localStorage.user_email,
             user_pass: localStorage.user_pass,
             //
-            post_id: post_id
+            post_id: post_id,
+            //
+            lat: sessionStorage.lat,
+            lng: sessionStorage.lng
         },
         type: 'GET',
         dataType: 'jsonp',
@@ -175,29 +156,106 @@ function postReadCb(res) {
     var img_fn = post[0]["img_fn"];
     if (img_fn != null) {
         var url = localStorage.server + localStorage.server_img + img_fn;
-        console.log(url);
-        $("#post_read .img_fn").attr("src", url);
+        //console.log(url);
+        $("#post_read .img_fn").css("background-image", "url(" + url + ")");
+    } else {
+        $("#post_read .img_fn").css("background-image", "url(img/camera.jpg)");
     }
-    if (post[0]["user_fb_pic"] != null) {
-        $("#post_read .user_fb_pic").attr("src", post[0]["user_fb_pic"]);
+    // IMG USER
+    if (post[0]["user_img"] != null) {
+        var user_img = localStorage.server + localStorage.server_img + post[0]["user_img"];
+        $("#post_read .user_img").attr("src", user_img);
+    } else {
+        if (post[0]["user_fb_pic"] !== null) {
+            $("#post_read .user_img").attr("src", post[0]["user_fb_pic"]);
+        } else {
+            $("#post_read .user_img").attr("src", "img/user.png");
+        }
     }
 
-    // CHAT FILL
-    $("#post_read .chat").attr("data-id", post[0]["user_id"]);
-    $("#post_read .chat").attr("data-name", post[0]["user_name"]);
-    $("#post_read .chat").attr("data-pic", post[0]["user_fb_pic"]);
+    // GOOGLE MAPS
+    $("#post_gmap").attr("src", "https://maps.googleapis.com/maps/api/staticmap?key=AIzaSyBbu9Qwc7f7u-ze4bmVu6oTbsgC86SR0mQ&center=" + post[0]["post_lat"] + "," + post[0]["post_lng"] + "&zoom=16&scale=false&size=350x300&maptype=roadmap&format=png&visual_refresh=true&markers=size:mid%7Ccolor:0xff0000%7Clabel:%7C" + post[0]["post_lat"] + "," + post[0]["post_lng"]);
+    $("#gps").attr("data-lat", post[0]["post_lat"]);
+    $("#gps").attr("data-lng", post[0]["post_lng"]);
+
+    // RESETAR BOTÃO SOLICITAR
+    $("#post_read .postRequest")
+            .removeAttr("class")
+            .addClass("postRequest button button-raised");
+    // CRIAR BOTÃO SOLICITAR
+    if (post[0]["request_date"] === null) {
+        $("#post_read .postRequest")
+                .html("Solicitar")
+                .addClass("color-pink button-fill")
+                .attr("data-id", post[0]["post_id"]);
+    } else {
+        if (post[0]["request_acc_date"] !== null) {
+
+            $("#post_read .postRequest")
+                    .html("Entrou")
+                    .addClass("color-green button-fill")
+                    .attr("data-id", post[0]["post_id"]);
+
+        } else if (post[0]["request_rej_date"] !== null) {
+
+            $("#post_read .postRequest")
+                    .html("Rejeitado")
+                    .addClass("color-pink button button-raised");
+        } else {
+
+            $("#post_read .postRequest")
+                    .html("Solicitado")
+                    .addClass("color-gray button-fill")
+                    .attr("data-id", post[0]["post_id"]);
+        }
+    }
+
+    //=======================
+    // DATA
+    //=======================
+    var now = moment().format("YYYY-MM-DD HH:mm:ss");
+    var dt0 = post[0]["post_date_start"];
+    var dt1 = post[0]["post_date_end"];
+    if (now < dt0) {
+        $("#post_read .date_txt").html("Começa em");
+    } else {
+        if (now > dt1) {
+            $("#post_read .date_txt").html("Finalizado");
+            $("#post_read .post_date_start").hide();
+            $("#post_read .postRequest").hide();
+        } else {
+            $("#post_read .date_txt").html("Em andamento");
+            $("#post_read .post_date_start").hide();
+        }
+    }
+    var date_start = moment(post[0]["post_date_start"], "YYYY-MM-DD HH:mm:ss").fromNow();
+    $("#post_read .post_date_start").html(date_start);
+    //=======================
+    // /DATA
+    //=======================
 
     // FILL
     $("#post_read .user_read").attr("data-id", post[0]["user_id"]);
     $("#post_read .post_view").html(view);
     $("#post_read .post_com").html(com);
     $("#post_read .post_like").html(like);
-    $("#post_read .post_name").html(post[0]["post_name"]);
     $("#post_read .user_name").html(post[0]["user_name"]);
     $("#post_read .post_date").html(post[0]["post_date"]);
-    $("#post_read .user_phone").attr("href", "tel:0" + post[0]["user_phone"]);
-    $("#post_read .post_price").html(post[0]["post_price"]);
-    //pretty();
+    $("#post_read .post_dis").html(post[0]["dis"]);
+    if (post[0]["post_obs"] != null) {
+        $("#post_map .post_obs_title").show();
+        $("#post_map .post_obs").show().html(post[0]["post_obs"]);
+    } else {
+        $("#post_map .post_obs_title").hide();
+        $("#post_map .post_obs").hide();
+    }
+
+    //
+    $("#post_read .post_name").html(post[0]["post_name"]);
+    $("#post_map .post_name").html(post[0]["post_name"]);
+    $("#post_users .post_name").html(post[0]["post_name"]);
+    $("#post_chat .post_name").html(post[0]["post_name"]);
+    //
     var txt = post[0]["post_txt"];
     if (txt !== null) {
         $("#post_read .post_txt").html(txt);
@@ -347,9 +405,9 @@ function postList(last_id, op, followers) {
                                 $(this).find(".post_img").css("background-image", "url(" + localStorage.server + localStorage.server_img + val["img_fn"] + ")");
 
                             }
-                            if (val["user_fb_pic"] != null) {
-                                $(this).find(".user_fb_pic").attr("src", val["user_fb_pic"]);
-                            }
+                            /*if (val["user_fb_pic"] != null) {
+                             $(this).find(".user_fb_pic").attr("src", val["user_fb_pic"]);
+                             }*/
                             $(this).find(".post_name").html(val["post_name"]);
                             $(this).find(".cat1").html(val["cat1"]);
                             // share
@@ -364,14 +422,14 @@ function postList(last_id, op, followers) {
                             // BOTÃO SOLICITAR
                             if (val["request_date"] === null) {
                                 $(this).find(".postRequest")
-                                        .html("Eu quero")
+                                        .html("Solicitar")
                                         .addClass("color-pink button-fill")
                                         .attr("data-id", val["post_id"]);
                             } else {
                                 if (val["request_acc_date"] !== null) {
 
                                     $(this).find(".postRequest")
-                                            .html("Participando")
+                                            .html("Entrou")
                                             .addClass("color-green button-fill")
                                             .attr("data-id", val["post_id"]);
 
@@ -638,24 +696,17 @@ function postStart(id) {
 }
 // JQUERY VALIDATION FORM
 function postValidate() {
+
+    jQuery.validator.addMethod("notEqual", function (value, element, param) {
+        return this.optional(element) || value != param;
+    }, "Please specify a different (non-default) value");
+
     $("#postForm").validate({
         rules: {
-            post_name: {
-                required: true,
-                minlength: 5
-            },
-            post_txt: {
-                //required: true
-            },
-            post_date_start: {
-                required: true
-            },
-            post_dur: {
-                required: true
-            },
-            categ_id: {
-                required: true
-            }
+            post_name: {required: true, minlength: 5},
+            post_date_start: {required: true},
+            post_dur: {required: true, notEqual: "00:00"},
+            categ_id: {required: true}
         },
         errorElement: 'div',
         errorPlacement: function (error, element) {
