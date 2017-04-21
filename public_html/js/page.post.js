@@ -85,12 +85,9 @@ $$(document).on('click', '#gps', function (e) {
 //=============================
 // PAGE: POST_READ
 //=============================
-myApp.onPageBeforeInit('post_read', function (page) {
-    //postRead(sessionStorage.post_id, postReadCb);
-});
 $$(document).on('click', '.post_edit', function (e) {
-    sessionStorage.edit_id = sessionStorage.post_id;
-    go("post_form.html");
+    //sessionStorage.edit_id = sessionStorage.post_id;
+    //go("post_form.html");
     //view4.router.loadPage("post_read.html", {ignoreCache: true});
 });
 $$(document).on('click', '.post_del', function (e) {
