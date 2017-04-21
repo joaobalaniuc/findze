@@ -17,7 +17,10 @@ $$(document).on('click', '.postRequest', function (e) {
     if (typeof post_id !== "undefined") {
         postRequest(post_id);
         $(this).hide();
-        $(this).after("<img class='pre' src='img/loader2.gif' style='float:right' />");
+        if (sessionStorage.activePage == "post_read")
+            $(this).after("<center><img class='pre' src='img/loader2.gif' /></center>");
+        else
+            $(this).after("<img class='pre' src='img/loader2.gif' style='float:right' />");
     }
 });
 
@@ -757,7 +760,7 @@ function postRequest(post_id) {
                     }
                     if (res.success) {
 
-                        var $el = $("#post_" + post_id + " .postRequest");
+                        var $el = $("#post_" + post_id + " .postRequest, #post_read .postRequest");
 
                         if (res.success == "1") {
                             $el.html("Solicitado")
@@ -765,7 +768,7 @@ function postRequest(post_id) {
                                     .addClass("button button-fill color-gray postRequest")
                                     .show();
                         } else {
-                            $el.html("Eu quero")
+                            $el.html("Solicitar")
                                     .removeClass()
                                     .addClass("button button-fill color-pink postRequest")
                                     .show();
