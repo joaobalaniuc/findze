@@ -106,6 +106,8 @@
         <param name="APP_ID" value="1428042377217863" />
         <param name="APP_NAME" value="Findze" />
     </plugin>
+    
+    <plugin name="uk.co.workingedge.phonegap.plugin.launchnavigator" source="npm" />
 
     <!--
     <plugin name="uk.co.workingedge.phonegap.plugin.launchnavigator" source="npm" />
