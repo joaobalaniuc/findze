@@ -9,7 +9,7 @@ $(function () {
 
 });
 //========================================
-// VIEW-1: HOME
+// VIEW-1: HOME (FILTER)
 //========================================
 $(function () {
     // filter on
@@ -21,10 +21,19 @@ $(function () {
         $$("#filter_range_val").html(sessionStorage.filter_range + " km");
         if (sessionStorage.filter_inpro > 0) {
             $$("#filter_inpro").prop('checked', true);
-        }
-        else {
+        } else {
             filterSet(true);
         }
+    }
+});
+// FILTER BUTTON
+$$(document).on('click', '#searchButton', function (e) {
+    if ($("#searchForm").is(":visible")) {
+        $("#searchButton i").css("color", "#fff");
+        $("#searchForm").fadeOut("fast");
+    } else {
+        $("#searchButton i").css("color", "#000");
+        $("#searchForm").fadeIn("fast");
     }
 });
 $$(document).on("input change", "#filter_range", function (e) {
