@@ -217,7 +217,7 @@ function postReadCb(res) {
     var dt0 = post[0]["post_date_start"];
     var dt1 = post[0]["post_date_end"];
     if (now < dt0) {
-        $("#post_read .date_txt").html("Começa em");
+        $("#post_read .date_txt").html("Começa");
     } else {
         if (now > dt1) {
             $("#post_read .date_txt").html("Finalizado");
@@ -454,7 +454,7 @@ function postList(last_id, op, followers) {
                             var dt0 = val["post_date_start"];
                             var dt1 = val["post_date_end"];
                             if (now < dt0) {
-                                $(this).find(".date_txt").html("Começa em");
+                                $(this).find(".date_txt").html("Começa");
                             } else {
                                 if (now > dt1) {
                                     $(this).find(".date_txt").html("Finalizado");
